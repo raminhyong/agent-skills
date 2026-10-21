@@ -1,0 +1,4 @@
+interface:
+  display_name: "Debug Existing Web App"
+  short_description: "วิเคราะห์และแก้บั๊กเว็บเดิมโดยรักษางานเก่า"
+  default_prompt: "Use $debug-existing-webapp to diagnose and safely fix this existing web app."

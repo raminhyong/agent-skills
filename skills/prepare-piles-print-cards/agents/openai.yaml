@@ -1,0 +1,4 @@
+interface:
+  display_name: "เตรียมการ์ด Piles สำหรับพิมพ์"
+  short_description: "ครอปกรอบ ใส่ชื่อ และจัดการ์ด Piles ลง A4"
+  default_prompt: "Use $prepare-piles-print-cards to prepare Piles character cards for A4 printing with complete outer frames and Thai name panels."

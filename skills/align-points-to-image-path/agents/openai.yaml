@@ -1,0 +1,4 @@
+interface:
+  display_name: "Align Points to Image Path"
+  short_description: "จัดจุด UI ให้ตรงกับเส้นทางในภาพอย่างแม่นยำ"
+  default_prompt: "Use $align-points-to-image-path to place UI points precisely along the route in this image."

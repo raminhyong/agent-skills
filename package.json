@@ -1,0 +1,15 @@
+{
+  "name": "agent-skills-visual-dev",
+  "version": "1.0.0",
+  "description": "Visual development and UI inspection toolkit for Antigravity AI Agent",
+  "main": "tools/preview-capture.mjs",
+  "type": "module",
+  "scripts": {
+    "capture": "node tools/preview-capture.mjs",
+    "mcp:playwright": "npx @playwright/mcp@latest",
+    "mcp:chrome": "npx chrome-devtools-mcp@latest --auto-connect"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

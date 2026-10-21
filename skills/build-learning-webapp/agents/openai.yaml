@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Learning Web App"
+  short_description: "ออกแบบและสร้างเว็บแอปกิจกรรมการเรียนรู้"
+  default_prompt: "Use $build-learning-webapp to design and implement a focused classroom learning app."

@@ -1,13 +1,13 @@
 # ==============================================================================
 # Sync Thai School Document Skills: Repo -> Hermes Agent profile
-#   skills/thai-project-proposal, thai-official-memo, thai-exam-format
+#   skills/thai-doc, thai-project-proposal, thai-official-memo, thai-exam-format, thai-web-fonts
 #   -> $env:LOCALAPPDATA\hermes\skills\productivity\<name>
 # ใช้เมื่อแก้สกิลใน repo แล้วอยากให้ Hermes (Pancake) เห็นเวอร์ชันล่าสุดทันที
 # ==============================================================================
 param(
     [string]$HermesSkillsPath = (Join-Path $env:LOCALAPPDATA "hermes\skills"),
     [string]$Category = "productivity",
-    [string[]]$Skills = @("thai-project-proposal", "thai-official-memo", "thai-exam-format")
+    [string[]]$Skills = @("thai-doc", "thai-project-proposal", "thai-official-memo", "thai-exam-format", "thai-web-fonts")
 )
 
 $RepoSkillsPath = Join-Path $PSScriptRoot "..\skills"

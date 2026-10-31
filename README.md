@@ -28,7 +28,7 @@ graph TD
 | - human-like-learner (/learner)     | - arrange-card-deck-sheets (/cards)  |                           |
 | - thai-project-proposal (/project)  | - prepare-piles-print-cards (/piles) |                           |
 | - thai-official-memo (/memo)        | - align-points-to-image-path         |                           |
-| - thai-exam-format (/exam)          |                                      |                           |
+| - thai-exam-format (/exam)          | - thai-web-fonts (/fonts)            |                           |
 +-------------------------------------+--------------------------------------+---------------------------+
 | [ สกิลที่ถูกถอดถอนและเก็บเข้า Archive (ลดความสับสน Agent) ]                                            |
 | - 27 Google Cloud BigQuery / Airflow / Dataflow / Composer Skills (เก็บไว้ที่ archive/)                |
@@ -60,7 +60,8 @@ graph TD
 | 17 | **`thai-project-proposal`** | `/project` | เขียน/แก้/ตรวจโครงการสถานศึกษาให้ตรงแบบฟอร์มโรงเรียนและเอกสารจัดทำแผน | สูง (High) | 🟢 Active Core |
 | 18 | **`thai-official-memo`** | `/memo` | สร้างบันทึกข้อความราชการ (ไปราชการ/รายงานผล/ส่งข้อสอบ/ชี้แจง/สอนแทน) ครบทุกฟิลด์ + บล็อกความเห็นผู้อำนวยการ | สูง (High) | 🟢 Active Core |
 | 19 | **`thai-exam-format`** | `/exam` | จัดฟอร์แมตเอกสารข้อสอบ DOCX (ปก ตารางมาตรฐาน ตัวเลือก keep-together) ตามมาตรฐานโรงเรียน | สูง (High) | 🟢 Active Core |
-| 20-46 | **Google Cloud Data (27 รายการ)** | - | BigQuery, Airflow, Composer, Dataflow, Dataproc | ไม่ได้ใช้ในงานหลัก | 📦 Archived |
+| 21 | **`thai-web-fonts`** | `/fonts` | ดึง/self-host/ตรวจฟอนต์ไทย 11 ตระกูล (Google Fonts woff2, LINE Seed, TH Sarabun New) + สร้าง @font-face + specimen ให้เลือกคู่ฟอนต์ | สูง (High) | 🟢 Active Core |
+| 22-48 | **Google Cloud Data (27 รายการ)** | - | BigQuery, Airflow, Composer, Dataflow, Dataproc | ไม่ได้ใช้ในงานหลัก | 📦 Archived |
 
 > **นโยบายการ mirror (สำคัญ)**: hub นี้เก็บ **เฉพาะสกิลที่เราเป็นเจ้าของ/ดูแลเอง** — สกิล `builtin` ที่ Hermes Agent แถมมา (docx, pdf, xlsx, github, notion, google-workspace, apple-*, computer-use ฯลฯ) **ไม่ถูกคัดลอกเข้า repo** ให้อ้างอิง upstream แทน เพื่อไม่ให้ repo บวมและไม่ให้ `sync-to-global.ps1` ดันสกิลเต็มชุดเข้า Antigravity · สกิล GCP ที่เลิกใช้แล้วอยู่ใน `archive/` (ไม่ load เข้า agent)
 

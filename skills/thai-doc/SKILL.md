@@ -75,6 +75,7 @@ description: Universal Thai document standards (DOCX / Academic / Official), typ
    - แก้ไขโดยกำหนดคุณสมบัติใน Run Property:
      - `<w:noProof/>` (สั่งปิดการตรวจสะกดสำหรับ Run นั้น)
      - `<w:lang w:val="th-TH"/>` (กำหนดภาษาเป็นภาษาไทย)
+   - ⚠️ **ไม่ใช้ทุกงาน**: `noProof` เหมาะกับบันทึกข้อความ/ข้อสอบ/รายงานที่ส่งให้คนอื่นอ่าน แต่ **งานเขียนโครงการสถานศึกษา ห้ามใช้** (โครงการต้องให้ผู้ใช้เห็นคำที่อาจสะกดผิด) — ตัดสินจากชนิดเอกสารก่อนเขียนโค้ด แล้วคงไว้ทั้งเรื่อง
 
 ---
 
@@ -177,6 +178,23 @@ def set_paragraph_zero_spacing(p):
     p.paragraph_format.space_after = Pt(0)
     p.paragraph_format.line_spacing = 1.0
 ```
+
+---
+
+## 🧪 9. การตรวจสอบผลลัพธ์จริง (Verify before delivering)
+
+ห้ามรายงานว่า "จัดรูปแบบเสร็จ" เพราะโค้ดรันไม่ error — ต้องวัดจากไฟล์ที่ออกมา
+
+```bash
+py -3.12 scripts/verify_thai_docx.py <file.docx> --render
+```
+
+`scripts/verify_thai_docx.py` ตรวจ 4 อย่างและ `exit 1` เมื่อพบปัญหา: ฟอนต์ explicit ของทุก run · เลขไทย `[๐-๙]` · `\u200b` ที่แทรกก่อน/หลังสระ–วรรณยุกต์ (ต้องเป็น 0) · จำนวน ZWSP ทั้งหมด (รายงานเป็นตัวเลข ไม่ใช่คำว่า "checked")
+
+- สคริปต์ python-docx / pythainlp / pymupdf ให้รันด้วย `py -3.12` (python 3.14 ที่ Hermes ใช้ไม่มี python-docx)
+- `--render` แปลง DOCX→PDF ด้วย Word COM (`win32com.client`, `FileFormat=17`) แล้วใช้ `pymupdf` ทำ PNG หน้าละภาพ — เครื่องนี้ไม่มี LibreOffice จึงต้องใช้เส้นทางนี้
+- ตรวจด้วยตาเฉพาะสิ่งที่สคริปต์ไม่รู้: ตารางล้นขอบ ช่องลงนามแตกหน้า หัวข้อค้างท้ายหน้า และคอลัมน์ตารางไม่ตรงแนว
+- ตรวจ ZWSP ต้องดูสองทิศ: `\u200b` ตามด้วยสระ/วรรณยุกต์ และสระ/วรรณยุกต์ตามด้วย `\u200b` — tokenizer ที่จัดเรียง marker ใหม่จะพลาดถ้าตรวจทิศเดียว
 
 ---
 

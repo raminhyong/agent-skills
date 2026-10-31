@@ -43,7 +43,7 @@ Call the native Antigravity `browser_subagent` to actuate and verify interactive
 #### Modality B: Quick Multi-Viewport Snapshot (Fast Layout Audit)
 Run the project capture utility to snapshot desktop, tablet, and mobile breakpoints:
 ```powershell
-node tools/preview-capture.mjs http://localhost:5173 ./previews
+node scripts/preview-capture.mjs   # ไฟล์อยู่ในโฟลเดอร์สกิลนี้: skills/software-development/visual-dev-loop/scripts/ http://localhost:5173 ./previews
 ```
 
 #### Modality C: MCP Server Direct Tooling (`@playwright/mcp`)

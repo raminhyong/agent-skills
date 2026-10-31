@@ -62,6 +62,8 @@ graph TD
 | 19 | **`thai-exam-format`** | `/exam` | จัดฟอร์แมตเอกสารข้อสอบ DOCX (ปก ตารางมาตรฐาน ตัวเลือก keep-together) ตามมาตรฐานโรงเรียน | สูง (High) | 🟢 Active Core |
 | 20-46 | **Google Cloud Data (27 รายการ)** | - | BigQuery, Airflow, Composer, Dataflow, Dataproc | ไม่ได้ใช้ในงานหลัก | 📦 Archived |
 
+> **นโยบายการ mirror (สำคัญ)**: hub นี้เก็บ **เฉพาะสกิลที่เราเป็นเจ้าของ/ดูแลเอง** — สกิล `builtin` ที่ Hermes Agent แถมมา (docx, pdf, xlsx, github, notion, google-workspace, apple-*, computer-use ฯลฯ) **ไม่ถูกคัดลอกเข้า repo** ให้อ้างอิง upstream แทน เพื่อไม่ให้ repo บวมและไม่ให้ `sync-to-global.ps1` ดันสกิลเต็มชุดเข้า Antigravity · สกิล GCP ที่เลิกใช้แล้วอยู่ใน `archive/` (ไม่ load เข้า agent)
+
 ---
 
 ## 3. สคริปต์สำหรับการซิงก์ข้ามเครื่อง

@@ -19,8 +19,11 @@
 |                    |                    | - picseek          |   on Laptop        | - GCP Composer     |
 |                    |                    | - human-learner    |                    |   (27 รายการ)      |
 |                    |                    | - visual-dev-loop  |                    |                    |
+|                    |                    | - /project /memo /exam |                    |                    |
 +--------------------+--------------------+--------------------+--------------------+--------------------+
 ```
+
+> สกิลชุดงานสารบรรณ–โครงการ–ข้อสอบ: `thai-project-proposal` (`/project`) · `thai-official-memo` (`/memo`) · `thai-exam-format` (`/exam`) — ดูรายละเอียดใน [README หมวด 5](../README.md)
 
 ---
 
@@ -39,6 +42,7 @@
      - `#6`: `[Core-Media] prepare-piles-print-cards & arrange-card-deck-sheets`
      - `#7`: `[Archive-Pruned] ย้าย 27 Google Cloud Data Skills เข้าโฟลเดอร์ Archive`
      - `#8`: `[Future-Intake] พื้นที่รองรับสกิลใหม่จาก Repos ชุมชน AI Agents`
+     - `#9`: `[Core-Thai] thai-project-proposal & thai-official-memo & thai-exam-format (ชุดงานสารบรรณ–โครงการ–ข้อสอบ)`
 
 ---
 

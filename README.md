@@ -18,19 +18,21 @@ graph TD
 ```
 
 ```text
-+---------------------------------------------------------------------------------------------------+
-|  CENTRAL AGENT SKILLS ARCHITECTURE                                                               |
-+------------------------------------+------------------------------------+-------------------------+
-|  [ หมวดการสอนภาษาไทย / งานโรงเรียน ]   |  [ หมวดพัฒนาเว็บแอป / สื่อการสอน ]   |  [ หมวดวิจัย / ถอดรหัส ]|
-|  - thai-doc (/thai-doc, /doc)      |  - build-learning-webapp (/app-build)| - rea (/rea)            |
-|  - thai-subapp-blueprint (/subapp) |  - debug-existing-webapp (/app-debug)| - agent-reach (/reach)  |
-|  - picseek (/picseek)              |  - visual-dev-loop (/visual-dev)   | - typesafe-ai (/typesafe|
-|  - human-like-learner (/learner)   |  - arrange-card-deck-sheets (/cards)|                         |
-|                                    |  - prepare-piles-print-cards(/piles) |                         |
-+------------------------------------+------------------------------------+-------------------------+
-|  [ สกิลที่ถูกถอดถอนและเก็บเข้า Archive (ลดความสับสน Agent) ]                                      |
-|  - 27 Google Cloud BigQuery / Airflow / Dataflow / Composer Skills (เก็บไว้ที่ archive/)          |
-+---------------------------------------------------------------------------------------------------+
++-------------------------------------+--------------------------------------+---------------------------+
+| CENTRAL AGENT SKILLS ARCHITECTURE                                                                      |
++-------------------------------------+--------------------------------------+---------------------------+
+| [ หมวดการสอนภาษาไทย / งานโรงเรียน ] | [ หมวดพัฒนาเว็บแอป / สื่อการสอน ]    | [ หมวดวิจัย / ถอดรหัส ]   |
+| - thai-doc (/thai-doc, /doc)        | - build-learning-webapp (/app-build) | - rea (/rea)              |
+| - thai-subapp-blueprint (/subapp)   | - debug-existing-webapp (/app-debug) | - agent-reach (/reach)    |
+| - picseek (/picseek)                | - visual-dev-loop (/visual-dev)      | - typesafe-ai (/typesafe) |
+| - human-like-learner (/learner)     | - arrange-card-deck-sheets (/cards)  |                           |
+| - thai-project-proposal (/project)  | - prepare-piles-print-cards (/piles) |                           |
+| - thai-official-memo (/memo)        | - align-points-to-image-path         |                           |
+| - thai-exam-format (/exam)          |                                      |                           |
++-------------------------------------+--------------------------------------+---------------------------+
+| [ สกิลที่ถูกถอดถอนและเก็บเข้า Archive (ลดความสับสน Agent) ]                                            |
+| - 27 Google Cloud BigQuery / Airflow / Dataflow / Composer Skills (เก็บไว้ที่ archive/)                |
++-------------------------------------+--------------------------------------+---------------------------+
 ```
 
 ---
@@ -55,7 +57,10 @@ graph TD
 | 14 | **`managing-python-dependencies`**| - | จัดการ virtualenv และ dependencies ของ Python | ปานกลาง (Medium) | 🟢 Active Utility |
 | 15 | **`accidental-data-loss-prevention`**| - | เฝ้าระวังและป้องกันการลบข้อมูลสำคัญหรือไฟล์สำคัญ | เฝ้าระวัง (Guard) | 🟢 Active Guard |
 | 16 | **`skill-repair`** | - | ซ่อมแซม manifest ของสกิลที่ติดตั้งไม่สมบูรณ์ | ยามจำเป็น | 🟢 Active Utility |
-| 17-43 | **Google Cloud Data (27 รายการ)** | - | BigQuery, Airflow, Composer, Dataflow, Dataproc | ไม่ได้ใช้ในงานหลัก | 📦 Archived |
+| 17 | **`thai-project-proposal`** | `/project` | เขียน/แก้/ตรวจโครงการสถานศึกษาให้ตรงแบบฟอร์มโรงเรียนและเอกสารจัดทำแผน | สูง (High) | 🟢 Active Core |
+| 18 | **`thai-official-memo`** | `/memo` | สร้างบันทึกข้อความราชการ (ไปราชการ/รายงานผล/ส่งข้อสอบ/ชี้แจง/สอนแทน) ครบทุกฟิลด์ + บล็อกความเห็นผู้อำนวยการ | สูง (High) | 🟢 Active Core |
+| 19 | **`thai-exam-format`** | `/exam` | จัดฟอร์แมตเอกสารข้อสอบ DOCX (ปก ตารางมาตรฐาน ตัวเลือก keep-together) ตามมาตรฐานโรงเรียน | สูง (High) | 🟢 Active Core |
+| 20-46 | **Google Cloud Data (27 รายการ)** | - | BigQuery, Airflow, Composer, Dataflow, Dataproc | ไม่ได้ใช้ในงานหลัก | 📦 Archived |
 
 ---
 
@@ -65,6 +70,7 @@ graph TD
 | :--- | :--- | :--- |
 | **ซิงก์เข้าเครื่อง** | `powershell -File scripts/sync-to-global.ps1` | นำสกิลใน repo นี้เข้าสู่ `~/.gemini/config/skills` บนเครื่องปัจจุบัน |
 | **คลีนสกิลที่ไม่ใช้** | `powershell -File scripts/clean-unused-from-global.ps1` | ถอดถอนสกิล GCP 27 ตัวออกจากเครื่องหลัก เพื่อประหยัด Token และไม่ให้ Agent สับสน |
+| **ซิงก์เข้าสู่ Hermes Agent** | `powershell -File scripts/sync-to-hermes.ps1` | คัดลอกสกิลชุดเอกสารไทย (`thai-project-proposal`, `thai-official-memo`, `thai-exam-format`) ไปไว้ที่ `%LOCALAPPDATA%\hermes\skills\productivity` ให้ Pancake ใช้เวอร์ชันล่าสุด |
 
 ---
 
@@ -73,3 +79,24 @@ graph TD
 - **Repository**: [https://github.com/raminhyong/agent-skills](https://github.com/raminhyong/agent-skills)
 - **GitHub Project 3**: [https://github.com/users/raminhyong/projects/3/settings](https://github.com/users/raminhyong/projects/3/settings)
 - **คู่มือเชื่อมโยง Project 3**: ดูใน [project-board/PROJECT_3_SETUP.md](file:///d:/MEGA/AGENT%20SKILLS/project-board/PROJECT_3_SETUP.md)
+---
+
+## 5. ชุดสกิลงานสารบรรณ–โครงการ–ข้อสอบ (Thai School Documents Suite)
+
+สามสกิลนี้ต่อยอดจาก `thai-doc` (มาตรฐานกลาง) แต่แยกตาม **ชนิดเอกสาร** — โหลดผิดตัวจะได้ค่าพิกัดผิดทันที
+
+| งาน | สกิล | คำสั่งลัด | เอกสารอ้างอิงในสกิล |
+| :--- | :--- | :--- | :--- |
+| เขียน/แก้/ตรวจโครงการสถานศึกษา | `thai-project-proposal` | `/project` | `references/plan-2569-source.md` · `references/plan-2569-full.pdf` · `examples/โครงการ01_ตัวอย่าง.docx` |
+| บันทึกข้อความราชการ | `thai-official-memo` | `/memo` | `references/exam-submission-memo-spec.md` · `examples/` (แบบเปล่า/การสอนแทน/ส่งข้อสอบ) |
+| จัดฟอร์แมตข้อสอบ DOCX | `thai-exam-format` | `/exam` | `references/format-spec-full.md` · `references/master-rules.md` · `examples/Job03.json` + `Job03_Formatted.docx` |
+
+**ค่าที่ต่างกันระหว่างสามสกิล (จุดที่พลาดบ่อย)**
+
+| รายการ | โครงการ | บันทึกข้อความ | ข้อสอบ |
+| :--- | :--- | :--- | :--- |
+| ระยะขอบ | 1.5 / 1.0 / 1.5 / 1.0 นิ้ว | บน 0.79" ล่าง 0.50" ซ้าย 1.00" ขวา 0.79" | บน-ล่าง 0.5" ซ้าย 0.7" ขวา 0.8" |
+| `noProof` (ปิดหยักแดง) | **ห้ามใช้** (ต้องเห็นคำที่อาจผิด) | ใช้ | ใช้ |
+| Zero-width space `\u200b` | ต้องมีทุกส่วน รวมนอกตาราง | ต้องมีทุก run | ต้องมี (ห้ามแทรกกลางสระ/วรรณยุกต์) |
+
+สคริปต์ของทั้งสามสกิลรันด้วย `py -3.12` (มี `python-docx 1.2.0` / `pythainlp 5.3.7` / `pymupdf 1.28.2`) — Python 3.14 ที่ Hermes ใช้ไม่มี python-docx

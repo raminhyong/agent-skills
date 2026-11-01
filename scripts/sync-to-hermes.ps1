@@ -7,7 +7,7 @@
 param(
     [string]$HermesSkillsPath = (Join-Path $env:LOCALAPPDATA "hermes\skills"),
     [string]$Category = "productivity",
-    [string[]]$Skills = @("thai-doc", "thai-project-proposal", "thai-official-memo", "thai-exam-format", "thai-web-fonts")
+    [string[]]$Skills = @("thai-doc", "thai-project-proposal", "thai-official-memo", "thai-exam-format", "thai-web-fonts", "thai-smart-form-apps")
 )
 
 $RepoSkillsPath = Join-Path $PSScriptRoot "..\skills"

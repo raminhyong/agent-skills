@@ -59,6 +59,7 @@ graph TD
 | 16 | **`skill-repair`** | - | ซ่อมแซม manifest ของสกิลที่ติดตั้งไม่สมบูรณ์ | ยามจำเป็น | 🟢 Active Utility |
 | 17 | **`thai-project-proposal`** | `/project` | เขียน/แก้/ตรวจโครงการสถานศึกษาให้ตรงแบบฟอร์มโรงเรียนและเอกสารจัดทำแผน | สูง (High) | 🟢 Active Core |
 | 18 | **`thai-official-memo`** | `/memo` | สร้างบันทึกข้อความราชการ (ไปราชการ/รายงานผล/ส่งข้อสอบ/ชี้แจง/สอนแทน) ครบทุกฟิลด์ + บล็อกความเห็นผู้อำนวยการ | สูง (High) | 🟢 Active Core |
+| 19 | **`thai-smart-form-apps`** | `/form-app` | แอปกรอกแบบฟอร์มราชการ (smart-form-filler): กรอกน้อยที่สุด, ต่อฐานข้อมูลนักเรียน/ครู/วิชา/ผู้บริหาร, dropdown ปี-ภาค-วันที่ (ปฏิทินไทย), พรีวิว A4 แบ่งหน้าจริง, สร้าง .docx ฝั่งเบราว์เซอร์ | สูง (High) | 🟢 Active Core |
 | 19 | **`thai-exam-format`** | `/exam` | จัดฟอร์แมตเอกสารข้อสอบ DOCX (ปก ตารางมาตรฐาน ตัวเลือก keep-together) ตามมาตรฐานโรงเรียน | สูง (High) | 🟢 Active Core |
 | 21 | **`thai-web-fonts`** | `/fonts` | ดึง/self-host/ตรวจฟอนต์ไทย 11 ตระกูล (Google Fonts woff2, LINE Seed, TH Sarabun New) + สร้าง @font-face + specimen ให้เลือกคู่ฟอนต์ | สูง (High) | 🟢 Active Core |
 | 22-48 | **Google Cloud Data (27 รายการ)** | - | BigQuery, Airflow, Composer, Dataflow, Dataproc | ไม่ได้ใช้ในงานหลัก | 📦 Archived |
@@ -92,6 +93,7 @@ graph TD
 | :--- | :--- | :--- | :--- |
 | เขียน/แก้/ตรวจโครงการสถานศึกษา | `thai-project-proposal` | `/project` | `references/plan-2569-source.md` · `references/plan-2569-full.pdf` · `examples/โครงการ01_ตัวอย่าง.docx` |
 | บันทึกข้อความราชการ | `thai-official-memo` | `/memo` | `references/exam-submission-memo-spec.md` · `examples/` (แบบเปล่า/การสอนแทน/ส่งข้อสอบ) |
+| แอปกรอกฟอร์ม + พรีวิว A4 | `thai-smart-form-apps` | `/form-app` | กติกากรอกน้อยที่สุด · ฐานข้อมูลโรงเรียน · pagination · DOCX builder |
 | จัดฟอร์แมตข้อสอบ DOCX | `thai-exam-format` | `/exam` | `references/format-spec-full.md` · `references/master-rules.md` · `examples/Job03.json` + `Job03_Formatted.docx` |
 
 **ค่าที่ต่างกันระหว่างสามสกิล (จุดที่พลาดบ่อย)**

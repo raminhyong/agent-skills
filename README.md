@@ -105,3 +105,29 @@ graph TD
 | Zero-width space `\u200b` | ต้องมีทุกส่วน รวมนอกตาราง | ต้องมีทุก run | ต้องมี (ห้ามแทรกกลางสระ/วรรณยุกต์) |
 
 สคริปต์ของทั้งสามสกิลรันด้วย `py -3.12` (มี `python-docx 1.2.0` / `pythainlp 5.3.7` / `pymupdf 1.28.2`) — Python 3.14 ที่ Hermes ใช้ไม่มี python-docx
+
+---
+
+## 6. ชุดเครื่องมือเบราว์เซอร์ตัวจริง (Live Browser Toolset)
+
+เบราว์เซอร์ของ agent ทั่วไปรัน **headless** และใช้โปรไฟล์ชั่วคราว → ผู้ใช้มองไม่เห็น และต้องล็อกอินใหม่ทุก session
+ชุดนี้แก้ด้วยการเปิด **Chrome ตัวจริง** (`--user-data-dir` ถาวร + `--remote-debugging-port`) แล้วเกาะด้วย Playwright ผ่าน CDP
+
+| ไฟล์ | หน้าที่ |
+| :--- | :--- |
+| `tools/live-browser/live.sh` · `live.cmd` | เปิด Chrome มีหน้าต่างจริง + CDP + โปรไฟล์ถาวร |
+| `tools/live-browser/pw.mjs` | CLI หลัก: `goto · shot · text · click · clickcss · fill · press · eval · download · fetchsave` |
+| `tools/live-browser/seek.mjs` | กรอวิดีโอ JW Player ไปปลายคลิปด้วยการคลิกแถบเวลาจริง |
+| `tools/live-browser/dl.mjs` | ดาวน์โหลดผ่าน UI ไปโฟลเดอร์ที่กำหนด (CDP download behavior) |
+| `tools/live-browser/show-window.ps1` | ยกหน้าต่างที่ต้องการขึ้นหน้า (SetForegroundWindow) |
+| `tools/live-browser/examples/answer.sh` | ตัวอย่างตอบข้อสอบออนไลน์แบบจังหวะคนจริง |
+| `tools/live-browser/install.ps1` | ติดตั้งอัตโนมัติ (คัดลอกไป `%USERPROFILE%\tools\pw` + `npm i playwright` + หา Chrome) |
+| `skills/live-browser/SKILL.md` | สกิลสำหรับ agent (ใช้เมื่อไหร่ · กติกาเหล็ก · กับดัก) |
+
+```bash
+cd tools/live-browser && npm i playwright
+bash live.sh "https://example.com"     # ล็อกอินเองครั้งแรก → คุกกี้ค้างในโปรไฟล์
+node pw.mjs status
+```
+
+**กติกา**: ห้ามพิมพ์รหัสผ่านแทนผู้ใช้ · ห้ามใช้ JS/API หลบขั้นตอนแพลตฟอร์ม · เช็ก `MainWindowTitle` ก่อนบอกว่า "เปิดหน้าให้แล้ว" · โปรไฟล์ `chrome-live/` ห้าม commit

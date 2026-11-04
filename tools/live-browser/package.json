@@ -1,0 +1,14 @@
+{
+  "name": "hermes-live-browser",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Visible, persistent Chrome driven by Playwright over CDP — for agents that must let the human see and use the same browser session.",
+  "scripts": {
+    "status": "node pw.mjs status",
+    "open": "bash live.sh"
+  },
+  "dependencies": {
+    "playwright": "^1.64.1"
+  }
+}

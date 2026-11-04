@@ -16,11 +16,12 @@
 #   LIVE_PORT    พอร์ต CDP (ค่าเริ่มต้น: 9222)
 set -u
 
-RESTORE=0
+RESTORE=0; PERSIST=0
 case "${1:-}" in
+  "")                RESTORE=1; URL="" ;;          # ไม่ใส่อาร์กิวเมนต์ = กู้แท็บเดิมที่ค้างไว้
   --restore)         RESTORE=1; URL="" ;;
   --restore-persist) RESTORE=1; URL=""; PERSIST=1 ;;
-  *)                 URL="${1:-about:blank}"; PERSIST=0 ;;
+  *)                 URL="$1" ;;
 esac
 PORT="${LIVE_PORT:-9222}"
 PROFILE="${LIVE_PROFILE:-$HOME/tools/chrome-live}"

@@ -156,14 +156,16 @@ bash examples/answer.sh "ข้อความตัวเลือก" next    
 Chrome เก็บ session ล่าสุดไว้ในโปรไฟล์ — `live.sh` มีโหมดกู้คืน:
 
 ```bash
-bash live.sh --restore            # เปิดแล้วกู้แท็บที่ค้างไว้ทั้งหมด
-bash live.sh --restore-persist    # กู้แท็บ + ตั้งค่าโปรไฟล์ให้ "เปิดแท็บเดิมทุกครั้ง" (restore_on_startup=4)
+bash live.sh                      # ไม่ใส่อาร์กิวเมนต์ = กู้แท็บที่ค้างไว้ทั้งหมด (ค่าเริ่มต้น)
+bash live.sh --restore            # เหมือนข้างบน (เขียนชัดเจน)
+bash live.sh --restore-persist    # กู้แท็บ + พยายามตั้ง restore_on_startup=4 ลง Preferences
+bash live.sh "https://example.com"  # เปิดหน้าใหม่ (ไม่กู้แท็บ)
 ```
 
-- `--restore` = ใส่แฟล็ก `--restore-last-session` ให้ Chrome
-- `--restore-persist` = เขียน `restore_on_startup: 4` ลง `Default/Preferences` ด้วย → ครั้งต่อ ๆ ไปไม่ต้องใส่แฟล็ก
-- ต้องทำตอน Chrome **ปิดอยู่** (ถ้าเปิดอยู่แล้ว สคริปต์จะบอกว่าใช้แท็บที่มีอยู่)
-- session จะถูกบันทึกก็ต่อเมื่อ Chrome ปิดแบบปกติ (ปิดหน้าต่าง/killed อย่างสุภาพ) — ถ้า crash อาจเหลือ Last Session ไม่ครบ
+- กู้แท็บด้วยแฟล็ก Chrome เอง `--restore-last-session` — **เชื่อถือได้ที่สุด**
+- `--restore-persist` เขียน `restore_on_startup: 4` ลง `Default/Preferences` แต่ Chrome ถือไฟล์นี้เป็นของตัวเองและอาจเขียนทับตอนปิด → ถ้าตั้งแล้วไม่ติด ให้ใช้แฟล็ก (ค่าเริ่มต้นของสคริปต์) แทน
+- ต้องทำตอน Chrome **ปิดอยู่** (ถ้าเปิดอยู่แล้ว สคริปต์จะบอกว่ากำลังใช้แท็บที่มีอยู่)
+- session จะถูกบันทึกเมื่อ Chrome ปิดแบบปกติ — ปิดด้วย `CloseMainWindow` (ไม่ใช่ `Stop-Process -Force`)
 
 ตรวจว่ากู้ได้กี่แท็บ: `node pw.mjs status` (คืน `pages` + `urls` ทั้งหมด)
 

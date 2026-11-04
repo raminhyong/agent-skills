@@ -53,7 +53,10 @@ Windows: `install.ps1` ทำให้อัตโนมัติ (คัดล�
 
 ```bash
 bash live.sh "<url>"                       # เปิด/โฟกัสหน้าต่างจริง
+bash live.sh --restore                     # เปิดแล้วกู้แท็บที่ค้างไว้ทั้งหมด (กระดานงานไม่หาย)
+bash live.sh --restore-persist             # กู้แท็บ + ตั้งโปรไฟล์ให้เปิดแท็บเดิมทุกครั้ง
 node pw.mjs status                          # ดูแท็บ + title
+node pw.mjs newtab "<url>"                  # เปิดแท็บใหม่ (สร้างกระดานงาน ไม่ทับของเดิม)
 node pw.mjs goto "<url>"                    # เปลี่ยนหน้า
 node pw.mjs shot out.png                    # ภาพ (แนบ MEDIA: ให้ผู้ใช้)
 node pw.mjs text | head -40                 # อ่านเนื้อหา
@@ -79,6 +82,7 @@ node pw.mjs fetchsave "<url>" out.pdf       # ดาวน์โหลดเม�
 | กรอวิดีโอยาว (JW Player) | `node seek.mjs 0.97` (คลิกแถบเวลาจริง) |
 | ตอบข้อสอบ | `bash examples/answer.sh "<ตัวเลือก>" next` ทีละข้อ |
 | เว็บจับบอตแรง (Reddit/Google) | `computer_use` (เมาส์+คีย์บอร์ดจริง) ตาม §6 |
+| ทำงานค้างหลายหน้า (กระดานงาน) | `node pw.mjs newtab <url>` เปิดใหม่ทีละแท็บ → ปิด Chrome แบบสุภาพ → ครั้งหน้า `bash live.sh --restore` ได้แท็บเดิมคืน |
 
 ---
 

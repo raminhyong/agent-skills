@@ -64,6 +64,13 @@ try {
       out(JSON.stringify({ pages: pages.length, urls: pages.map(p => p.url()), title: page ? await page.title() : null }));
       break;
 
+    case 'newtab':
+      await need();
+      page = await ctx.newPage();
+      if (a1) { await page.goto(a1, { waitUntil: 'domcontentloaded', timeout: 60000 }); await page.waitForTimeout(800); }
+      out('new tab:', page.url(), '| tabs:', ctx.pages().length);
+      break;
+
     case 'goto':
       await need();
       await page.goto(a1, { waitUntil: 'domcontentloaded', timeout: 60000 });

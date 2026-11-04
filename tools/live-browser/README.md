@@ -79,6 +79,7 @@ macOS: `LIVE_CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrom
 | คำสั่ง | ทำอะไร |
 |---|---|
 | `node pw.mjs status` | ดูแท็บทั้งหมด + title (เช็กว่าเกาะถูกตัว) |
+| `node pw.mjs newtab [url]` | เปิดแท็บใหม่ (ไม่ทับแท็บเดิม — ใช้สร้างกระดานงาน) |
 | `node pw.mjs goto <url>` | เปิด/ย้ายแท็บปัจจุบัน |
 | `node pw.mjs shot <file.png>` | ภาพเฉพาะ viewport (แนบ `MEDIA:` ให้ผู้ใช้ดู) |
 | `node pw.mjs fullshot <file.png>` | ภาพเต็มหน้า |
@@ -149,6 +150,24 @@ bash examples/answer.sh "ข้อความตัวเลือก" next    
 - ห้ามใช้ `clickjs` / แก้ค่าฟอร์ม / อ่านค่าเฉลยจาก DOM / ยิง API
 - ตรวจว่าตัวเลือกติดจริง: นับ `input[type=radio]:checked` เพิ่มขึ้น 1
 - ห้ามกดรัว — ทำช้ากว่าคนเร็วนิดเดียวก็พอ
+
+### 4.6 เปิดแท็บเดิมทั้งหมดกลับมา (กระดานงานไม่หาย)
+
+Chrome เก็บ session ล่าสุดไว้ในโปรไฟล์ — `live.sh` มีโหมดกู้คืน:
+
+```bash
+bash live.sh --restore            # เปิดแล้วกู้แท็บที่ค้างไว้ทั้งหมด
+bash live.sh --restore-persist    # กู้แท็บ + ตั้งค่าโปรไฟล์ให้ "เปิดแท็บเดิมทุกครั้ง" (restore_on_startup=4)
+```
+
+- `--restore` = ใส่แฟล็ก `--restore-last-session` ให้ Chrome
+- `--restore-persist` = เขียน `restore_on_startup: 4` ลง `Default/Preferences` ด้วย → ครั้งต่อ ๆ ไปไม่ต้องใส่แฟล็ก
+- ต้องทำตอน Chrome **ปิดอยู่** (ถ้าเปิดอยู่แล้ว สคริปต์จะบอกว่าใช้แท็บที่มีอยู่)
+- session จะถูกบันทึกก็ต่อเมื่อ Chrome ปิดแบบปกติ (ปิดหน้าต่าง/killed อย่างสุภาพ) — ถ้า crash อาจเหลือ Last Session ไม่ครบ
+
+ตรวจว่ากู้ได้กี่แท็บ: `node pw.mjs status` (คืน `pages` + `urls` ทั้งหมด)
+
+> หมายเหตุ: การกู้แท็บ ≠ กู้การล็อกอิน — เว็บที่ cookie หมดอายุ (เช่น ระบบที่ตั้ง session สั้น) จะเด้งไปหน้า login แม้แท็บจะกลับมาแล้ว
 
 ---
 

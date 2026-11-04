@@ -16,7 +16,12 @@
 #   LIVE_PORT    พอร์ต CDP (ค่าเริ่มต้น: 9222)
 set -u
 
-URL="${1:-about:blank}"
+RESTORE=0
+case "${1:-}" in
+  --restore)         RESTORE=1; URL="" ;;
+  --restore-persist) RESTORE=1; URL=""; PERSIST=1 ;;
+  *)                 URL="${1:-about:blank}"; PERSIST=0 ;;
+esac
 PORT="${LIVE_PORT:-9222}"
 PROFILE="${LIVE_PROFILE:-$HOME/tools/chrome-live}"
 CHROME="${LIVE_CHROME:-}"
@@ -66,7 +71,10 @@ up() { curl -s --max-time 2 "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&
 
 if up; then
   echo "CDP :$PORT เปิดอยู่แล้ว — ใช้แท็บเดิม"
-  if [ -n "${1:-}" ]; then
+  if [ "$RESTORE" = "1" ]; then
+    echo "หมายเหตุ: --restore ใช้ได้ตอน Chrome ยังไม่เปิด — ตอนนี้ใช้แท็บที่มีอยู่ (ดูด้วย: node pw.mjs status)"
+  fi
+  if [ -n "${URL:-}" ]; then
     cd "$(dirname "$0")" && node pw.mjs goto "$URL"
   fi
 else
@@ -74,12 +82,27 @@ else
   echo "โปรไฟล์: $PROFILE"
   LOG="$PROFILE/chrome-live-launch.log"
   rm -f "$PROFILE/DevToolsActivePort" 2>/dev/null || true
+
+  # ตั้งค่า "เปิดแท็บเดิมต่อ" ลงโปรไฟล์ (ทำได้เฉพาะตอน Chrome ปิดอยู่)
+  if [ "${PERSIST:-0}" = "1" ]; then
+    python - "$PROFILE_NATIVE/Default/Preferences" <<'PY' 2>/dev/null || echo "WARN: ตั้งค่า restore_on_startup ไม่สำเร็จ"
+import json, sys
+p = sys.argv[1]
+d = json.load(open(p, encoding='utf-8'))
+d.setdefault('session', {})['restore_on_startup'] = 4   # 4 = เปิดแท็บที่ค้างไว้ต่อ
+json.dump(d, open(p, 'w', encoding='utf-8'), ensure_ascii=False)
+print('ตั้งค่าแล้ว: restore_on_startup = 4 (เปิดแท็บเดิมทุกครั้ง)')
+PY
+  fi
+
+  ARGS=()
+  [ "$RESTORE" = "1" ] && ARGS+=(--restore-last-session)
   ("$CHROME" \
     --remote-debugging-port="$PORT" \
     --user-data-dir="$PROFILE_NATIVE" \
     --no-first-run --no-default-browser-check \
     --window-size=1400,900 \
-    "$URL" >"$LOG" 2>&1 &)
+    "${ARGS[@]}" ${URL:+"$URL"} >"$LOG" 2>&1 &)
   # รอสูงสุด ~60 วิ (โปรไฟล์ใหญ่/ดิสก์ช้าอาจใช้เวลาเปิดนาน)
   for i in $(seq 1 60); do up && break; sleep 1; done
   if ! up; then

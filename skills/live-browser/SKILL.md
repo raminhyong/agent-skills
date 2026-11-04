@@ -60,7 +60,9 @@ node pw.mjs newtab "<url>"                  # เปิดแท็บใหม�
 node pw.mjs goto "<url>"                    # เปลี่ยนหน้า
 node pw.mjs shot out.png                    # ภาพ (แนบ MEDIA: ให้ผู้ใช้)
 node pw.mjs text | head -40                 # อ่านเนื้อหา
-node pw.mjs click "<ข้อความ>"               # คลิกเมาส์จริง
+node pw.mjs click "<ข้อความ>"               # คลิกเมาส์จริง (มีลูกศรชี้ให้เห็นก่อนคลิก)
+node pw.mjs point "<ข้อความ>"               # ชี้เฉย ๆ ไม่คลิก
+node pw.mjs cursor                          # สาธิตตัวชี้ + ripple
 node pw.mjs clickcss "<selector>"           # คลิกด้วย selector
 node pw.mjs fill "<label>" "<ข้อความ>"      # กรอกช่อง
 node pw.mjs press Escape                    # ปิด overlay
@@ -81,6 +83,7 @@ node pw.mjs fetchsave "<url>" out.pdf       # ดาวน์โหลดเม�
 | ดาวน์โหลดใบประกาศ | `download` หรือ `fetchsave` → เปิด `file:///...pdf` + `shot` เพื่อตรวจด้วยตา |
 | กรอวิดีโอยาว (JW Player) | `node seek.mjs 0.97` (คลิกแถบเวลาจริง) |
 | ตอบข้อสอบ | `bash examples/answer.sh "<ตัวเลือก>" next` ทีละข้อ |
+| ต้องให้ผู้ใช้เห็นว่า agent ชี้ตรงไหน | `point` / `click` มี overlay ลูกศร+วงส้ม+ป้ายชื่อ (PW_CURSOR=0 ปิด) |
 | เว็บจับบอตแรง (Reddit/Google) | `computer_use` (เมาส์+คีย์บอร์ดจริง) ตาม §6 |
 | ทำงานค้างหลายหน้า (กระดานงาน) | `node pw.mjs newtab <url>` เปิดใหม่ทีละแท็บ → ปิด Chrome แบบสุภาพ → ครั้งหน้า `bash live.sh --restore` ได้แท็บเดิมคืน |
 

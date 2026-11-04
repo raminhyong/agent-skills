@@ -23,9 +23,9 @@ CHROME="${LIVE_CHROME:-}"
 
 if [ -z "$CHROME" ]; then
   for c in \
-    "/c/Program Files/Google/Chrome/Application/chrome.exe" \
-    "/c/Program Files (x86)/Google/Chrome/Application/chrome.exe" \
-    "/c/Program Files/Microsoft/Edge/Application/msedge.exe" \
+    "C:/Program Files/Google/Chrome/Application/chrome.exe" \
+    "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe" \
+    "C:/Program Files/Microsoft/Edge/Application/msedge.exe" \
     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
     "$(command -v google-chrome 2>/dev/null || true)" \
     "$(command -v chromium 2>/dev/null || true)"; do
@@ -33,31 +33,64 @@ if [ -z "$CHROME" ]; then
   done
 fi
 
+# แปลง path แบบ MSYS (/c/...) เป็น Windows (C:/...) — Chrome ที่เป็น native app เปิด path แบบ /c/ ไม่ได้
+case "$CHROME" in
+  /?/*)
+    if command -v cygpath >/dev/null 2>&1; then
+      CHROME="$(cygpath -m "$CHROME")"
+    else
+      CHROME="$(echo "$CHROME" | sed -E 's#^/([a-zA-Z])/#\U\1:/#')"
+    fi
+    ;;
+esac
+
 if [ -z "$CHROME" ]; then
   echo "ERROR: ไม่พบ Chrome/Edge — ตั้ง LIVE_CHROME=<path> เอง" >&2
   exit 1
 fi
 
 mkdir -p "$PROFILE"
+# แปลงโฟลเดอร์โปรไฟล์เป็น path แบบ Windows ด้วย (Chrome native ไม่รับ /c/...)
+PROFILE_NATIVE="$PROFILE"
+case "$PROFILE" in
+  /?/*)
+    if command -v cygpath >/dev/null 2>&1; then
+      PROFILE_NATIVE="$(cygpath -m "$PROFILE")"
+    else
+      PROFILE_NATIVE="$(echo "$PROFILE" | sed -E 's#^/([a-zA-Z])/#\U\1:/#')"
+    fi
+    ;;
+esac
 
 up() { curl -s --max-time 2 "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1; }
 
 if up; then
   echo "CDP :$PORT เปิดอยู่แล้ว — ใช้แท็บเดิม"
   if [ -n "${1:-}" ]; then
-    PW=/$(dirname "$0") ; cd "$(dirname "$0")" && node pw.mjs goto "$URL"
+    cd "$(dirname "$0")" && node pw.mjs goto "$URL"
   fi
 else
   echo "เปิด Chrome: $CHROME"
   echo "โปรไฟล์: $PROFILE"
+  LOG="$PROFILE/chrome-live-launch.log"
+  rm -f "$PROFILE/DevToolsActivePort" 2>/dev/null || true
   ("$CHROME" \
     --remote-debugging-port="$PORT" \
-    --user-data-dir="$PROFILE" \
+    --user-data-dir="$PROFILE_NATIVE" \
     --no-first-run --no-default-browser-check \
     --window-size=1400,900 \
-    "$URL" >/dev/null 2>&1 &)
-  for i in $(seq 1 30); do up && break; sleep 0.5; done
-  up || { echo "ERROR: Chrome ไม่ยอมเปิด CDP port $PORT (โปรไฟล์อาจถูก lock)" >&2; exit 1; }
+    "$URL" >"$LOG" 2>&1 &)
+  # รอสูงสุด ~60 วิ (โปรไฟล์ใหญ่/ดิสก์ช้าอาจใช้เวลาเปิดนาน)
+  for i in $(seq 1 60); do up && break; sleep 1; done
+  if ! up; then
+    echo "ERROR: Chrome ไม่ยอมเปิด CDP port $PORT" >&2
+    echo "--- log ล่าสุด ($LOG) ---" >&2
+    tail -8 "$LOG" 2>/dev/null >&2
+    if [ -f "$PROFILE/DevToolsActivePort" ]; then
+      echo "พบ DevToolsActivePort: $(head -1 "$PROFILE/DevToolsActivePort") — Chrome อาจเปิดพอร์ตอื่น" >&2
+    fi
+    exit 1
+  fi
 fi
 
 # ยืนยันว่ามีหน้าต่างจริงบนจอ (บน Windows) — ถ้าว่าง แปลว่าไม่มีหน้าต่าง อย่าอ้างว่าเปิดให้แล้ว

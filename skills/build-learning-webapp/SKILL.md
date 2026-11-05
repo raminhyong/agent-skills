@@ -32,6 +32,9 @@ If the user asks to simplify, remove secondary economies, shops, inventories, an
 - Design mobile-first with large touch targets, readable Thai text, keyboard focus, loading, empty, error, and completed states.
 - Tie visual milestones to meaningful learning stages, not arbitrary decoration.
 - Keep the visual theme consistent across the entry screen, activity, feedback, and banner.
+- Lock visual identity with a project `DESIGN.md`: query `ui-ux-pro-max` (`scripts/search.py`) for cohesive palettes, typography pairings (e.g. Prompt/Kanit + Outfit), and accessible contrast (4.5:1).
+- Apply `emil-skills` micro-interactions: tactile button press (`:active { transform: scale(0.97); }`), custom ease-out (`cubic-bezier(0.23, 1, 0.32, 1)`), animations < 250ms, and celebration spring physics on rewards.
+
 
 ## Design the data flow
 

@@ -61,3 +61,5 @@ Before concluding any frontend edit, audit the captured screen against these cri
 3. **Contrast & Color Palette**: Harmonious dark/light theme tokens; no raw saturated `#ff0000` or `#0000ff`.
 4. **Responsive Overflow**: Check mobile viewport (390x844). No horizontal scroll bars on root containers.
 5. **Interactive Feedback**: Hover and active transitions on buttons (0.15s - 0.2s cubic-bezier).
+6. **Anti-Slop & Micro-Interaction Audit (`impeccable` + `emil-skills`)**: Ensure no generic purple-gradient card boilerplate, no unstyled default controls, no `scale(0)` entrances (use `scale(0.95)` + opacity), no sluggish `ease-in`, and verify tactile `:active` feedback on all clickable elements.
+

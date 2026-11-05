@@ -37,6 +37,16 @@
   - `/project`: โหลดสกิล `thai-project-proposal` เขียน/แก้/ตรวจโครงการสถานศึกษาให้ตรงแบบฟอร์มโรงเรียนและเอกสารจัดทำแผน (ห้ามแต่งชื่อกลยุทธ์/โครงการหลัก/นโยบาย/มาตรฐาน/เป้าหมาย)
   - `/memo`: โหลดสกิล `thai-official-memo` สร้างบันทึกข้อความราชการ (ไปราชการ/รายงานผล/ส่งข้อสอบ/ชี้แจง/สอนแทน)
   - `/exam`: โหลดสกิล `thai-exam-format` จัดฟอร์แมตเอกสารข้อสอบ DOCX ตามมาตรฐานโรงเรียน
+  - `/uipro` หรือ `/design`: โหลดสกิล `ui-ux-pro-max` ระบบสืบค้นสไตล์ คู่สี ฟอนต์ และดีไซน์ซิสเต็มอัจฉริยะ (Offline BM25)
+  - `/motion` หรือ `/emil`: โหลดสกิล `emil-skills` ปรับแต่งแอนิเมชัน Micro-interactions, สปริงฟิสิกส์ และปฏิกิริยาสัมผัส
+  - `/impeccable`: โหลดสกิล `impeccable` ตรวจสอบและยกระดับ UI ป้องกัน AI Slop และคุมสัญญา DESIGN.md
+  - `/superpowers`: โหลดชุดสกิล `superpowers` (TDD, Systematic Debugging, Brainstorming, Executing Plans, Subagent Development)
+
+- **มาตรฐานการออกแบบ UI/UX และ Micro-interactions (Anti-Slop & Polish Standards)**:
+  - เว็บแอปทุกตัวต้องสร้างหรือปฏิบัติตาม `DESIGN.md` ประจำโปรเจกต์ (Single Source of Truth) เพื่อล็อกโทนสี HSL/OKLCH, สเกลตัวอักษร, กริดระยะห่าง 8px และตัดวงจร AI Slop
+  - ใช้ `ui-ux-pro-max` ในการสืบค้นคู่สี สไตล์ และแนวทาง UX ทางจิตวิทยาการเรียนรู้โดยอัตโนมัติ
+  - ใช้หลักการของ `emil-skills` คุมแอนิเมชัน: แอนิเมชัน UI ต้องสั้นกว่า 300ms, ใช้ `ease-out` หรือ Spring Physics, ปุ่มกดต้องมี `:active` scale (0.97), ห้ามใช้ `ease-in` หรือ `transition: all` ลอยๆ
+
 
 
 

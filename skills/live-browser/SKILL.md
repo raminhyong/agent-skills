@@ -82,8 +82,12 @@ node pw.mjs fetchsave "<url>" out.pdf       # ดาวน์โหลดเม�
 | กรอกฟอร์ม + ยืนยันผล | `fill` → `click` → `shot` → `text` |
 | ดาวน์โหลดใบประกาศ | `download` หรือ `fetchsave` → เปิด `file:///...pdf` + `shot` เพื่อตรวจด้วยตา |
 | กรอวิดีโอยาว (JW Player) | `node seek.mjs 0.97` (คลิกแถบเวลาจริง) |
+| ปรับสปีดวิดีโอทางการ 2x (e-Learning) | `node set_speed.mjs 2` (คลิกปุ่ม Speed บนตัวเล่นวิดีโออย่างเป็นธรรมชาติ) |
+| ติดตามจบบทและเรียนบทถัดไป | `node advance_module.mjs` (เฝ้าวิดีโอจบ คลิกป๊อปอัปบทถัดไป + ปรับ 2x อัตโนมัติ) |
+| ตรวจสอบจอแสดงผลหลายจอ (Multi-Monitor) | `powershell -ExecutionPolicy Bypass -File ./detect_monitors.ps1` |
+| สลับโปรไฟล์ Chrome | `switch_profile.bat` หรือ `open_profile_1.bat` / `open_profile_2.bat` |
 | ตอบข้อสอบ | `bash examples/answer.sh "<ตัวเลือก>" next` ทีละข้อ |
-| ต้องให้ผู้ใช้เห็นว่า agent ชี้ตรงไหน | `point` / `click` มี overlay ลูกศร+วงส้ม+ป้ายชื่อ (PW_CURSOR=0 ปิด) |
+| ต้องให้ผู้ใช้เห็นว่า agent ชี้ตรงไหน | `point` / `click` มี overlay เมาส์เรเดียนซ์ออร่าสีทอง+ประกายคลื่นน้ำ+ป้ายชื่อเอเจนต์ (PW_CURSOR=0 ปิด) |
 | เว็บจับบอตแรง (Reddit/Google) | `computer_use` (เมาส์+คีย์บอร์ดจริง) ตาม §6 |
 | ทำงานค้างหลายหน้า (กระดานงาน) | `node pw.mjs newtab <url>` เปิดใหม่ทีละแท็บ → ปิด Chrome แบบสุภาพ → ครั้งหน้า `bash live.sh --restore` ได้แท็บเดิมคืน |
 

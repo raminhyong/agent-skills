@@ -1,12 +1,15 @@
 {
   "name": "hermes-live-browser",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "Visible, persistent Chrome driven by Playwright over CDP — for agents that must let the human see and use the same browser session.",
+  "description": "Visible, persistent Chrome driven by Playwright over CDP with custom agent radiance cursor, multi-monitor support, and e-learning speed control.",
   "scripts": {
     "status": "node pw.mjs status",
-    "open": "bash live.sh"
+    "open": "bash live.sh",
+    "speed": "node set_speed.mjs 2",
+    "advance": "node advance_module.mjs",
+    "monitors": "powershell -ExecutionPolicy Bypass -File ./detect_monitors.ps1"
   },
   "dependencies": {
     "playwright": "^1.64.1"

@@ -30,6 +30,7 @@
  */
 import { chromium } from 'playwright';
 import fs from 'fs';
+import { TONY_CURSOR_DATA_URI } from './cursor_icon.js';
 
 const [, , cmd, a1, a2] = process.argv;
 const ENDPOINT = process.env.CDP || 'http://127.0.0.1:9222';
@@ -58,29 +59,57 @@ async function byText(p, t) {
   return null;
 }
 
-/** ---------- Cursor overlay (ให้เจ๊เห็นว่า agent ชี้ตรงไหน) ---------- */
+/** ---------- Cursor overlay (ตัวชี้เมาส์โทนี่ + เอฟเฟกต์เรเดียนซ์) ---------- */
 const CURSOR_ON = (process.env.PW_CURSOR ?? '1') !== '0';
-const CURSOR_LABEL = process.env.PW_CURSOR_LABEL ?? 'แพนเค้ก';
+const CURSOR_LABEL = process.env.PW_CURSOR_LABEL ?? process.env.AGENT_NAME ?? 'โทนี่';
 
 async function cursorInject(page) {
-  await page.evaluate(({ label, v }) => {
+  await page.evaluate(({ label, v, iconUri }) => {
     const old = document.getElementById('__hermes_cursor');
     if (old && window.__hc && window.__hc.v === v) return;
     const px = window.__hc ? window.__hc.x : 0, py = window.__hc ? window.__hc.y : 0;
     if (old) old.remove();
+
+    // Inject Radiance Keyframe Styles
+    if (!document.getElementById('__tony_radiance_style')) {
+      const st = document.createElement('style');
+      st.id = '__tony_radiance_style';
+      st.textContent = `
+        @keyframes tony_radiance_pulse {
+          0%, 100% {
+            filter: drop-shadow(0 0 6px rgba(255,160,0,0.95)) drop-shadow(0 0 14px rgba(255,80,0,0.8)) drop-shadow(0 0 24px rgba(255,215,0,0.55));
+            transform: scale(1);
+          }
+          50% {
+            filter: drop-shadow(0 0 12px rgba(255,210,50,1)) drop-shadow(0 0 24px rgba(255,60,0,0.95)) drop-shadow(0 0 38px rgba(255,235,100,0.85));
+            transform: scale(1.06);
+          }
+        }
+        @keyframes tony_halo_spin {
+          0% { transform: scale(0.85) rotate(0deg); opacity: 0.7; }
+          50% { transform: scale(1.25) rotate(180deg); opacity: 0.95; }
+          100% { transform: scale(0.85) rotate(360deg); opacity: 0.7; }
+        }
+      `;
+      (document.head || document.documentElement).appendChild(st);
+    }
+
     const el = document.createElement('div');
     el.id = '__hermes_cursor';
     el.style.cssText = 'position:fixed;left:0;top:0;width:0;height:0;z-index:2147483647;pointer-events:none;';
     el.innerHTML =
-      '<div style="position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,rgba(255,140,0,.28),rgba(255,140,0,0) 70%);"></div>' +
-      '<svg width="30" height="30" viewBox="0 0 24 24" style="position:absolute;transform:translate(-1px,-1px);filter:drop-shadow(0 3px 4px rgba(0,0,0,.45))">' +
-      '<path d="M4 2 L20 12 L12.5 13.6 L16 21 L13 22.2 L9.6 14.8 L4 19 Z" fill="#ffffff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>' +
-      '<div style="position:absolute;left:22px;top:22px;font:600 11px/1.2 system-ui,-apple-system,sans-serif;color:#111;background:#ffe9a8;border:1px solid #d9b84a;border-radius:999px;padding:2px 7px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18);display:' +
-      (label ? 'block' : 'none') + '">' + (label || '') + '</div>';
+      // 1. Radiant Aura Halo
+      '<div style="position:absolute;left:-24px;top:-24px;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,50,0.65) 0%,rgba(255,120,0,0.35) 45%,rgba(255,60,0,0) 75%);animation:tony_halo_spin 3s infinite linear;pointer-events:none;"></div>' +
+      // 2. Custom Tony Hand pointing at (0, 0) with Radiance Pulse
+      '<img src="' + iconUri + '" style="position:absolute;left:-10px;top:-4px;width:46px;height:46px;pointer-events:none;animation:tony_radiance_pulse 1.8s infinite ease-in-out;transform-origin:10px 4px;">' +
+      // 3. Tony Badge
+      '<div style="position:absolute;left:26px;top:22px;font:700 12px/1.2 system-ui,-apple-system,sans-serif;color:#ffffff;background:linear-gradient(135deg,#ff6f00,#ff8f00);border:1.5px solid #ffe082;border-radius:999px;padding:3px 9px;white-space:nowrap;box-shadow:0 0 12px rgba(255,111,0,0.8),0 2px 6px rgba(0,0,0,0.25);letter-spacing:0.5px;display:' +
+      (label ? 'block' : 'none') + '">✨ ' + (label || '') + '</div>';
+
     document.documentElement.appendChild(el);
     el.style.transform = `translate(${px}px, ${py}px)`;
     window.__hc = { el, x: px, y: py, v };
-  }, { label: CURSOR_LABEL, v: 'hc3|' + CURSOR_LABEL }).catch(() => {});
+  }, { label: CURSOR_LABEL, v: 'tony_radiance_v1|' + CURSOR_LABEL, iconUri: TONY_CURSOR_DATA_URI }).catch(() => {});
 }
 
 async function cursorMove(page, x, y, ms = 320) {
@@ -102,15 +131,15 @@ async function cursorMove(page, x, y, ms = 320) {
   }, { x, y, ms }).catch(() => {});
 }
 
-async function cursorRipple(page, x, y, ms = 380) {
+async function cursorRipple(page, x, y, ms = 400) {
   if (!CURSOR_ON) return;
   await page.evaluate(async ({ x, y, ms }) => {
     const c = window.__hc; if (!c) return;
     const r = document.createElement('div');
-    r.style.cssText = `position:absolute;left:${x - 12}px;top:${y - 12}px;width:24px;height:24px;border-radius:50%;` +
-      `border:2px solid #ff8c00;background:rgba(255,140,0,.18);transition:transform ${ms}ms ease-out,opacity ${ms}ms ease-out;`;
+    r.style.cssText = `position:absolute;left:${x - 18}px;top:${y - 18}px;width:36px;height:36px;border-radius:50%;` +
+      `border:2.5px solid #ffd54f;background:radial-gradient(circle,rgba(255,235,59,0.5) 0%,rgba(255,152,0,0.25) 55%,transparent 100%);box-shadow:0 0 18px #ff9800, inset 0 0 10px #ffeb3b;transition:transform ${ms}ms ease-out,opacity ${ms}ms ease-out;`;
     c.el.appendChild(r);
-    requestAnimationFrame(() => { r.style.transform = 'scale(2.4)'; r.style.opacity = '0'; });
+    requestAnimationFrame(() => { r.style.transform = 'scale(2.6)'; r.style.opacity = '0'; });
     await new Promise(res => setTimeout(res, ms));
     r.remove();
   }, { x, y, ms }).catch(() => {});

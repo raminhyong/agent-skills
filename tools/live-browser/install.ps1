@@ -1,4 +1,4 @@
-# install.ps1 — ติดตั้งชุด live-browser ลงเครื่องนี้ (Windows)
+﻿# install.ps1 — ติดตั้งชุด live-browser ลงเครื่องนี้ (Windows)
 #
 # วิธีใช้ (PowerShell):
 #   powershell -ExecutionPolicy Bypass -File install.ps1
@@ -25,7 +25,11 @@ New-Item -ItemType Directory -Force -Path $Dest | Out-Null
 New-Item -ItemType Directory -Force -Path "$Dest\examples" | Out-Null
 New-Item -ItemType Directory -Force -Path $Profile | Out-Null
 
-$files = @('live.sh','live.cmd','pw.mjs','cdp.mjs','seek.mjs','dl.mjs','package.json','README.md')
+$files = @(
+  'live.sh','live.cmd','pw.mjs','cdp.mjs','seek.mjs','dl.mjs','package.json','README.md',
+  'advance_module.mjs','set_speed.mjs','cursor_icon.js','tony_cursor.png','detect_monitors.ps1',
+  'switch_profile.bat','open_profile_1.bat','open_profile_2.bat','open_profile_default.bat','show-window.ps1'
+)
 foreach ($f in $files) {
   $src = Join-Path $PSScriptRoot $f
   if (Test-Path $src) { Copy-Item $src -Destination $Dest -Force; Say "คัดลอก $f" }
@@ -48,13 +52,14 @@ if (-not $chrome) { Write-Warning "ไม่พบ Chrome/Edge — โปรด�
 else { Say "พบเบราว์เซอร์: $chrome" }
 
 # เก็บค่าลง config.ps1 (ไม่มีความลับ)
-@"
-# โหลดด้วย: . "$Dest\config.ps1"
-`$env:LIVE_CHROME  = '$chrome'
-`$env:LIVE_PROFILE = '$Profile'
-`$env:LIVE_PORT    = '$Port'
-`$env:CDP          = 'http://127.0.0.1:$Port'
-"@ | Set-Content -Path "$Dest\config.ps1" -Encoding UTF8
+$cfg = @(
+  "# โหลดด้วย: . `"$Dest\config.ps1`"",
+  "`$env:LIVE_CHROME  = '$chrome'",
+  "`$env:LIVE_PROFILE = '$Profile'",
+  "`$env:LIVE_PORT    = '$Port'",
+  "`$env:CDP          = 'http://127.0.0.1:$Port'"
+) -join "`r`n"
+Set-Content -Path (Join-Path $Dest "config.ps1") -Value $cfg -Encoding UTF8
 Say "เขียน config.ps1"
 
 if (-not $SkipNpm) {

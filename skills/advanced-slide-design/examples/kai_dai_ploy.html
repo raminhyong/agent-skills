@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1400, height=1980, initial-scale=1.0">
+  <title>ไก่ได้พลอย — มาสเตอร์คลาสการออกแบบสไลด์แนวตั้ง (21:29.7)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Prompt:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1400px;
+      height: 1980px;
+      overflow: hidden;
+      background-color: #030611;
+      color: #ffffff;
+      font-family: 'Noto Sans Thai', 'Prompt', sans-serif;
+      position: relative;
+    }
+
+    .viewport-canvas {
+      position: relative;
+      width: 1400px;
+      height: 1980px;
+      overflow: hidden;
+      background: #030611;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 85px 95px 75px 95px;
+    }
+
+    /* Ambient Sapphire & Ruby Glow */
+    .ambient-glow-top {
+      position: absolute;
+      top: -10%;
+      left: 10%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, rgba(99, 102, 241, 0.08) 40%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ambient-glow-bottom {
+      position: absolute;
+      bottom: 10%;
+      right: 5%;
+      width: 750px;
+      height: 750px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(14, 165, 233, 0.08) 40%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ==========================================================
+       HERO VISUAL LAYER (VERTICAL INTEGRATION)
+       Seamless fading top, bottom, and sides
+       ========================================================== */
+    .hero-visual-layer {
+      position: absolute;
+      top: 480px;
+      left: 0;
+      width: 100%;
+      height: 940px;
+      z-index: 2;
+      overflow: hidden;
+      mask-image: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.2) 8%,
+        rgba(0, 0, 0, 0.9) 25%,
+        rgba(0, 0, 0, 1) 50%,
+        rgba(0, 0, 0, 0.9) 75%,
+        rgba(0, 0, 0, 0.2) 92%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.2) 8%,
+        rgba(0, 0, 0, 0.9) 25%,
+        rgba(0, 0, 0, 1) 50%,
+        rgba(0, 0, 0, 0.9) 75%,
+        rgba(0, 0, 0, 0.2) 92%,
+        transparent 100%
+      );
+    }
+
+    .hero-visual-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      transform: scale(1.05);
+      filter: contrast(1.12) saturate(1.2) brightness(0.96);
+    }
+
+    /* Lateral Vignette to blend left and right edges */
+    .vignette-lateral {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(to right, 
+        #030611 0%, 
+        rgba(3, 6, 17, 0.4) 10%, 
+        transparent 25%, 
+        transparent 75%, 
+        rgba(3, 6, 17, 0.4) 90%, 
+        #030611 100%
+      );
+    }
+
+    /* ==========================================================
+       EDITORIAL CONTENT ARCHITECTURE (21:29.7 PORTRAIT)
+       STRICT MINIMUM 20PX FLOOR + BOLD VIVID COLORS + DISTINCT STROKE
+       ========================================================== */
+
+    /* 1. TOP ZONE: Header, Hero Title & Core Meaning */
+    .top-zone {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .eyebrow-tracker {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 21px; /* STRICT FLOOR >= 20px */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #38bdf8; /* Sapphire Cyan */
+      text-shadow: 
+        0 0 2px #000, 0 0 2px #000,
+        0 0 15px rgba(56, 189, 248, 0.8),
+        0 2px 8px rgba(0, 0, 0, 0.95);
+    }
+
+    .eyebrow-line {
+      width: 40px;
+      height: 3px;
+      background: #38bdf8;
+      box-shadow: 0 0 14px #38bdf8;
+      display: inline-block;
+    }
+
+    .eyebrow-series {
+      color: #bae6fd;
+      letter-spacing: 1.5px;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Hero Title with BOLDER DISTINCT STROKE & RADIANCE */
+    .hero-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 114px;
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff 30%, #bae6fd 65%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* Distinct Bold Stroke and Deep Protective Halo */
+      paint-order: stroke fill;
+      -webkit-text-stroke: 2px rgba(3, 6, 17, 0.95);
+      filter: 
+        drop-shadow(0 0 28px rgba(56, 189, 248, 0.55)) 
+        drop-shadow(0 0 6px rgba(0, 0, 0, 0.95))
+        drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95));
+    }
+
+    .latin-subtitle {
+      font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+      font-size: 23px; /* STRICT FLOOR >= 20px */
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #f43f5e; /* Vivid Ruby Coral */
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-shadow: 
+        0 0 2px #000, 0 0 2px #000,
+        0 0 16px rgba(244, 63, 94, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.95);
+    }
+
+    .latin-subtitle .translation {
+      color: #f8fafc;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* Core Assertion Card with Distinct Protective Shadow & Stroke */
+    .assertion-zone {
+      margin-top: 10px;
+      position: relative;
+      padding-left: 32px;
+      border-left: 4.5px solid #38bdf8;
+      box-shadow: -10px 0 25px -4px rgba(56, 189, 248, 0.4);
+    }
+
+    .assertion-lead {
+      font-family: 'Prompt', sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.48;
+      color: #ffffff; /* PURE VIVID WHITE */
+      letter-spacing: -0.3px;
+      /* BOLDER DISTINCT PROTECTIVE SHADOW & STROKE */
+      paint-order: stroke fill;
+      -webkit-text-stroke: 1.5px rgba(3, 6, 17, 0.9);
+      text-shadow: 
+        0 0 3px #000, 0 0 3px #000,
+        0 2px 14px rgba(0, 0, 0, 0.98),
+        0 0 30px rgba(3, 6, 17, 0.95),
+        0 0 50px rgba(3, 6, 17, 0.9);
+    }
+
+    .assertion-lead em {
+      font-style: normal;
+      color: #fbbf24; /* Electric Amber-Gold */
+      font-weight: 800;
+      -webkit-text-stroke: 1.5px rgba(3, 6, 17, 0.9);
+      text-shadow: 0 0 20px rgba(251, 191, 36, 0.7), 0 2px 8px rgba(0, 0, 0, 0.95);
+    }
+
+    .assertion-sub {
+      margin-top: 14px;
+      font-size: 22px; /* STRICT FLOOR >= 20px */
+      line-height: 1.6;
+      color: #e2e8f0; /* Crisp Off-White */
+      font-weight: 500;
+      text-shadow: 0 0 2px #000, 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    /* 2. MIDDLE ZONE: Floating Focal Principle Badge over the Visual */
+    .middle-zone {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 20px;
+      margin: 220px 0 40px 0;
+      pointer-events: none;
+    }
+
+    .focal-capsule {
+      background: rgba(3, 6, 17, 0.85);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      backdrop-filter: blur(25px);
+      border-radius: 24px;
+      padding: 20px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      text-align: right;
+      box-shadow: 
+        0 0 30px rgba(14, 165, 233, 0.25),
+        0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .focal-stamp {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; /* STRICT FLOOR >= 20px */
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #38bdf8;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+    }
+
+    .focal-motto {
+      font-family: 'Kanit', sans-serif;
+      font-size: 27px; /* Bold & impactful */
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 1.2px rgba(3, 6, 17, 0.9);
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.5), 0 3px 12px rgba(0, 0, 0, 0.95);
+    }
+
+    /* 3. BOTTOM ZONE: Strategic Comparison Pillars & Presenter Footer */
+    .bottom-zone {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .comparison-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding-top: 28px;
+      border-top: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .pillar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(3, 6, 17, 0.7);
+      backdrop-filter: blur(15px);
+      padding: 24px 26px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .pillar-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; /* STRICT FLOOR >= 20px */
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .pillar-tag.illiterate {
+      color: #fb7185; /* Vivid Rose/Ruby */
+      text-shadow: 0 0 15px rgba(251, 113, 133, 0.6), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .pillar-tag.mastery {
+      color: #38bdf8; /* Vivid Sapphire */
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .pillar-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      paint-order: stroke fill;
+      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+    }
+
+    .pillar-desc {
+      font-size: 21px; /* STRICT FLOOR >= 20px */
+      line-height: 1.58;
+      color: #cbd5e1; /* Vivid high contrast */
+      text-shadow: 0 0 2px #000, 0 2px 8px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Footer Bar (Single Line, High Contrast) */
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: 22px;
+      border-top: 2px solid rgba(255, 255, 255, 0.12);
+      font-family: 'Prompt', sans-serif;
+      font-size: 21px; /* STRICT FLOOR >= 20px */
+      color: #94a3b8;
+      white-space: nowrap;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .author-signature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #cbd5e1;
+      white-space: nowrap;
+    }
+
+    .author-name {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 21px; /* STRICT FLOOR >= 20px */
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .divider-dot {
+      width: 6px;
+      height: 6px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    .spec-mark {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #38bdf8;
+      font-size: 20px; /* STRICT FLOOR >= 20px */
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport-canvas">
+    <!-- Ambient Light Spill -->
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+
+    <!-- Hero Image Layer: Blended seamlessly from top and bottom into darkness -->
+    <div class="hero-visual-layer">
+      <img id="proverb-img" src="assets/chicken_gem_proverb.png" alt="ไก่ได้พลอย — ไก่ชนขนมรกตกับอัญมณีล้ำค่าที่ส่องประกาย">
+    </div>
+
+    <!-- Vignette Overlays -->
+    <div class="vignette-lateral"></div>
+
+    <!-- 1. TOP ZONE: Editorial Title & Meaning -->
+    <header class="top-zone">
+      <div class="eyebrow-tracker">
+        <span class="eyebrow-line"></span>
+        <span>คลังปัญญาภาษาไทย</span>
+        <span class="eyebrow-series">/ 03 • VALUE & WISDOM</span>
+      </div>
+
+      <div class="title-block">
+        <h1 class="hero-title">ไก่ได้พลอย</h1>
+        <p class="latin-subtitle">
+          <span>/kài-dâai-phlɔɔy/</span>
+          <span class="divider-dot"></span>
+          <span class="translation">"A rooster finding a precious gem"</span>
+        </p>
+      </div>
+
+      <div class="assertion-zone">
+        <h2 class="assertion-lead">
+          ได้ครอบครองสิ่งที่มี<em>คุณค่ามหาศาล</em> แต่ไร้ปัญญาที่จะมองเห็น<br>
+          จึงไม่อาจนำความล้ำค่านั้นมาสร้างให้เกิดประโยชน์แท้จริง
+        </h2>
+        <p class="assertion-sub">
+          อุปมาถึงผู้ที่ได้รับโอกาส วัตถุสิ่งของ หรือความรู้อันประเสริฐ แต่ขาดวิสัยทัศน์และความเข้าใจ ย่อมปล่อยให้สิ่งล้ำค่าสูญเปล่าราวกับก้อนกรวดไร้ราคา
+        </p>
+      </div>
+    </header>
+
+    <!-- 2. MIDDLE ZONE: Floating Key Takeaway Capsule -->
+    <div class="middle-zone">
+      <div class="focal-capsule">
+        <span class="focal-stamp">CRITICAL PRINCIPLE</span>
+        <span class="focal-motto">"มีของล้ำค่า... แต่ตาไม่ถึง"</span>
+      </div>
+    </div>
+
+    <!-- 3. BOTTOM ZONE: Strategic Comparison & Editorial Footer -->
+    <footer class="bottom-zone">
+      <section class="comparison-strip">
+        <div class="pillar-col">
+          <span class="pillar-tag illiterate">ILLITERACY TRAP</span>
+          <h3 class="pillar-title">มีอาวุธแต่ไร้ทักษะ</h3>
+          <p class="pillar-desc">
+            มี AI ทันสมัย มีเทคโนโลยีราคาแพง แต่ขาดทักษะ (Digital Literacy) จึงใช้งานได้เพียงแค่ผิวเผิน ปล่อยให้ขุมทรัพย์ทางปัญญากลายเป็นของประดับ
+          </p>
+        </div>
+
+        <div class="pillar-col">
+          <span class="pillar-tag mastery">VALUE MASTERY</span>
+          <h3 class="pillar-title">เจียระไนสู่คุณค่าแท้จริง</h3>
+          <p class="pillar-desc">
+            ฝึกฝนทักษะ พัฒนาความรู้ความเข้าใจอย่างลึกซึ้ง เพื่อเปลี่ยน "พลอยในมือ" ให้กลายเป็นอาวุธทรงพลังในการสร้างผลงานและพลิกโฉมการเรียนรู้
+          </p>
+        </div>
+      </section>
+
+      <div class="footer-bar">
+        <div class="author-signature">
+          <span class="author-name">นายรามิล ปัญญพัทธ์</span>
+          <span class="divider-dot"></span>
+          <span>กลุ่มสาระการเรียนรู้ภาษาไทย โรงเรียนพูลเจริญวิทยาคม</span>
+        </div>
+        <div class="spec-mark">PORTRAIT MASTERCLASS • 21:29.7 (A4 4K)</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

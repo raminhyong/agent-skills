@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
+  <title>กบในกะลา — มาสเตอร์คลาสการออกแบบสไลด์ (High Contrast & Radiance Stroke)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Prompt:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background-color: #030712;
+      color: #ffffff;
+      font-family: 'Noto Sans Thai', 'Prompt', sans-serif;
+      position: relative;
+    }
+
+    .viewport-canvas {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: #030712;
+    }
+
+    /* Ambient Radiance from the outer universe */
+    .ambient-glow {
+      position: absolute;
+      top: 10%;
+      right: 15%;
+      width: 850px;
+      height: 850px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(14, 165, 233, 0.12) 35%, transparent 70%);
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Hero Visual Layer: Masked seamlessly into deep black */
+    .hero-visual-layer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 70%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.05) 10%,
+        rgba(0, 0, 0, 0.5) 32%,
+        rgba(0, 0, 0, 0.9) 60%,
+        rgba(0, 0, 0, 1) 85%
+      );
+      -webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.05) 10%,
+        rgba(0, 0, 0, 0.5) 32%,
+        rgba(0, 0, 0, 0.9) 60%,
+        rgba(0, 0, 0, 1) 85%
+      );
+    }
+
+    .hero-visual-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.03);
+      filter: contrast(1.1) saturate(1.15) brightness(0.95);
+    }
+
+    /* Vignette Overlays */
+    .vignette-vertical {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(to bottom, 
+        #030712 0%, 
+        rgba(3, 7, 18, 0.35) 12%, 
+        transparent 35%, 
+        transparent 65%, 
+        rgba(3, 7, 18, 0.6) 85%, 
+        #030712 100%
+      );
+    }
+
+    .vignette-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(to left, rgba(3, 7, 18, 0.8) 0%, transparent 100%);
+    }
+
+    /* ==========================================================
+       EDITORIAL CONTENT ARCHITECTURE
+       STRICT MINIMUM 20PX FLOOR + PUNCHY VIVID COLORS + RADIANCE STROKE
+       ========================================================== */
+    .content-stage {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      padding: 85px 120px 75px 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 1120px;
+    }
+
+    /* 1. Header & Eyebrow Tracker */
+    .header-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .eyebrow-tracker {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #10b981; /* Emerald punch */
+      /* Delicate radiance & text shadow */
+      text-shadow: 0 0 15px rgba(16, 185, 129, 0.5), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .eyebrow-line {
+      width: 36px;
+      height: 3px;
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981;
+      display: inline-block;
+    }
+
+    .eyebrow-series {
+      color: #a7f3d0;
+      letter-spacing: 1px;
+    }
+
+    /* 2. Hero Headline with Radiance Stroke */
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 108px;
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      /* Intense vivid gradient */
+      background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 70%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* Dual Radiance & Dark Halo to never get lost across complex imagery */
+      filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.35)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.95));
+    }
+
+    .latin-subtitle {
+      font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+      font-size: 22px; /* Min 20px+ */
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #38bdf8; /* Vivid Sky Blue */
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .latin-subtitle .translation {
+      color: #f1f5f9;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* 3. Core Assertion Quote (Editorial Anchor with High Contrast) */
+    .assertion-zone {
+      margin: 10px 0 20px 0;
+      position: relative;
+      padding-left: 36px;
+      border-left: 4px solid #10b981;
+      box-shadow: -10px 0 25px -5px rgba(16, 185, 129, 0.3);
+    }
+
+    .assertion-lead {
+      font-family: 'Prompt', sans-serif;
+      font-size: 33px;
+      font-weight: 700;
+      line-height: 1.48;
+      color: #ffffff; /* PURE VIVID WHITE */
+      letter-spacing: -0.3px;
+      max-width: 860px;
+      /* Crisp outline & protective dark shadow */
+      text-shadow: 
+        0 2px 12px rgba(0, 0, 0, 0.95),
+        0 0 25px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(3, 7, 18, 0.95);
+    }
+
+    .assertion-lead em {
+      font-style: normal;
+      color: #facc15; /* Electric Warning Yellow */
+      font-weight: 800;
+      text-shadow: 0 0 20px rgba(250, 204, 21, 0.6), 0 2px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    .assertion-sub {
+      margin-top: 14px;
+      font-size: 21px; /* Min 20px+ */
+      line-height: 1.6;
+      color: #e2e8f0; /* Crisp Off-White */
+      max-width: 820px;
+      font-weight: 500;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    /* 4. Strategic Comparison Pillars (Punchy High Contrast) */
+    .comparison-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 920px;
+      padding-top: 24px;
+      border-top: 1.5px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .pillar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pillar-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .pillar-tag.fixed {
+      color: #f87171; /* High-intensity Red */
+      text-shadow: 0 0 15px rgba(248, 113, 113, 0.5), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .pillar-tag.growth {
+      color: #34d399; /* High-intensity Emerald */
+      text-shadow: 0 0 15px rgba(52, 211, 153, 0.5), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .pillar-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    .pillar-desc {
+      font-size: 20px; /* STRICT FLOOR */
+      line-height: 1.55;
+      color: #cbd5e1; /* Vivid high contrast */
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+    }
+
+    /* 5. Editorial Footer Bar (Single Line, High Contrast) */
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 980px;
+      gap: 30px;
+      padding-top: 22px;
+      border-top: 1.5px solid rgba(255, 255, 255, 0.12);
+      font-family: 'Prompt', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      color: #94a3b8;
+      white-space: nowrap;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .author-signature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #cbd5e1;
+      white-space: nowrap;
+    }
+
+    .author-name {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 20px; /* STRICT FLOOR */
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .divider-dot {
+      width: 6px;
+      height: 6px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .spec-mark {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #38bdf8;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Focal Principle Stamp on right */
+    .focal-tag {
+      position: absolute;
+      bottom: 85px;
+      right: 120px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      text-align: right;
+      pointer-events: none;
+    }
+
+    .focal-stamp {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #34d399;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(52, 211, 153, 0.7), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    .focal-motto {
+      font-family: 'Kanit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      /* Intense radiance stroke */
+      text-shadow: 
+        0 0 20px rgba(16, 185, 129, 0.6),
+        0 4px 15px rgba(0, 0, 0, 0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport-canvas">
+    <!-- Ambient Universe Light Spill -->
+    <div class="ambient-glow"></div>
+
+    <!-- Hero Image Layer: Blended seamlessly from right into deep darkness -->
+    <div class="hero-visual-layer">
+      <img id="proverb-img" src="assets/frog_proverb.png" alt="กบในกะลาที่มองเห็นแสงสว่างแห่งโลกกว้างภายนอก">
+    </div>
+
+    <!-- Vignette Overlays -->
+    <div class="vignette-vertical"></div>
+    <div class="vignette-right"></div>
+
+    <!-- Left Content Stage -->
+    <main class="content-stage">
+      <!-- 1. Header Zone -->
+      <header class="header-zone">
+        <div class="eyebrow-tracker">
+          <span class="eyebrow-line"></span>
+          <span>คลังปัญญาภาษาไทย</span>
+          <span class="eyebrow-series">/ 02 • MINDSET & WISDOM</span>
+        </div>
+
+        <div class="title-block">
+          <h1 class="hero-title">กบในกะลา</h1>
+          <p class="latin-subtitle">
+            <span>/kòp-nai-kà-laa/</span>
+            <span class="divider-dot"></span>
+            <span class="translation">"The frog beneath the coconut shell"</span>
+          </p>
+        </div>
+      </header>
+
+      <!-- 2. Core Assertion (High-Contrast Editorial Anchor) -->
+      <section class="assertion-zone">
+        <h2 class="assertion-lead">
+          ผู้มีโลกทัศน์<em>คับแคบ</em>และประสบการณ์น้อย<br>
+          แต่สำคัญตัวผิดว่ามีความรู้ยิ่งใหญ่เหนือใครในหล้า
+        </h2>
+        <p class="assertion-sub">
+          อุปมาถึงบุคคลที่ยึดติดอยู่แต่ในกรอบเดิม มองไม่เห็นจักรวาลแห่งการเรียนรู้ที่กว้างใหญ่ไพศาลภายนอกกะลาที่ตนครอบครองอยู่
+        </p>
+      </section>
+
+      <!-- 3. Executive Strategic Pillars (High-Intensity Contrast) -->
+      <section class="comparison-strip">
+        <div class="pillar-col">
+          <span class="pillar-tag fixed">FIXED MINDSET</span>
+          <h3 class="pillar-title">กับดักกะลาครอบ</h3>
+          <p class="pillar-desc">
+            ยึดติดความสำเร็จในอดีต ปิดกั้นนวัตกรรมและเทคโนโลยี AI คิดว่าสิ่งที่ตนรู้คือที่สุดแล้ว ปฏิเสธการเปลี่ยนแปลง
+          </p>
+        </div>
+
+        <div class="pillar-col">
+          <span class="pillar-tag growth">GROWTH MINDSET</span>
+          <h3 class="pillar-title">ก้าวสู่โลกกว้าง</h3>
+          <p class="pillar-desc">
+            เปิดใจเรียนรู้ตลอดชีวิต (Lifelong Learning) พร้อมรับมุมมองใหม่ พัฒนาทักษะดิจิทัลเพื่อก้าวทันโลกยุคไร้พรมแดน
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. Editorial Metadata Footer (Min 20px) -->
+      <footer class="footer-bar">
+        <div class="author-signature">
+          <span class="author-name">นายรามิล ปัญญพัทธ์</span>
+          <span class="divider-dot"></span>
+          <span>กลุ่มสาระการเรียนรู้ภาษาไทย โรงเรียนพูลเจริญวิทยาคม</span>
+        </div>
+        <div class="spec-mark">MASTERCLASS SERIES • 4K ULTRA HD</div>
+      </footer>
+    </main>
+
+    <!-- Focal Corner Accent -->
+    <div class="focal-tag">
+      <span class="focal-stamp">CRITICAL PRINCIPLE</span>
+      <span class="focal-motto">"เปิดกะลา... เพื่อค้นพบจักรวาล"</span>
+    </div>
+  </div>
+</body>
+</html>

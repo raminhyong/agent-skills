@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
+  <title>วัวหายล้อมคอก — มาสเตอร์คลาสการออกแบบสไลด์ (Min Font 20px)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Prompt:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background-color: #05070f;
+      color: #f1f5f9;
+      font-family: 'Noto Sans Thai', 'Prompt', sans-serif;
+      position: relative;
+    }
+
+    /* ==========================================================
+       CINEMATIC BACKGROUND & SEAMLESS IMAGE BLEND
+       ========================================================== */
+    .viewport-canvas {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: #05070f;
+    }
+
+    /* Ambient Warm Light bleeding from the horizon */
+    .ambient-glow {
+      position: absolute;
+      top: -20%;
+      right: 10%;
+      width: 950px;
+      height: 950px;
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, rgba(245, 158, 11, 0.06) 45%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* The Hero Visual: Positioned across right 68%, seamlessly masked */
+    .hero-visual-layer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 68%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.08) 12%,
+        rgba(0, 0, 0, 0.45) 30%,
+        rgba(0, 0, 0, 0.85) 55%,
+        rgba(0, 0, 0, 1) 85%
+      );
+      -webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.08) 12%,
+        rgba(0, 0, 0, 0.45) 30%,
+        rgba(0, 0, 0, 0.85) 55%,
+        rgba(0, 0, 0, 1) 85%
+      );
+    }
+
+    .hero-visual-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 70% center;
+      transform: scale(1.04);
+      filter: contrast(1.08) saturate(1.12) brightness(0.92);
+    }
+
+    /* Edge Vignette Overlays */
+    .vignette-vertical {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(to bottom, 
+        #05070f 0%, 
+        rgba(5, 7, 15, 0.3) 12%, 
+        transparent 35%, 
+        transparent 65%, 
+        rgba(5, 7, 15, 0.5) 85%, 
+        #05070f 100%
+      );
+    }
+
+    .vignette-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(to left, rgba(5, 7, 15, 0.75) 0%, transparent 100%);
+    }
+
+    .film-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* ==========================================================
+       EDITORIAL CONTENT ARCHITECTURE (MINIMUM FONT 20PX FLOOR)
+       ========================================================== */
+    .content-stage {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      padding: 85px 120px 75px 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 1100px;
+    }
+
+    /* 1. Header / Eyebrow Kicker (Min 20px) */
+    .header-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .eyebrow-tracker {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #d97706;
+    }
+
+    .eyebrow-line {
+      width: 36px;
+      height: 2.5px;
+      background: #d97706;
+      display: inline-block;
+    }
+
+    .eyebrow-series {
+      color: #94a3b8;
+      letter-spacing: 1px;
+    }
+
+    /* 2. Hero Headline */
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 106px;
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff 40%, #fef3c7 75%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.6));
+    }
+
+    .latin-subtitle {
+      font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+      font-size: 22px; /* Min 20px+ */
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .latin-subtitle .translation {
+      color: #cbd5e1;
+      font-style: italic;
+    }
+
+    /* 3. Core Assertion Quote */
+    .assertion-zone {
+      margin: 10px 0 20px 0;
+      position: relative;
+      padding-left: 36px;
+      border-left: 3px solid #d97706;
+    }
+
+    .assertion-lead {
+      font-family: 'Prompt', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.48;
+      color: #f8fafc;
+      letter-spacing: -0.3px;
+      max-width: 860px;
+    }
+
+    .assertion-lead em {
+      font-style: normal;
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
+    .assertion-sub {
+      margin-top: 14px;
+      font-size: 21px; /* Min 20px+ */
+      line-height: 1.6;
+      color: #94a3b8;
+      max-width: 820px;
+      font-weight: 400;
+    }
+
+    /* 4. Strategic Comparison Pillar */
+    .comparison-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      max-width: 880px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pillar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pillar-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .pillar-tag.reactive {
+      color: #f87171;
+    }
+
+    .pillar-tag.proactive {
+      color: #34d399;
+    }
+
+    .pillar-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .pillar-desc {
+      font-size: 20px; /* STRICT FLOOR */
+      line-height: 1.55;
+      color: #94a3b8;
+    }
+
+    /* 5. Presenter Editorial Footer */
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 960px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'Prompt', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .author-signature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .author-name {
+      color: #f8fafc;
+      font-weight: 600;
+      font-size: 20px; /* STRICT FLOOR */
+      white-space: nowrap;
+    }
+
+    .divider-dot {
+      width: 5px;
+      height: 5px;
+      background: #64748b;
+      border-radius: 50%;
+    }
+
+    .spec-mark {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #64748b;
+      font-size: 20px; /* STRICT FLOOR */
+      letter-spacing: 1px;
+    }
+
+    /* Focal Principle Stamp on right */
+    .focal-tag {
+      position: absolute;
+      bottom: 85px;
+      right: 120px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      text-align: right;
+      pointer-events: none;
+    }
+
+    .focal-stamp {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; /* STRICT FLOOR */
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fbbf24;
+      text-transform: uppercase;
+    }
+
+    .focal-motto {
+      font-family: 'Kanit', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport-canvas">
+    <!-- Ambient Light Spill -->
+    <div class="ambient-glow"></div>
+
+    <!-- Hero Image Layer: Blended seamlessly from right into deep darkness -->
+    <div class="hero-visual-layer">
+      <img src="assets/cow_proverb.png" alt="บรรยากาศคอกวัวยามรุ่งอรุณที่เปิดทิ้งไว้">
+    </div>
+
+    <!-- Vignette Overlays -->
+    <div class="vignette-vertical"></div>
+    <div class="vignette-right"></div>
+    <div class="film-grain"></div>
+
+    <!-- Left Content Stage -->
+    <main class="content-stage">
+      <!-- 1. Header Zone -->
+      <header class="header-zone">
+        <div class="eyebrow-tracker">
+          <span class="eyebrow-line"></span>
+          <span>คลังปัญญาภาษาไทย</span>
+          <span class="eyebrow-series">/ 01 • PROVERB & STRATEGY</span>
+        </div>
+
+        <div class="title-block">
+          <h1 class="hero-title">วัวหายล้อมคอก</h1>
+          <p class="latin-subtitle">
+            <span>/wua-hǎai-lɔ́ɔm-khɔ̀ɔk/</span>
+            <span class="divider-dot"></span>
+            <span class="translation">"To lock the stable door after the steed is stolen"</span>
+          </p>
+        </div>
+      </header>
+
+      <!-- 2. Core Assertion (Editorial Anchor) -->
+      <section class="assertion-zone">
+        <h2 class="assertion-lead">
+          เมื่อเกิด<em>ความสูญเสีย</em>ขึ้นแล้ว จึงคิดหาทางป้องกัน<br>
+          ซึ่งสายเกินกว่าจะกู้คืนสิ่งที่มีค่ากลับคืนมาได้
+        </h2>
+        <p class="assertion-sub">
+          บทเรียนโบราณที่สะท้อนสัจธรรมเหนือกาลเวลา เตือนสติไม่ให้ประมาทหรือละเลยการวางมาตรการคุ้มกัน จนกระทั่งความเสียหายเกิดขึ้นตรงหน้า
+        </p>
+      </section>
+
+      <!-- 3. Executive Strategic Pillars (Min 20px) -->
+      <section class="comparison-strip">
+        <div class="pillar-col">
+          <span class="pillar-tag reactive">REACTIVE TRAP</span>
+          <h3 class="pillar-title">ตามแก้เมื่อสาย</h3>
+          <p class="pillar-desc">
+            รอให้ระบบล่ม ข้อมูลรั่วไหล หรือเกิดปัญหาในชั้นเรียนก่อน จึงตื่นตัวล้อมรั้ว ซึ่งมีต้นทุนความเสียหายสูงกว่าเสมอ
+          </p>
+        </div>
+
+        <div class="pillar-col">
+          <span class="pillar-tag proactive">PROACTIVE MASTERY</span>
+          <h3 class="pillar-title">ป้องกันเชิงรุก</h3>
+          <p class="pillar-desc">
+            ประเมินความเสี่ยงล่วงหน้า สำรองข้อมูล (Backup) รักษามาตรฐาน PDPA และจัดทำแผนการจัดการเรียนรู้อย่างรัดกุม
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. Editorial Metadata Footer (Min 20px) -->
+      <footer class="footer-bar">
+        <div class="author-signature">
+          <span class="author-name">นายรามิล ปัญญพัทธ์</span>
+          <span class="divider-dot"></span>
+          <span>กลุ่มสาระการเรียนรู้ภาษาไทย โรงเรียนพูลเจริญวิทยาคม</span>
+        </div>
+        <div class="spec-mark">MASTERCLASS SERIES • 4K ULTRA HD</div>
+      </footer>
+    </main>
+
+    <!-- Focal Corner Accent -->
+    <div class="focal-tag">
+      <span class="focal-stamp">CRITICAL PRINCIPLE</span>
+      <span class="focal-motto">"กันไว้ดีกว่าแก้ แย่แล้วแก้ไม่ทัน"</span>
+    </div>
+  </div>
+</body>
+</html>

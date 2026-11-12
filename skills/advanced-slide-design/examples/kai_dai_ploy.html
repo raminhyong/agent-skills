@@ -128,13 +128,13 @@
       gap: 16px;
     }
 
-    /* Eyebrow Kicker (Floor 36px) */
+    /* Eyebrow Kicker (1.2% Floor = 24px) */
     .eyebrow-tracker {
       display: inline-flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       font-family: 'Space Grotesk', 'Prompt', sans-serif;
-      font-size: 34px; /* PROPORTIONAL 1.8% FLOOR */
+      font-size: 24px; /* PROPORTIONAL 1.2% FLOOR */
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -146,8 +146,8 @@
     }
 
     .eyebrow-line {
-      width: 48px;
-      height: 4px;
+      width: 40px;
+      height: 3.5px;
       background: #38bdf8;
       box-shadow: 0 0 16px #38bdf8;
       display: inline-block;
@@ -185,15 +185,15 @@
 
     /* Subtitle with Proper Thai Collision Buffer */
     .latin-subtitle {
-      margin-top: 24px; /* Generous breathing room below Thai tone marks */
+      margin-top: 22px; /* Generous breathing room below Thai tone marks */
       font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
-      font-size: 34px; /* PROPORTIONAL FLOOR */
+      font-size: 26px; /* PROPORTIONAL 1.2% FLOOR COMPLIANT */
       font-weight: 600;
       letter-spacing: 0.5px;
       color: #ff3366; /* Vibrant Electric Coral */
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       text-shadow: 
         0 0 3px #000, 0 0 5px #000,
         0 0 20px rgba(255, 51, 102, 0.7),
@@ -208,16 +208,16 @@
 
     /* Core Assertion Card: Luminance >= 90% Pure White + Ice Blue Accent */
     .assertion-zone {
-      margin-top: 24px;
+      margin-top: 22px;
       position: relative;
-      padding-left: 36px;
-      border-left: 6px solid #38bdf8;
-      box-shadow: -12px 0 30px -4px rgba(56, 189, 248, 0.5);
+      padding-left: 32px;
+      border-left: 5px solid #38bdf8;
+      box-shadow: -10px 0 25px -4px rgba(56, 189, 248, 0.5);
     }
 
     .assertion-lead {
       font-family: 'Prompt', sans-serif;
-      font-size: 44px; /* High Impact */
+      font-size: 38px; /* High Impact */
       font-weight: 700;
       line-height: 1.45;
       color: #ffffff; /* PURE WHITE 100% LUMINANCE */
@@ -239,10 +239,10 @@
 
     /* Sub-description: Boosted to Pure White/Ice for Maximum Projector Contrast */
     .assertion-sub {
-      margin-top: 16px;
-      font-size: 34px; /* PROPORTIONAL FLOOR */
+      margin-top: 14px;
+      font-size: 26px; /* PROPORTIONAL 1.2% FLOOR COMPLIANT */
       line-height: 1.6;
-      color: #f8fafc; /* BRIGHT ICE WHITE (was dull cyan/gray) */
+      color: #f8fafc; /* BRIGHT ICE WHITE */
       font-weight: 500;
       text-shadow: 0 0 3px #000, 0 2px 12px rgba(0, 0, 0, 0.98);
     }
@@ -277,9 +277,9 @@
 
     .focal-stamp {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 30px;
+      font-size: 24px; /* 1.2% FLOOR */
       font-weight: 700;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       color: #38bdf8;
       text-transform: uppercase;
       text-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
@@ -287,7 +287,7 @@
 
     .focal-motto {
       font-family: 'Kanit', sans-serif;
-      font-size: 36px;
+      font-size: 30px;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.5px;
@@ -302,25 +302,25 @@
       z-index: 5;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 25px;
     }
 
     .comparison-strip {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      padding-top: 25px;
-      border-top: 2.5px solid rgba(255, 255, 255, 0.18);
+      gap: 40px;
+      padding-top: 22px;
+      border-top: 2px solid rgba(255, 255, 255, 0.18);
     }
 
     .pillar-col {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       background: rgba(3, 6, 17, 0.82);
       backdrop-filter: blur(20px);
-      padding: 30px 32px;
-      border-radius: 24px;
+      padding: 26px 28px;
+      border-radius: 20px;
       border: 1.5px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
     }
@@ -328,9 +328,9 @@
     /* EQUAL ENERGY PERCEPTUAL BALANCING */
     .pillar-tag {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 30px;
+      font-size: 24px; /* 1.2% FLOOR */
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
     }
 
@@ -348,29 +348,29 @@
 
     .pillar-title {
       font-family: 'Prompt', sans-serif;
-      font-size: 38px;
+      font-size: 32px;
       font-weight: 700;
       color: #ffffff;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98);
     }
 
     .pillar-desc {
-      font-size: 32px; /* Large, crisp, easy to read on projector */
+      font-size: 26px; /* 1.2% FLOOR COMPLIANT */
       line-height: 1.55;
       color: #f1f5f9; /* High brightness white */
       text-shadow: 0 0 2px #000, 0 2px 10px rgba(0, 0, 0, 0.98);
     }
 
-    /* FOOTER BAR: Prominent, Crisp, High-Contrast */
+    /* FOOTER BAR: Prominent, Crisp, High-Contrast (1.2% Floor = 24px) */
     .footer-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding-top: 24px;
-      border-top: 2px solid rgba(255, 255, 255, 0.15);
+      padding-top: 20px;
+      border-top: 1.5px solid rgba(255, 255, 255, 0.15);
       font-family: 'Prompt', sans-serif;
-      font-size: 32px; /* PROPORTIONAL READABLE FLOOR */
+      font-size: 24px; /* 1.2% PROPORTIONAL FLOOR */
       color: #94a3b8;
       white-space: nowrap;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
@@ -379,7 +379,7 @@
     .author-signature {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       color: #e2e8f0;
       white-space: nowrap;
     }
@@ -387,13 +387,13 @@
     .author-name {
       color: #ffffff;
       font-weight: 700;
-      font-size: 34px;
+      font-size: 26px;
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
     }
 
     .divider-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       background: #38bdf8;
       border-radius: 50%;
       box-shadow: 0 0 12px #38bdf8;
@@ -402,7 +402,7 @@
     .spec-mark {
       font-family: 'Space Grotesk', sans-serif;
       color: #38bdf8;
-      font-size: 32px;
+      font-size: 24px; /* 1.2% PROPORTIONAL FLOOR */
       font-weight: 700;
       letter-spacing: 1.5px;
       text-shadow: 0 0 14px rgba(56, 189, 248, 0.5);

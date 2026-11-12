@@ -1,6 +1,6 @@
 ---
 name: advanced-slide-design
-description: มาตรฐานและแนวทางปฏิบัติการออกแบบสไลด์นำเสนอระดับพรีเมียม (Cinematic & Masterclass Presentation) สำหรับครูและนักวิชาการ ด้วยหลักจิตวิทยาการรู้คิด (Cognitive Load Theory), กฎการดึงสายตา (Leading Lines & Optical Vector), การเฟดภาพไร้รอยต่อ (Seamless Gradient Masking), การเลือกคู่ฟอนต์ขั้นสูง (ห้ามใช้ Sarabun ทำปก), กฎขนาดฟอนต์สัมพัทธ์ 1.8% Canvas Height, การตัดขอบฟอนต์ด้วย Distinct Stroke & Radiance, และการเรนเดอร์ระดับ 4K ด้วย Playwright (ไม่พึ่งพา Canva/Figma)
+description: มาตรฐานและแนวทางปฏิบัติการออกแบบสไลด์นำเสนอระดับพรีเมียม (Cinematic & Masterclass Presentation) สำหรับครูและนักวิชาการ ด้วยหลักจิตวิทยาการรู้คิด (Cognitive Load Theory), กฎการดึงสายตา (Leading Lines & Optical Vector), การเฟดภาพไร้รอยต่อ (Seamless Gradient Masking), การเลือกคู่ฟอนต์ขั้นสูง (ห้ามใช้ Sarabun ทำปก), กฎขนาดฟอนต์สัมพัทธ์ 1.2% Canvas Height (Golden Ratio Floor), การตัดขอบฟอนต์ด้วย Distinct Stroke & Radiance, และการเรนเดอร์ระดับ 4K ด้วย Playwright (ไม่พึ่งพา Canva/Figma)
 ---
 
 # มาตรฐานการออกแบบสไลด์ระดับมาสเตอร์คลาส (Advanced Slide Design Masterclass)
@@ -18,27 +18,31 @@ description: มาตรฐานและแนวทางปฏิบัต�
 
 ## ⚠️ กฎเหล็กขั้นสูงสุด (Non-Negotiable Rules)
 
-### 1. กฎขนาดฟอนต์สัมพัทธ์ความสูงแคนวาส (The 1.8% Canvas Height Rule)
-* ❌ **หลุมพรางขนาดฟอนต์ตายตัว (The Canvas Ratio Trap):** การกำหนดขนาดฟอนต์ขั้นต่ำแบบคงที่ (เช่น 20px) ใช้ได้ผลดีบนแคนวาสแนวนอน $1920 \times 1080\text{ px}$ แต่จะ **ล้มเหลวโดยสิ้นเชิง** บนแคนวาสแนวตั้งความละเอียดสูง เช่น A4 Portrait ($1400 \times 1980\text{ px}$) เพราะ 20px จะมีสัดส่วนเพียง $1.0\%$ ของความสูงหน้าจอ (เทียบเท่าตัวหนังสือขนาด 11px บนจอคอมพิวเตอร์) ทำให้ฉายโปรเจกเตอร์หรือทีวีในห้องเรียนแล้วไม่มีใครอ่านออก
-* ✅ **สูตรคำนวณขนาดฟอนต์ขั้นต่ำสุดสากล:**
-  $$\text{Minimum Font Floor} = \max(20\text{px}, \text{Canvas Height} \times 1.8\%)$$
-  * **แคนวาส 16:9 แนวนอน ($1920 \times 1080\text{ px}$):**
-    * ฟอนต์เล็กสุด (Footer, Eyebrow, ป้ายกำกับ): **$\ge 20\text{px}$**
-    * เนื้อหาบรรยาย (Body Text): **$22\text{px} - 28\text{px}$**
-    * พาดหัวย่อย / เสาหลัก (Pillars): **$24\text{px} - 32\text{px}$**
-    * พาดหัวหลัก (Hero Title): **$90\text{px} - 120\text{px}$**
+### 1. กฎขนาดฟอนต์สัมพัทธ์ความสูงแคนวาส (The 1.2% Canvas Height Rule - Golden Ratio Floor)
+* ❌ **หลุมพรางขนาดฟอนต์ตายตัวและฟอนต์ใหญ่เทอะทะ:**
+  * การใช้ขนาดฟอนต์คงที่ (เช่น 20px ทุกงาน) ล้มเหลวบนแคนวาสแนวตั้งความละเอียดสูง
+  * แต่การตั้งเกณฑ์สูงเกินไป (เช่น 1.8% หรือ 36px) จะทำให้องค์ประกอบรอง เช่น Footer Metadata, รหัสเอกสาร, เครดิตผู้สอน และป้ายกำกับ Eyebrow ใหญ่เทอะทะ แย่งความเด่นจากเนื้อหาหลัก และทำลายความหรูหรา (Visual Sophistication)
+* ✅ **สูตรคำนวณขนาดฟอนต์ขั้นต่ำสุดสากล (1.2% Canvas Height Floor):**
+  $$\text{Minimum Font Floor} = \text{Canvas Height} \times 1.2\%$$
   * **แคนวาส 21:29.7 แนวตั้ง A4 ($1400 \times 1980\text{ px}$):**
-    * ฟอนต์เล็กสุด (Footer Bar, Spec Tag, Author Credits): **$\ge 32\text{px} - 36\text{px}$**
-    * เนื้อหาบรรยาย (Pillar Descriptions, Definitions): **$34\text{px} - 40\text{px}$**
-    * พาดหัวรองและเสาหลัก (Pillar Headings, Subtitles): **$42\text{px} - 52\text{px}$**
-    * แสตมป์ข้อคิดแก่นแกน (Focal Principle / Motto): **$40\text{px} - 48\text{px}$**
-    * พาดหัวหลักแนวตั้ง (Hero Title): **$105\text{px} - 125\text{px}$**
+    * ฟอนต์เล็กสุด (Footer Bar, Spec Mark, Author Credits, Eyebrow Tag): **$\ge 24\text{px}$** ($1980 \times 1.2\% = 23.76\text{px}$)
+    * คำอ่านสัทอักษรและคำแปล (Phonetics & Translation): **$26\text{px} - 28\text{px}$**
+    * เนื้อหาบรรยายเสาหลักและคำอธิบาย (Pillar Descriptions, Definitions): **$25\text{px} - 28\text{px}$**
+    * ป้ายกำกับเสาหลัก (Pillar Tags): **$24\text{px}$**
+    * หัวข้อเสาหลักและแสตมป์แก่นคิด (Pillar Titles, Focal Motto): **$30\text{px} - 34\text{px}$**
+    * คำแถลงแก่นหลัก (Assertion Lead): **$38\text{px} - 44\text{px}$**
+    * พาดหัวหลักแนวตั้ง (Hero Display Title): **$110\text{px} - 125\text{px}$**
+  * **แคนวาส 16:9 แนวนอน ($1920 \times 1080\text{ px}$):**
+    * ฟอนต์เล็กสุด (Footer, Spec Tag, Eyebrow): **$\ge 14\text{px} - 16\text{px}$** (ปรับสมดุลสายตาให้อ่านสบาย)
+    * เนื้อหาบรรยาย (Body Text): **$20\text{px} - 24\text{px}$**
+    * พาดหัวย่อย / เสาหลัก (Pillars): **$24\text{px} - 28\text{px}$**
+    * พาดหัวหลัก (Hero Title): **$95\text{px} - 115\text{px}$**
 
 ---
 
 ### 2. กฎระยะเว้นชนวรรณยุกต์และสระภาษาไทย (Thai Typographic Collision Buffer)
 * อักษรไทยมี 4 มิติแนวตั้ง (พยัญชนะฐาน, สระบน, ไม้เอก/โท/ตรี/จัตวา, และสระล่าง/เชิง)
-* เมื่อวางคำอ่านสัทอักษร (Phonetics) หรือ Subtitle ภาษาอังกฤษ ต่อท้ายพาดหัวภาษาไทยขนาดใหญ่ **ต้องเว้นระยะห่างด้านล่าง (Bottom Buffer / Margin) อย่างน้อย $25\% - 30\%$ ของขนาด Font พาดหัว** (เช่น หากพาดหัว 110px ต้องเว้นระยะอย่างน้อย $26\text{px} - 32\text{px}$) เพื่อป้องกันไม่ให้หางสระหรือวรรณยุกต์ชนหรือบดบังตัวอักษรแถวถัดไป
+* เมื่อวางคำอ่านสัทอักษร (Phonetics) หรือ Subtitle ภาษาอังกฤษ ต่อท้ายพาดหัวภาษาไทยขนาดใหญ่ **ต้องเว้นระยะห่างด้านล่าง (Bottom Buffer / Margin) อย่างน้อย $22\text{px} - 28\text{px}$** เพื่อป้องกันไม่ให้หางสระหรือวรรณยุกต์ชนหรือบดบังตัวอักษรแถวถัดไป
 
 ---
 
@@ -46,7 +50,7 @@ description: มาตรฐานและแนวทางปฏิบัต�
 * ❌ **ห้ามใช้ `TH Sarabun New` หรือฟอนต์เอกสารราชการทำหน้าปก หรือสไลด์บรรยายแนวภาพยนตร์เด็ดขาด:** เพราะให้ความรู้สึกเป็นหนังสือราชการ/เอกสารธุรการที่น่าเบื่อ ไร้พลัง
 * ✅ **ฟอนต์พรีเมียมประจำเครื่องที่ต้องใช้:**
   * **พาดหัวหลักระดับปรากฏการณ์ (Hero Display Title):**  
-    👉 **`Kanit` (Bold / ExtraBold / Black)** ขนาด 95px – 120px  
+    👉 **`Kanit` (Bold / ExtraBold / Black)** ขนาด 95px – 125px  
     👉 **`Prompt` (Bold / ExtraBold)** ขนาด 85px – 105px
   * **สไลด์ห้องเรียน & สื่อการสอน Active Learning:**  
     👉 **`Mitr` (Medium / Bold)** ให้ความรู้สึกเป็นมิตร อบอุ่น มีหัวมนร่วมสมัย
@@ -117,9 +121,9 @@ description: มาตรฐานและแนวทางปฏิบัต�
 | :--- | :--- | :--- |
 | **ความละเอียด (Canvas Size)** | `1920 × 1080 px` | `1400 × 1980 px` |
 | **วัตถุประสงค์หลัก** | การนำเสนอบนจอโปรเจกเตอร์ / ทีวีในห้องประชุม | ใบสรุปความรู้ (One-Page Executive Summary) / สื่อการสอนรายบุคคล |
-| **ขนาดฟอนต์ขั้นต่ำสุด (Floor)** | **20px** | **34px – 36px** (ตามกฎ 1.8% Canvas Height) |
+| **ขนาดฟอนต์ขั้นต่ำสุด (Floor)** | **14px – 16px** | **24px** (ตามกฎ 1.2% Canvas Height) |
 | **พาดหัวหลัก (Hero Title)** | `Kanit` Bold 95px – 110px | `Kanit` Bold 110px – 125px |
-| **ระยะเว้นชนวรรณยุกต์ (Collision Buffer)**| $\ge 20\text{px}$ | $\ge 28\text{px} - 35\text{px}$ |
+| **ระยะเว้นชนวรรณยุกต์ (Collision Buffer)**| $\ge 20\text{px}$ | $\ge 22\text{px} - 28\text{px}$ |
 | **โครงสร้างเนื้อหา** | ซ้าย: เนื้อหา 45% / ขวา: ภาพเฟด 55% | 3 โซนแนวตั้ง: Top (30%) / Middle (45%) / Bottom (25%) |
 
 ---

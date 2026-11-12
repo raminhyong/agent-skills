@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 01 - Magazine Editorial Spread: Layered PLC Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Prompt:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1400px;
+      height: 1980px;
+      margin: 0;
+      padding: 0;
+      background-color: #F6F4EF;
+      color: #1E293B;
+      font-family: 'Noto Sans Thai', sans-serif;
+      overflow: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Refined Editorial Canvas: Level 2 Warm Alabaster */
+    .magazine-canvas {
+      width: 1400px;
+      height: 1980px;
+      position: relative;
+      background: 
+        radial-gradient(circle at 8% 8%, rgba(106, 26, 36, 0.04) 0%, transparent 55%),
+        radial-gradient(circle at 92% 92%, rgba(200, 138, 44, 0.05) 0%, transparent 55%),
+        linear-gradient(180deg, #F9F8F5 0%, #F2EFE8 100%);
+      padding: 46px 68px 40px 68px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* 1. Header Folio Bar */
+    .folio-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(106, 26, 36, 0.2);
+    }
+
+    .folio-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6A1A24;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .folio-tag::before {
+      content: '';
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: #C88A2C;
+      border-radius: 50%;
+    }
+
+    .folio-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(106, 26, 36, 0.3), rgba(200, 138, 44, 0.3));
+    }
+
+    .folio-issue {
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: #64748B;
+      text-transform: uppercase;
+    }
+
+    /* 2. Headline & Section Header */
+    .header-section {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .numeral-callout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #6A1A24;
+      color: #FFF7ED;
+      border-radius: 14px;
+      padding: 12px 6px;
+      box-shadow: 0 10px 22px rgba(106, 26, 36, 0.18);
+    }
+
+    .numeral-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 80px;
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      color: #FED7AA;
+    }
+
+    .numeral-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 4px;
+    }
+
+    .header-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #6A1A24;
+    }
+
+    .eyebrow-badge span {
+      background: rgba(106, 26, 36, 0.08);
+      padding: 3px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(106, 26, 36, 0.15);
+    }
+
+    .display-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.12;
+      color: #1A0F11;
+      letter-spacing: -0.5px;
+    }
+
+    .display-title em {
+      font-style: normal;
+      color: #6A1A24;
+    }
+
+    .standfirst-deck {
+      font-family: 'Prompt', sans-serif;
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: #475569;
+      border-left: 4px solid #C88A2C;
+      padding-left: 18px;
+      margin-top: 2px;
+    }
+
+    /* 3. Timetable Highlight Ribbon */
+    .timetable-ribbon {
+      margin-top: 14px;
+      background: #FFFFFF;
+      border: 1px solid rgba(106, 26, 36, 0.14);
+      border-left: 6px solid #6A1A24;
+      border-radius: 12px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.025);
+    }
+
+    .timetable-time {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #6A1A24;
+      white-space: nowrap;
+    }
+
+    .timetable-time svg {
+      width: 28px;
+      height: 28px;
+      fill: #C88A2C;
+      flex-shrink: 0;
+    }
+
+    .timetable-desc {
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .timetable-pill {
+      background: #FEF3C7;
+      color: #92400E;
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    /* ========================================================= */
+    /* 4. THE SIGNATURE LAYERED VISUAL STAGE (Organic Overlap)  */
+    /* ========================================================= */
+    .layered-visual-stage {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      margin-top: 18px;
+    }
+
+    /* Layer 1: Macro Anchor (Institutional Dialogue) - Expansive Depth */
+    .layer-anchor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 820px;
+      height: 540px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(26, 15, 17, 0.14);
+      border: 1px solid rgba(106, 26, 36, 0.22);
+      z-index: 1;
+      background: #000;
+    }
+
+    .layer-anchor img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 46%;
+      display: block;
+    }
+
+    .layer-anchor .anchor-overlay-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(8px);
+      color: #FED7AA;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(254, 215, 170, 0.35);
+    }
+
+    .anchor-caption-plate {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.92) 100%);
+      padding: 34px 22px 16px 22px;
+      color: #F8FAFC;
+      font-size: 24px;
+      line-height: 1.35;
+      max-width: 440px; /* leaves right side clear for overlapping insets */
+    }
+
+    .anchor-caption-plate strong {
+      color: #FED7AA;
+      font-family: 'Prompt', sans-serif;
+    }
+
+    /* Layer 2: Detail Inset A (Collaborative Planning) - Overlapping Upper-Right */
+    .layer-inset-planning {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      width: 510px;
+      background: #FFFFFF;
+      padding: 10px;
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(106, 26, 36, 0.16), 0 4px 14px rgba(0,0,0,0.06);
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      z-index: 3;
+    }
+
+    .layer-inset-planning .photo-box {
+      width: 100%;
+      height: 185px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .layer-inset-planning img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .layer-inset-planning .inset-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(106, 26, 36, 0.9);
+      backdrop-filter: blur(6px);
+      color: #FFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+    .layer-inset-planning .caption-text {
+      padding: 8px 6px 2px 6px;
+    }
+
+    .layer-inset-planning h5 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #6A1A24;
+      line-height: 1.25;
+    }
+
+    .layer-inset-planning p {
+      font-size: 24px;
+      color: #475569;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    /* Layer 3: Detail Inset B (Classroom Reflection) - Stacked Lower-Right with dramatic overlap */
+    .layer-inset-reflection {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 510px;
+      background: #FFFFFF;
+      padding: 10px;
+      border-radius: 16px;
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.2), 0 6px 16px rgba(0,0,0,0.08);
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      z-index: 4;
+    }
+
+    .layer-inset-reflection .photo-box {
+      width: 100%;
+      height: 185px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .layer-inset-reflection img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .layer-inset-reflection .inset-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(200, 138, 44, 0.95);
+      backdrop-filter: blur(6px);
+      color: #0F172A;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+    .layer-inset-reflection .caption-text {
+      padding: 8px 6px 2px 6px;
+    }
+
+    .layer-inset-reflection h5 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.25;
+    }
+
+    .layer-inset-reflection p {
+      font-size: 24px;
+      color: #475569;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    /* Floating Accent Tag connecting the layers */
+    .layer-connector-badge {
+      position: absolute;
+      top: 260px;
+      left: 700px;
+      z-index: 6;
+      background: #6A1A24;
+      color: #FFF7ED;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 24px rgba(106, 26, 36, 0.35);
+      border: 2px solid #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 5. Editorial Narrative & 3 Strategic Pillars */
+    .content-pillars-section {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1.48fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .narrative-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 22px 24px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.025);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .narrative-header {
+      font-family: 'Prompt', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #6A1A24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .narrative-body {
+      font-size: 25px;
+      line-height: 1.55;
+      color: #334155;
+      text-align: left;
+    }
+
+    .narrative-body strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
+
+    .quote-stripe {
+      margin-top: 12px;
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 10px 16px;
+      border-left: 3px solid #6A1A24;
+      font-size: 24px;
+      color: #475569;
+      font-style: italic;
+      line-height: 1.38;
+    }
+
+    /* Pillars List */
+    .pillars-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .pillar-item {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 14px 18px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 14px;
+      align-items: center;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+    }
+
+    .pillar-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(106, 26, 36, 0.08);
+      color: #6A1A24;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(106, 26, 36, 0.2);
+    }
+
+    .pillar-content h4 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 2px;
+      line-height: 1.25;
+    }
+
+    .pillar-content p {
+      font-size: 24px;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    /* 6. Institutional Footer Bar */
+    .footer-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 2px solid rgba(106, 26, 36, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      white-space: nowrap;
+    }
+
+    .footer-author {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .footer-author span {
+      color: #6A1A24;
+      font-weight: 700;
+    }
+
+    .footer-spec {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #94A3B8;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="magazine-canvas">
+
+    <!-- 1. Editorial Folio Bar -->
+    <div class="folio-bar">
+      <div class="folio-tag">QA &amp; Continuous Excellence</div>
+      <div class="folio-rule"></div>
+      <div class="folio-issue">INDICATOR 2.0 • PHULCHAROENWITTHAYAKOM SCHOOL</div>
+    </div>
+
+    <!-- 2. Headline & Section Header -->
+    <div class="header-section">
+      <div class="numeral-callout">
+        <div class="numeral-big">02</div>
+        <div class="numeral-sub">ITEM</div>
+      </div>
+      <div class="header-text-block">
+        <div class="eyebrow-badge">
+          <span>ระบบประกันคุณภาพภายในสถานศึกษา</span>
+          <em>•</em>
+          <span>เครือข่ายวิชาชีพครู</span>
+        </div>
+        <h1 class="display-title">ชุมชนแห่งการเรียนรู้ทางวิชาชีพ <em>(PLC)</em></h1>
+        <p class="standfirst-deck">
+          ขับเคลื่อนคุณภาพการศึกษาผ่านการรวมพลังครู สร้างวัฒนธรรมการแลกเปลี่ยนเรียนรู้เพื่อพัฒนาระบบประกันคุณภาพภายในอย่างต่อเนื่องและยั่งยืน
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Timetable Highlight Ribbon -->
+    <div class="timetable-ribbon">
+      <div class="timetable-time">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+        ทุกวันอังคาร | 15.30 – 17.30 น.
+      </div>
+      <div class="timetable-desc">กำหนดการพัฒนาวิชาชีพและแลกเปลี่ยนเรียนรู้ร่วมกันตามปฏิทินสถานศึกษา</div>
+      <div class="timetable-pill">WEEKLY PLC CYCLE</div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 4. SIGNATURE LAYERED VISUAL STAGE (Layer 1 + 2 + 3)       -->
+    <!-- ========================================================= -->
+    <div class="layered-visual-stage">
+      
+      <!-- Layer 1: Macro Anchor (Institutional Boardroom PLC) -->
+      <div class="layer-anchor">
+        <img src="task01_assets/image1.png" alt="การประชุม PLC ระดับสถานศึกษา ณ ห้องประชุมใหญ่">
+        <div class="anchor-overlay-tag">FIG. 02.1 : INSTITUTIONAL FORUM</div>
+        <div class="anchor-caption-plate">
+          <strong>ภาพหลัก : การประชุมระดับสถานศึกษา</strong><br>
+          ผู้บริหารและคณะครูร่วมขับเคลื่อนทิศทางการประกันคุณภาพภายในอย่างเป็นเอกภาพ
+        </div>
+      </div>
+
+      <!-- Layer 2: Inset A (Planning Meeting) Overlapping Upper-Right -->
+      <div class="layer-inset-planning">
+        <div class="photo-box">
+          <img src="task01_assets/image2_left.png" alt="การประชุมกลุ่มสาระฯ ร่วมวางแผนภารกิจ">
+          <div class="inset-badge">FIG. 02.2 : PLANNING</div>
+        </div>
+        <div class="caption-text">
+          <h5>กลุ่มสาระฯ ร่วมวางแผนภารกิจและกิจกรรมตามจุดเน้น</h5>
+        </div>
+      </div>
+
+      <!-- Layer 3: Inset B (Classroom Reflection) Cascading & Overlapping -->
+      <div class="layer-inset-reflection">
+        <div class="photo-box">
+          <img src="task01_assets/image2_right.png" alt="การแลกเปลี่ยนเรียนรู้ในชั้นเรียน">
+          <div class="inset-badge">FIG. 02.3 : REFLECTION</div>
+        </div>
+        <div class="caption-text">
+          <h5>การแลกเปลี่ยนเรียนรู้และสะท้อนคิดร่วมกันในชั้นเรียน</h5>
+        </div>
+      </div>
+
+      <!-- Connector Pill floating at layer boundary -->
+      <div class="layer-connector-badge">
+        <span>COLLABORATIVE DIALOGUE</span>
+      </div>
+
+    </div>
+
+    <!-- 5. Editorial Narrative & 3 Strategic Pillars -->
+    <div class="content-pillars-section">
+      <!-- Left: Narrative Statement -->
+      <div class="narrative-card">
+        <div>
+          <div class="narrative-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#6A1A24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            สาระสำคัญเชิงกระบวนการ
+          </div>
+          <p class="narrative-body">
+            สถานศึกษาใช้กระบวนการ <strong>ชุมชนแห่งการเรียนรู้ทางวิชาชีพ (PLC)</strong> เพื่อพัฒนาระบบการประกันคุณภาพภายในอย่างต่อเนื่อง ครูและบุคลากรจัดตั้งกลุ่มเครือข่ายพัฒนาวิชาชีพ ร่วมแลกเปลี่ยนเรียนรู้การดำเนินงานตามภารกิจและจุดเน้นสถานศึกษา พร้อมรับการอบรมพัฒนาคุณภาพการจัดการเรียนการสอนอย่างเป็นระบบ
+          </p>
+        </div>
+        <div class="quote-stripe">
+          "เปลี่ยนความโดดเดี่ยวในการสอน สู่พลังร่วมแห่งวิชาชีพ เพื่อประโยชน์สูงสุดของผู้เรียน"
+        </div>
+      </div>
+
+      <!-- Right: 3 Strategic Pillars -->
+      <div class="pillars-stack">
+        <div class="pillar-item">
+          <div class="pillar-num">01</div>
+          <div class="pillar-content">
+            <h4>จัดตั้งกลุ่มเครือข่ายวิชาชีพ (Professional Network)</h4>
+            <p>รวมกลุ่มครูและบุคลากรทางการศึกษาเป็นเครือข่ายพัฒนาวิชาชีพ เพื่อร่วมขับเคลื่อนภารกิจอย่างต่อเนื่อง</p>
+          </div>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-num">02</div>
+          <div class="pillar-content">
+            <h4>ปฏิทินแลกเปลี่ยนต่อเนื่อง (Continuous Dialogue)</h4>
+            <p>กำหนดช่วงเวลาประจำทุกวันอังคาร 15.30 - 17.30 น. เป็นพื้นที่กลางในการแลกเปลี่ยนเรียนรู้ตามจุดเน้น</p>
+          </div>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-num">03</div>
+          <div class="pillar-content">
+            <h4>ยกระดับการสอนตรงจุดเน้น (Targeted Instruction)</h4>
+            <p>จัดอบรมและนำข้อค้นพบจากวง PLC ไปยกระดับคุณภาพการจัดการเรียนการสอนและประกันคุณภาพภายใน</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Institutional Footer Bar -->
+    <div class="footer-bar">
+      <div class="footer-author">
+        รายงานโดย: <span>นายรามิล ปัญญพัทธ์</span> • กลุ่มบริหารงานวิชาการ โรงเรียนพูลเจริญวิทยาคม
+      </div>
+      <div class="footer-spec">LEVEL 2 BALANCED INK • 4K RETINA</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

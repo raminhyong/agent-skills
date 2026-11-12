@@ -18,6 +18,8 @@ description: มาตรฐานการสร้างแฟ้มสะส�
    * เอกสารรายงานที่ดีต้อง **"ไม่จัดแน่นจนอึดอัด"** แต่มีความผ่อนคลาย เป็นธรรมชาติ ด้วยการเปิดพื้นที่ว่าง (Intentional Whitespace / Negative Space) โอบล้อมเนื้อหา
 3. 📖 **การเล่าเรื่องแบบนิตยสารสารคดีสากล (Editorial Storytelling):**
    * แทนที่จะใส่ตารางสี่เหลี่ยมเรียงเป็นพรืด เราใช้การร้อยเรียงแบบ Editorial Spread: มีป้ายหมวดหมู่ (Folio) $\rightarrow$ หัวเรื่องทรงพลัง (Display Title) $\rightarrow$ คำโปรยนำสะกดสายตา (Standfirst Deck) $\rightarrow$ ภาพคู่ที่สนทนากัน (Dual-Visual Dialogue) $\rightarrow$ สถิติเชิงปริมาณที่ชัดเจน (Minimal Metrics)
+4. ⏳ **คุณภาพสูงสุดเหนือกาลเวลา (The Masterpiece Craftsmanship Protocol):**
+   * **ไม่รีบร้อนและไม่ลดทอนคุณภาพเพื่อความเร็ว:** แม้ขั้นตอนจะต้องมีความซับซ้อนสูง (เช่น การรัน AI ไดคัตพื้นหลังด้วยโมเดล SOTA ในระบบ, การคำนวณจุดตัด Bounding Box, การจัดเลเยอร์ซ้อนกันหลายระนาบ Foreground/Midground/Background, การทำ CSS `shape-outside` เพื่อให้ข้อความไหลเลี้ยวหลบรูปทรงธรรมชาติ, และการเรนเดอร์ตรวจทาน 4K Retina) โทนี่จะทุ่มเททำอย่างประณีตที่สุด เพื่อให้ผลงานออกมาเป็น **"ผลงานระดับมาสเตอร์พีซ (Masterpiece Standard)"** เสมอ ตามเจตนารมณ์ของครูรามิล
 
 ---
 
@@ -131,6 +133,8 @@ $$\text{Minimum Font Floor} = \text{Canvas Height} \times 1.2\%$$
 
 * **สคริปต์ตรวจจับวัตถุและบุคคลสำคัญ (Saliency Detection):**
   `python scripts/detect_subject.py <path-to-image>`
+* **สคริปต์ไดคัตและสกัดตัวแบบโปร่งใสระดับ SOTA (AI Subject Cutout):**
+  `python scripts/cutout_subject.py <path-to-image> <path-to-output.png> [--trim]`
 * **สคริปต์เรนเดอร์เอกสาร 4K Retina PNG & Vector PDF (Playwright):**
   `node render_report.mjs`
 

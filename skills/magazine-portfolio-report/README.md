@@ -17,6 +17,8 @@
    งานนำเสนอวิชาการต้อง **"ไม่จัดแน่นจนอึดอัด"** แต่มีช่องไฟที่หายใจได้ สวยงาม ดูเป็นธรรมชาติ
 3. 🪟 **สถาปัตยกรรมเลเยอร์ภาพ 3 มิติ (Layered Depth & Organic Overlap):**  
    เลิกใช้ "Card-in-a-Box" เรียงกล่องแยกกัน แต่ใช้ภาพหลัก (Macro Anchor) เป็นระนาบความลึก และให้ภาพเจาะลึก (Detail Insets) ซ้อนเหลื่อม (Overlap) อย่างมีศิลปะ โดยไม่ทับใบหน้าหรือจุดสำคัญของตัวแบบ
+4. ⏳ **คุณภาพสูงสุดเหนือกาลเวลา (The Masterpiece Craftsmanship Protocol):**  
+   ไม่จำกัดเวลาในการทำ และไม่ลดทอนคุณภาพเพื่อความเร็ว ยอมใช้กระบวนการซับซ้อนหลายขั้นตอน (AI Background Cutout, Multi-Plane Layering, CSS `shape-outside` ไหลข้อความตามทรงโค้ง, Saliency Protection, และ Playwright 4K QA) เพื่อให้ผลงานทุกหน้าออกมาสวยสมบูรณ์แบบที่สุดตามมาตรฐานครูรามิล
 
 ---
 
@@ -56,6 +58,10 @@ $$\text{Minimum Font Floor} = \text{Canvas Height} \times 1.2\%$$
 [4K PNG & Vector PDF Output]
 ```
 
+### 5. สคริปต์ AI Die-Cut ประจำระบบ (`scripts/cutout_subject.py`)
+* ขับเคลื่อนด้วยโมเดล SOTA `BRIA-RMBG` ONNX ขนาด 1.0 GB บนเครื่อง ทำงานออฟไลน์ไม่ต้องพึ่งพา API ภายนอก
+* สกัดตัวแบบ (คน วัตถุ ผลงาน) ออกมาเป็น Alpha Channel PNG/WebP ที่ขอบคมกริบ พร้อมใช้สำหรับจัดเลเยอร์ทะลุกรอบ (`Breaking the Boundary`) และใช้ร่วมกับ CSS `shape-outside`
+
 ---
 
 ## 📂 ตัวอย่างงานที่ผ่านการทดสอบจริง (Verified Examples)
@@ -80,3 +86,4 @@ $$\text{Minimum Font Floor} = \text{Canvas Height} \times 1.2\%$$
 ---
 *Last Updated: 12 พฤศจิกายน 2569*  
 *บันทึกโดย โทนี่ (Antigravity AI Agent) คู่หูโปรแกรมเมอร์ของครูรามิล*
+

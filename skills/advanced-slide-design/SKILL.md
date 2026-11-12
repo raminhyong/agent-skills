@@ -1,34 +1,53 @@
 ---
 name: advanced-slide-design
-description: มาตรฐานและแนวทางปฏิบัติการออกแบบสไลด์นำเสนอระดับพรีเมียม (Cinematic & Masterclass Presentation) สำหรับครูและนักวิชาการ ด้วยหลักจิตวิทยาการรู้คิด (Cognitive Load Theory), กฎการดึงสายตา (Leading Lines & Optical Vector), การเฟดภาพไร้รอยต่อ (Seamless Gradient Masking), การเลือกคู่ฟอนต์ขั้นสูง (ห้ามใช้ Sarabun ทำปก), และกฎเหล็กขนาดฟอนต์ขั้นต่ำ 20px บนความละเอียด 1920x1080
+description: มาตรฐานและแนวทางปฏิบัติการออกแบบสไลด์นำเสนอระดับพรีเมียม (Cinematic & Masterclass Presentation) สำหรับครูและนักวิชาการ ด้วยหลักจิตวิทยาการรู้คิด (Cognitive Load Theory), กฎการดึงสายตา (Leading Lines & Optical Vector), การเฟดภาพไร้รอยต่อ (Seamless Gradient Masking), การเลือกคู่ฟอนต์ขั้นสูง (ห้ามใช้ Sarabun ทำปก), กฎขนาดฟอนต์สัมพัทธ์ 1.8% Canvas Height, การตัดขอบฟอนต์ด้วย Distinct Stroke & Radiance, และการเรนเดอร์ระดับ 4K ด้วย Playwright (ไม่พึ่งพา Canva/Figma)
 ---
 
 # มาตรฐานการออกแบบสไลด์ระดับมาสเตอร์คลาส (Advanced Slide Design Masterclass)
 
-คู่มือและมาตรฐานการสร้างงานนำเสนอ สื่อการสอน และสไลด์สรุปผลงานระดับผู้บริหาร/วิชาการ ที่เน้นความทรงพลัง สวยงาม คมชัดระดับ 4K ไร้ความเกะกะรกตา (High Signal-to-Noise Ratio)
+คู่มือและมาตรฐานการสร้างงานนำเสนอ สื่อการสอน และสไลด์สรุปผลงานระดับผู้บริหาร/วิชาการ ที่เน้นความทรงพลัง สวยงาม คมชัดระดับ 4K ไร้ความเกะกะรกตา (High Signal-to-Noise Ratio) ควบคุมด้วยโค้ด HTML5/CSS3 และประมวลผลผ่าน Playwright Headless Browser โดยไม่พึ่งพา Canva หรือ Figma
+
+---
+
+## 💎 ปรัชญาและจุดยืนของเครื่องยนต์ (Engine Supremacy)
+* ❌ **ปฏิเสธ Canva และ Figma โดยเด็ดขาด (Strict No-Canva / No-Figma Policy):** 
+  * เทมเพลตสำเร็จรูปขาดความยืดหยุ่นทางโครงสร้างคณิตศาสตร์ มีข้อจำกัดเรื่องการเรนเดอร์สระ/วรรณยุกต์ภาษาไทย และมักส่งออกภาพแบบ Raster ที่สูญเสียความคมชัด
+  * ระบบสไลด์ของเราขับเคลื่อนด้วย **Custom Code (HTML5 + Modern CSS Flexbox/Grid)** และเรนเดอร์ผ่าน **Playwright Vector & 4K Retina Rendering Engine** ให้ความคมชัดระดับพิมพ์ออฟเซต ปรับแต่งขนาด อัตราส่วน และลูกเล่นแสงเงาได้ระดับซับพิกเซล
 
 ---
 
 ## ⚠️ กฎเหล็กขั้นสูงสุด (Non-Negotiable Rules)
 
-### 1. กฎขนาดฟอนต์ขั้นต่ำสุด (Minimum Font Floor: 20px)
-* **เกณฑ์บังคับ:** บนแคนวาสมาตรฐาน **1920 × 1080 px (16:9 Widescreen)** **ห้ามมีตัวอักษรใดมีขนาดเล็กกว่า 20px เด็ดขาด**
-* ครอบคลุมถึงทุกองค์ประกอบ:
-  * ป้ายหมวดหมู่ (Kicker / Eyebrow Tag): อย่างน้อย **20px**
-  * เนื้อหาคำอธิบาย (Body text / Description): อย่างน้อย **20px – 24px**
-  * หัวข้อย่อย / เสาหลัก (Pillars): อย่างน้อย **22px – 26px**
-  * เครดิตผู้สอน / สถาบัน / ตัวบอกสเปก (Footer Metadata): อย่างน้อย **20px**
-  * แสตมป์ข้อคิด / สรุปประเด็น (Focal Motto): อย่างน้อย **20px – 26px**
-* **เหตุผล:** สไลด์ไม่ได้มีไว้อ่านประชิดหน้าจอคอมพิวเตอร์อย่างเดียว แต่ต้องฉายขึ้นโปรเจกเตอร์หรือสมาร์ททีวีในห้องเรียน/ห้องประชุม ซึ่งผู้ชมนั่งห่างออกไป 5–10 เมตร ขนาดต่ำกว่า 20px จะทำลายความสามารถในการเข้าถึงข้อมูลทันที
+### 1. กฎขนาดฟอนต์สัมพัทธ์ความสูงแคนวาส (The 1.8% Canvas Height Rule)
+* ❌ **หลุมพรางขนาดฟอนต์ตายตัว (The Canvas Ratio Trap):** การกำหนดขนาดฟอนต์ขั้นต่ำแบบคงที่ (เช่น 20px) ใช้ได้ผลดีบนแคนวาสแนวนอน $1920 \times 1080\text{ px}$ แต่จะ **ล้มเหลวโดยสิ้นเชิง** บนแคนวาสแนวตั้งความละเอียดสูง เช่น A4 Portrait ($1400 \times 1980\text{ px}$) เพราะ 20px จะมีสัดส่วนเพียง $1.0\%$ ของความสูงหน้าจอ (เทียบเท่าตัวหนังสือขนาด 11px บนจอคอมพิวเตอร์) ทำให้ฉายโปรเจกเตอร์หรือทีวีในห้องเรียนแล้วไม่มีใครอ่านออก
+* ✅ **สูตรคำนวณขนาดฟอนต์ขั้นต่ำสุดสากล:**
+  $$\text{Minimum Font Floor} = \max(20\text{px}, \text{Canvas Height} \times 1.8\%)$$
+  * **แคนวาส 16:9 แนวนอน ($1920 \times 1080\text{ px}$):**
+    * ฟอนต์เล็กสุด (Footer, Eyebrow, ป้ายกำกับ): **$\ge 20\text{px}$**
+    * เนื้อหาบรรยาย (Body Text): **$22\text{px} - 28\text{px}$**
+    * พาดหัวย่อย / เสาหลัก (Pillars): **$24\text{px} - 32\text{px}$**
+    * พาดหัวหลัก (Hero Title): **$90\text{px} - 120\text{px}$**
+  * **แคนวาส 21:29.7 แนวตั้ง A4 ($1400 \times 1980\text{ px}$):**
+    * ฟอนต์เล็กสุด (Footer Bar, Spec Tag, Author Credits): **$\ge 32\text{px} - 36\text{px}$**
+    * เนื้อหาบรรยาย (Pillar Descriptions, Definitions): **$34\text{px} - 40\text{px}$**
+    * พาดหัวรองและเสาหลัก (Pillar Headings, Subtitles): **$42\text{px} - 52\text{px}$**
+    * แสตมป์ข้อคิดแก่นแกน (Focal Principle / Motto): **$40\text{px} - 48\text{px}$**
+    * พาดหัวหลักแนวตั้ง (Hero Title): **$105\text{px} - 125\text{px}$**
 
 ---
 
-### 2. กฎการเลือกฟอนต์ (Typography Policy)
-* ❌ **ห้ามใช้ `TH Sarabun New` หรือฟอนต์ราชการมีเชิงดั้งเดิมทำหน้าปก หรือสไลด์บรรยายแนวภาพยนตร์เด็ดขาด:** เพราะให้ความรู้สึกเป็นหนังสือราชการ/เอกสารธุรการที่น่าเบื่อ
+### 2. กฎระยะเว้นชนวรรณยุกต์และสระภาษาไทย (Thai Typographic Collision Buffer)
+* อักษรไทยมี 4 มิติแนวตั้ง (พยัญชนะฐาน, สระบน, ไม้เอก/โท/ตรี/จัตวา, และสระล่าง/เชิง)
+* เมื่อวางคำอ่านสัทอักษร (Phonetics) หรือ Subtitle ภาษาอังกฤษ ต่อท้ายพาดหัวภาษาไทยขนาดใหญ่ **ต้องเว้นระยะห่างด้านล่าง (Bottom Buffer / Margin) อย่างน้อย $25\% - 30\%$ ของขนาด Font พาดหัว** (เช่น หากพาดหัว 110px ต้องเว้นระยะอย่างน้อย $26\text{px} - 32\text{px}$) เพื่อป้องกันไม่ให้หางสระหรือวรรณยุกต์ชนหรือบดบังตัวอักษรแถวถัดไป
+
+---
+
+### 3. กฎการเลือกฟอนต์ระดับพรีเมียม (Typography Policy)
+* ❌ **ห้ามใช้ `TH Sarabun New` หรือฟอนต์เอกสารราชการทำหน้าปก หรือสไลด์บรรยายแนวภาพยนตร์เด็ดขาด:** เพราะให้ความรู้สึกเป็นหนังสือราชการ/เอกสารธุรการที่น่าเบื่อ ไร้พลัง
 * ✅ **ฟอนต์พรีเมียมประจำเครื่องที่ต้องใช้:**
   * **พาดหัวหลักระดับปรากฏการณ์ (Hero Display Title):**  
-    👉 **`Kanit` (Bold / ExtraBold / Black)** ขนาด 90px – 115px  
-    👉 **`Prompt` (Bold / ExtraBold)** ขนาด 80px – 100px
+    👉 **`Kanit` (Bold / ExtraBold / Black)** ขนาด 95px – 120px  
+    👉 **`Prompt` (Bold / ExtraBold)** ขนาด 85px – 105px
   * **สไลด์ห้องเรียน & สื่อการสอน Active Learning:**  
     👉 **`Mitr` (Medium / Bold)** ให้ความรู้สึกเป็นมิตร อบอุ่น มีหัวมนร่วมสมัย
   * **สไลด์ AI, นวัตกรรมดิจิทัล, EdTech:**  
@@ -41,127 +60,88 @@ description: มาตรฐานและแนวทางปฏิบัต�
 
 ---
 
-### 3. การเฟดภาพแบบไร้รอยต่อ (Seamless Gradient Masking & Vignette)
-* ❌ **ห้ามขังภาพไว้ในกล่องการ์ดสี่เหลี่ยม (No "Card-in-a-Box Syndrome"):** การวางรูปภาพในกรอบสี่เหลี่ยมโค้งมนแล้วใส่เงาลอยๆ ข้างกล่องข้อความ ทำให้สไลด์ดูเหมือนหน้าเว็บสำเร็จรูปราคาถูก
-* ✅ **เทคนิคการเฟดภาพเข้าสู่ความมืด (Cinematic Masking):**
-  * ให้ภาพครองพื้นที่ 65% – 70% ของแคนวาส หรือปูเต็มแผ่นหลัง
-  * ใช้ CSS Masking ไล่ระดับแบบหลายสต็อป (Multi-stop linear mask) ให้ขอบด้านข้อความค่อยๆ ละลายโปร่งใสหายไปในสีพื้นหลัง (เช่น สีดำ Obsidian `#05070F` หรือ Deep Slate):
-    ```css
-    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.45) 30%, rgba(0,0,0,1) 85%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.45) 30%, rgba(0,0,0,1) 85%);
-    ```
-  * ซ้อน **Radial & Linear Vignette** บริเวณขอบบน ล่าง และมุมภาพ เพื่อคุมมิติแสงให้อารมณ์ภาพยนตร์และกำจัดขอบตัดของภาพ 100%
-
----
-
-### 4. กฎการนำสายตาและลำดับสายตา (Visual Guidance & Leading Lines)
-* **Optical Vector (เวกเตอร์นำสายตา):** จัดวางองค์ประกอบในภาพให้มีเส้นนำสายตา (เช่น ลำแสงอาทิตย์, แนวกำแพง, แนวทางเดิน, รอยเท้า) พุ่งตรงจากภาพเข้าหาพาดหัวสไลด์เสมอ
-* **Extreme Scale Contrast:** สร้างความต่างของขนาดแบบสุดขั้ว ระหว่างพาดหัวหลัก (100px+) กับข้อความขยายความ เพื่อให้เกิดจุดปะทะสายตาแรกทันทีที่เปิดสไลด์
-* **ห้ามใช้อีโมจิการ์ตูนเป็นไอคอนในสไลด์พรีเมียม:** สไลด์ระดับมืออาชีพจะไม่ใช้อีโมจิเด็กเล่น (`💡`, `🎯`, `🛡️`) แต่ใช้ความสง่างามของ Typography, ตัวเลขโรมัน, ป้ายกำกับสากล, และเส้นสีนำสายตา (Accent Hairline Rule)
-
----
-
-### 5. โครงสร้างสีและการตัดขอบฟอนต์ (High Contrast, Punchy Colors & Distinct Radiance Stroke)
+### 4. โครงสร้างสี สมดุลพลังงานการรับรู้ และ Stroke คมชัด (Contrast, Perceptual Balance & Radiance)
 * ❌ **ห้ามใช้สีเทาหม่นๆ หรือสีกลางๆ (No Muddy Muted Grays) ในข้อความสำคัญ:** สีเทาหม่นจะทำให้ฟอนต์กลืนไปกับฉากหลัง สูญเสียจุดโฟกัส และอ่านยากมากในสภาพแสงจริง
-* ✅ **เลือกใช้สีที่สดเข้ม โดดเด่น ชัดเจน (High-Saturation & Punchy Contrast):**
-  * พาดหัวและข้อความนำ: สีขาวสว่างบริสุทธิ์ (`#FFFFFF`), สีเหลืองสะดุดตา (`#FACC15`), สีเขียวมรกตสด (`#10B981`), หรือสีฟ้าแซฟไฟร์ (`#38BDF8`)
-  * ป้ายและข้อมูลเปรียบเทียบ: ใช้คู่สีตัดกันสูง เช่น ทับทิมปะทะไพลิน (`#FB7185` vs `#38BDF8`) หรือ แดงสดปะทะเขียวสด
+* 💡 **กฎความสว่างของตัวอักษรบรรยายบนธีมมืด (Dark-Theme Luminance Threshold):**
+  * ในการ์ดหรือแถบนิยามความหมาย ตัวอักษรบรรยายเนื้อหาต้องมีความสว่างสากลอย่างน้อย $90\% - 100\%$ (เช่น `#FFFFFF` หรือ `#F8FAFC`) ห้ามใช้สีฟ้าน้ำทะเลเข้มหรือสีครามทึบกับข้อความบรรยายเพราะทำให้อ่านยากมาก
+* ⚡ **กฎสมดุลพลังงานการรับรู้ของสีคู่ตรงข้าม (Perceptual Energy Balancing - Helmholtz-Kohlrausch Effect):**
+  * เมื่อออกแบบคอลัมน์เปรียบเทียบสองขั้ว (เช่น *ILLITERACY TRAP* vs *VALUE MASTERY*) ดวงตามนุษย์รับรู้สีโทนเย็น (Cyan `#38BDF8`) ว่าสว่างและเด่นกว่าสีโทนร้อนเสมอ
+  * ดังนั้น ขั้วตรงข้ามต้องไม่ใช้สีชมพูหม่นหรือแดงทึบ แต่ต้องใช้ **Electric Neon Coral / Vivid Crimson (`#FF3366` หรือ `#FF2E63`)** เพื่อสร้างสมดุลทางสายตาและน้ำหนักทางจิตวิทยาที่เท่าเทียมกัน
 * 🛡️ **เทคนิค Stroke ชัดเจน & Radiance Halo คัดขอบฟอนต์ (The Distinct Stroke Armor):**
-  * **ห้ามใส่ Stroke บางหรือจางเกินไป:** Stroke ต้องคมชัดและหนาพอดีเพื่อสร้าง Contrast ที่มองเห็นได้ชัดเจน
   * ใช้ **`paint-order: stroke fill;`** เสมอ เพื่อให้เส้น Stroke อยู่ *ด้านหลัง* เนื้อฟอนต์ ไม่บีบตัวอักษรให้ลีบแบน
-  * ขนาด Stroke แนะนำ: `-webkit-text-stroke: 1.5px – 2px rgba(0, 0, 0, 0.95);` สำหรับพาดหัวและตัวเน้น
+  * ขนาด Stroke แนะนำ: `-webkit-text-stroke: 1.5px – 2.5px rgba(0, 0, 0, 0.95);`
   * เสริมด้วย **Radiance Halo ซ้อน 3 ชั้น** (`text-shadow`):
     ```css
     /* เทคนิค Distinct Stroke & Radiance Halo */
     paint-order: stroke fill;
     -webkit-text-stroke: 2px rgba(3, 6, 17, 0.95);
     text-shadow: 
-      0 0 2px #000, 0 0 3px #000,          /* Black crisp edge */
+      0 0 2px #000, 0 0 4px #000,          /* Black crisp edge */
       0 0 25px rgba(56, 189, 248, 0.65),    /* Vivid Radiance Glow */
       0 10px 30px rgba(0, 0, 0, 0.95);      /* Deep backing shadow */
     ```
 
 ---
 
-### 6. มาตรฐานสไลด์แนวตั้ง (Portrait Presentation 21 : 29.7 / A4 Ratio)
-* **ความละเอียดแคนวาสแนะนำ:** **1400 × 1980 px** (อัตราส่วน 21 : 29.7 พอดีเป๊ะ สอดคล้องกับมาตรฐานกระดาษ A4)
-* **การแบ่งสัดส่วนเนื้อหาแนวตั้ง (Vertical 3-Zone Architecture):**
-  1. **Top Zone (30%):** Eyebrow Tag -> พาดหัวยักษ์ (Hero Title 105px – 115px) -> คำอ่าน & คำแปล -> ข้อความแก่น (Assertion Zone)
-  2. **Middle Zone (45%):** Hero Visual บรรยากาศอลังการ เฟดภาพหัว-ท้าย (Vertical Gradient Masking) ละลายเข้าหาแคนวาสดำมืด พร้อมแคปซูลแสตมป์ข้อคิดลอยเด่น (Floating Key Takeaway)
-  3. **Bottom Zone (25%):** การเปรียบเทียบเชิงกลยุทธ์ 2 คอลัมน์ (Strategic Pillars) -> แถบเครดิตผู้สอน (Footer Bar แนวนอนบรรทัดเดียว)
-* **กฎฟอนต์ขั้นต่ำ:** บังคับใช้กฎ **Minimum Font Floor 20px** อย่างเคร่งครัดเช่นเดียวกันทุกองค์ประกอบ
+### 5. กฎห้ามวางวัตถุบดบังจุดสนใจของภาพ (Strict Zero Subject Occlusion)
+* ❌ **ห้ามใช้การ์ดลอย (`position: absolute`) ทับส่วนสำคัญของตัวแบบ:** การวางกล่องข้อความลอยทับหางนก ใบหน้าคน แสงอัญมณี หรือจุดโฟกัสของภาพประกอบ ทำให้สไลด์ดูรก ทำลายงานศิลปะ และตัดขาดลำดับการกวาดสายตา (Cognitive Visual Flow)
+* ✅ **การจัดวางแบบต่อเนื่องเชิงเส้น (Linear & Integrated Capsule Flow):**
+  * จัดแบ่งพื้นที่อย่างเป็นสัดส่วน (Top Zone -> Middle Visual -> Bottom Zone)
+  * วางแคปซูลแสตมป์ข้อคิด (`.integrated-capsule`) คั่นกลางระหว่างภาพประกอบกับเสาหลักด้านล่างอย่างกลมกลืน ช่วยให้ภาพประกอบอวดความงามได้ 100% เต็มตา
 
 ---
 
-## 🛠️ สถาปัตยกรรมโค้ดสไลด์ต้นแบบ (HTML5 / CSS Boilerplate)
+### 6. การเฟดภาพแบบไร้รอยต่อ (Seamless Gradient Masking & Vignette)
+* ❌ **ห้ามขังภาพไว้ในกล่องการ์ดสี่เหลี่ยม (No "Card-in-a-Box Syndrome")**
+* ✅ **เทคนิคการเฟดภาพเข้าสู่ความมืด (Cinematic Masking):**
+  * **แนวนอน (Landscape):** ไล่ระดับความโปร่งใสจากซ้ายไปขวา (ละลายฝั่งข้อความ)
+  * **แนวตั้ง (Portrait):** ไล่ระดับความโปร่งใสแบบบน-ล่าง (ละลายขอบบนและล่างเข้าหาพื้นหลังดำ `#030611`)
+    ```css
+    mask-image: linear-gradient(to bottom, 
+      transparent 0%, 
+      rgba(0, 0, 0, 0.15) 10%,
+      rgba(0, 0, 0, 0.9) 25%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0.9) 75%,
+      rgba(0, 0, 0, 0.15) 92%,
+      transparent 100%
+    );
+    ```
+  * ซ้อน **Lateral & Radial Vignette** เพื่อคุมมิติแสงให้อารมณ์ภาพยนตร์และกำจัดขอบตัดของภาพ 100%
 
-```html
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
-  <title>Masterclass Slide Template</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;900&family=Noto+Sans+Thai:wght@400;500;600&family=Prompt:wght@500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      width: 1920px; height: 1080px; overflow: hidden;
-      background: #05070f; color: #f1f5f9;
-      font-family: 'Noto Sans Thai', 'Prompt', sans-serif;
-    }
-    .viewport { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
-    .hero-image {
-      position: absolute; top: 0; right: 0; width: 68%; height: 100%;
-      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.45) 30%, rgba(0,0,0,1) 85%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.45) 30%, rgba(0,0,0,1) 85%);
-    }
-    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
-    .content {
-      position: relative; z-index: 5; width: 100%; height: 100%;
-      padding: 85px 120px 75px 120px; display: flex; flex-direction: column; justify-content: space-between;
-      max-width: 1100px;
-    }
-    /* กฎเหล็กฟอนต์ขั้นต่ำ 20px */
-    .kicker { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #d97706; }
-    .title { font-family: 'Kanit', sans-serif; font-size: 106px; font-weight: 900; line-height: 1.02; }
-    .lead { font-family: 'Prompt', sans-serif; font-size: 32px; font-weight: 600; line-height: 1.48; }
-    .body { font-size: 21px; line-height: 1.6; color: #94a3b8; }
-    .footer { font-size: 20px; color: #64748b; white-space: nowrap; }
-  </style>
-</head>
-<body>
-  <div class="viewport">
-    <div class="hero-image"><img src="assets/image.png"></div>
-    <main class="content">
-      <!-- องค์ประกอบสไลด์ตามมาตรฐาน -->
-    </main>
-  </div>
-</body>
-</html>
-```
+---
+
+## 📐 มาตรฐานสัดส่วนแคนวาสทั้ง 2 รูปแบบ
+
+| คุณลักษณะ | แนวนอน 16:9 (Landscape Masterclass) | แนวตั้ง 21:29.7 (A4 Portrait Masterclass) |
+| :--- | :--- | :--- |
+| **ความละเอียด (Canvas Size)** | `1920 × 1080 px` | `1400 × 1980 px` |
+| **วัตถุประสงค์หลัก** | การนำเสนอบนจอโปรเจกเตอร์ / ทีวีในห้องประชุม | ใบสรุปความรู้ (One-Page Executive Summary) / สื่อการสอนรายบุคคล |
+| **ขนาดฟอนต์ขั้นต่ำสุด (Floor)** | **20px** | **34px – 36px** (ตามกฎ 1.8% Canvas Height) |
+| **พาดหัวหลัก (Hero Title)** | `Kanit` Bold 95px – 110px | `Kanit` Bold 110px – 125px |
+| **ระยะเว้นชนวรรณยุกต์ (Collision Buffer)**| $\ge 20\text{px}$ | $\ge 28\text{px} - 35\text{px}$ |
+| **โครงสร้างเนื้อหา** | ซ้าย: เนื้อหา 45% / ขวา: ภาพเฟด 55% | 3 โซนแนวตั้ง: Top (30%) / Middle (45%) / Bottom (25%) |
 
 ---
 
 ## 🚀 คำสั่งการเรนเดอร์สไลด์คุณภาพสูงสุด (4K Retina Output)
 
-เมื่อสร้างหรือแก้ไขไฟล์สไลด์ ให้ใช้สคริปต์ Playwright เรนเดอร์ด้วยความละเอียดระดับ 2x (3840 × 2160 px Downsampled) เพื่อความคมชัดสูงสุดบนจอทุกประเภท:
+เมื่อสร้างหรือแก้ไขไฟล์สไลด์ ให้ใช้สคริปต์ Playwright เรนเดอร์ด้วยความละเอียดระดับ 2x (3840 × 2160 หรือ 2800 × 3960 px Downsampled) เพื่อความคมชัดสูงสุดบนจอทุกประเภท:
 
 ```javascript
 import { chromium } from 'playwright';
 
 const browser = await chromium.launch();
 const page = await browser.newPage({
-  viewport: { width: 1920, height: 1080 },
+  viewport: { width: 1400, height: 1980 }, // หรือ { width: 1920, height: 1080 }
   deviceScaleFactor: 2
 });
 
 await page.goto('file:///path/to/slide.html', { waitUntil: 'networkidle' });
 await page.screenshot({ path: 'slide.png' });
-await page.pdf({ path: 'slide.pdf', width: '1920px', height: '1080px', printBackground: true });
+await page.pdf({ path: 'slide.pdf', width: '1400px', height: '1980px', printBackground: true });
 await browser.close();
 ```
 
 ---
 *บันทึกมาตรฐานโดย นายรามิล ปัญญพัทธ์ (โรงเรียนพูลเจริญวิทยาคม) & โทนี่ (Antigravity AI Agent)*
-

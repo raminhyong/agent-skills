@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>พระอุโบสถวัดราชโอรสาราม - ปฐมบทสถาปัตยกรรมพระราชนิยม</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Kanit:wght@500;600;700;800;900&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Pridi:wght@500;600;700&family=Prompt:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1400px;
+      height: 1980px;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F3ED;
+      color: #1A1F2C;
+      font-family: 'Noto Sans Thai', sans-serif;
+      overflow: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Architectural Paper Canvas */
+    .magazine-canvas {
+      width: 1400px;
+      height: 1980px;
+      position: relative;
+      background: 
+        radial-gradient(circle at 10% 8%, rgba(140, 37, 30, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 90% 92%, rgba(200, 138, 44, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #F9F8F4 0%, #F3EFE6 100%);
+      padding: 44px 44px 38px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* 1. Header Folio Bar */
+    .folio-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 12px;
+      padding-right: 10px;
+      border-bottom: 2px solid rgba(140, 37, 30, 0.25);
+    }
+
+    .folio-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #8C251E;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .folio-tag::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #C88A2C;
+      border-radius: 50%;
+    }
+
+    .folio-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(140, 37, 30, 0.3), rgba(200, 138, 44, 0.3));
+    }
+
+    .folio-issue {
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: #5A6A80;
+      text-transform: uppercase;
+    }
+
+    /* 2. Header & Title Section */
+    .header-section {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .numeral-callout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #8C251E;
+      color: #FFF7ED;
+      border-radius: 14px;
+      padding: 12px 6px;
+      box-shadow: 0 10px 24px rgba(140, 37, 30, 0.2);
+    }
+
+    .numeral-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 78px;
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      color: #FED7AA;
+    }
+
+    .numeral-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
+      margin-top: 4px;
+    }
+
+    .header-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #8C251E;
+    }
+
+    .eyebrow-badge span {
+      background: rgba(140, 37, 30, 0.08);
+      padding: 3px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(140, 37, 30, 0.18);
+    }
+
+    .display-title {
+      font-family: 'Prompt', sans-serif;
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #121824;
+      letter-spacing: -0.5px;
+    }
+
+    .display-title em {
+      font-style: normal;
+      color: #8C251E;
+    }
+
+    .standfirst-deck {
+      font-family: 'Prompt', sans-serif;
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 1.42;
+      color: #475569;
+      border-left: 4px solid #C88A2C;
+      padding-left: 18px;
+      margin-top: 2px;
+    }
+
+    /* 3. Provenance & Chronology Ribbon (Guaranteed SINGLE LINE, ZERO WRAPPING) */
+    .chronology-ribbon {
+      margin-top: 2px;
+      background: #FFFFFF;
+      border: 1px solid rgba(140, 37, 30, 0.15);
+      border-left: 6px solid #8C251E;
+      border-radius: 12px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.025);
+      white-space: nowrap;
+    }
+
+    .chronology-time {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      color: #8C251E;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .chronology-time svg {
+      width: 26px;
+      height: 26px;
+      fill: #C88A2C;
+      flex-shrink: 0;
+    }
+
+    .chronology-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(140, 37, 30, 0.2);
+      flex-shrink: 0;
+    }
+
+    .chronology-desc {
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+      color: #334155;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .chronology-pill {
+      background: #FEF3C7;
+      color: #92400E;
+      font-family: 'Space Grotesk', 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      letter-spacing: 0px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ========================================================= */
+    /* 4. THE BOUNDARY-BREAKING ARCHITECTURAL STAGE (MULTI-LAYER)*/
+    /* ========================================================= */
+    .architectural-stage {
+      position: relative;
+      width: 100%;
+      height: 650px;
+      margin-top: 4px;
+      /* STRICT: NO overflow: hidden! Allows gable peak and 3D layers to break out! */
+    }
+
+    /* Layer 1 (Background Plane): Atmospheric Sky Panel */
+    .stage-sky-backdrop {
+      position: absolute;
+      top: 60px; /* Offset from top so the gable peak breaks UPWARDS into alabaster paper */
+      left: 0;
+      width: 100%;
+      height: 585px;
+      border-radius: 20px;
+      background: 
+        radial-gradient(ellipse at 35% 22%, rgba(255, 255, 255, 0.8) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 45%, rgba(255, 255, 255, 0.5) 0%, transparent 60%),
+        linear-gradient(180deg, #7EAED1 0%, #B2D1E5 38%, #E5EFF5 72%, #F3EFE6 100%);
+      border: 1.5px solid rgba(126, 174, 209, 0.5);
+      box-shadow: 0 18px 45px rgba(20, 30, 45, 0.09);
+      z-index: 1;
+      overflow: hidden; /* Contains inner sky gradient and coordinate marks neatly */
+    }
+
+    /* Monograph Sub-Badge inside Top-Left Sky */
+    .sky-monograph-badge {
+      position: absolute;
+      top: 14px;
+      left: 28px;
+      background: rgba(140, 37, 30, 0.88);
+      color: #FFF7ED;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 6px;
+      letter-spacing: 1.5px;
+      box-shadow: 0 4px 14px rgba(140, 37, 30, 0.2);
+      z-index: 2;
+    }
+
+    /* Subtle Architectural Coordinate Marks inside Sky Panel */
+    .sky-coord-tag {
+      position: absolute;
+      bottom: 16px;
+      left: 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(90, 106, 128, 0.45);
+      text-transform: uppercase;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Layer 2 (Middle Plane): Giant Landmark Typography (Paris Landmark Style) */
+    .stage-landmark-typo {
+      position: absolute;
+      top: 128px;
+      left: 28px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .landmark-word {
+      font-family: 'Cinzel', serif;
+      font-size: 96px;
+      font-weight: 900;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
+      text-shadow: 0 4px 20px rgba(18, 24, 36, 0.12);
+      paint-order: stroke fill;
+      -webkit-text-stroke: 1.5px rgba(200, 138, 44, 0.35);
+      line-height: 1;
+    }
+
+    /* Layer 3 (Foreground Hero Plane): AI Cutout Ubosot (Breaks UPWARDS in front of letters) */
+    .stage-cutout-wrap {
+      position: absolute;
+      top: -24px; /* Breaks UPWARDS 84px above the sky panel top edge (top: 60px)! */
+      left: 10px;
+      width: 865px;
+      height: 650px;
+      z-index: 3; /* IN FRONT OF TYPOGRAPHY (z-index: 2)! Gable slices cleanly across RATCHAORAS */
+      filter: drop-shadow(0 20px 30px rgba(18, 24, 36, 0.22));
+      pointer-events: none;
+    }
+
+    .stage-cutout-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: bottom left;
+      display: block;
+    }
+
+    /* Layer 4: Overlapping Cascading Micro Insets (Right Side, Layered Depth) */
+    .stage-insets-column {
+      position: absolute;
+      top: 80px;
+      right: 14px;
+      width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 6; /* High z-index to overlap foreground elements and sky naturally */
+    }
+
+    .architectural-inset-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 8px 12px;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: 0 16px 36px rgba(18, 24, 36, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    /* Organic Staggered Cascade */
+    .cascade-1 {
+      transform: translateX(0);
+    }
+    .cascade-2 {
+      transform: translateX(-16px); /* Overlaps deeper into courtyard negative space */
+    }
+    .cascade-3 {
+      transform: translateX(-6px);
+    }
+
+    .inset-thumb-box {
+      width: 110px;
+      height: 88px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #1A1F2C;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .inset-thumb-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .inset-content h5 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #8C251E;
+      line-height: 1.25;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+
+    .inset-content p {
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 24px;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    /* 5. The 3 Architectural Pillars Section */
+    .pillars-section {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 18px 22px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pillar-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .pillar-badge-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(140, 37, 30, 0.08);
+      color: #8C251E;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(140, 37, 30, 0.2);
+      flex-shrink: 0;
+    }
+
+    .pillar-card-header h4 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #121824;
+      line-height: 1.25;
+    }
+
+    .pillar-card p {
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 24px;
+      color: #475569;
+      line-height: 1.45;
+      text-align: left;
+    }
+
+    .pillar-card strong {
+      color: #8C251E;
+      font-weight: 600;
+    }
+
+    /* 6. Synthesis Quote Bar */
+    .quote-banner {
+      margin-top: 4px;
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 12px 24px;
+      border-left: 5px solid #8C251E;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .quote-text {
+      font-family: 'Prompt', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #334155;
+      font-style: italic;
+    }
+
+    .quote-text strong {
+      color: #8C251E;
+      font-style: normal;
+    }
+
+    .quote-cite {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #94A3B8;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* 7. Institutional Footer Bar */
+    .footer-bar {
+      margin-top: 4px;
+      padding-top: 12px;
+      padding-right: 14px;
+      border-top: 2px solid rgba(140, 37, 30, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      white-space: nowrap;
+    }
+
+    .footer-author {
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .footer-author span {
+      color: #8C251E;
+      font-weight: 700;
+    }
+
+    .footer-spec {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0px;
+      color: #94A3B8;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="magazine-canvas">
+
+    <!-- 1. Editorial Folio Bar -->
+    <div class="folio-bar">
+      <div class="folio-tag">HERITAGE &amp; ARCHITECTURAL PARADIGM</div>
+      <div class="folio-rule"></div>
+      <div class="folio-issue">VOL. 03 • WAT RATCHAORASARAM RATCHAWORAWIHAN</div>
+    </div>
+
+    <!-- 2. Header & Title Section -->
+    <div class="header-section">
+      <div class="numeral-callout">
+        <div class="numeral-big">01</div>
+        <div class="numeral-sub">ORIGIN</div>
+      </div>
+      <div class="header-text-block">
+        <div class="eyebrow-badge">
+          <span>ปฐมบทสถาปัตยกรรมพระราชนิยม</span>
+          <em>•</em>
+          <span>รัตนโกสินทร์ยุคปฏิวัติศิลป์</span>
+        </div>
+        <h1 class="display-title">พระอุโบสถ <em>วัดราชโอรสาราม</em></h1>
+        <p class="standfirst-deck">
+          อาคารปฐมฤกษ์แห่งสยามที่ปรับเปลี่ยนจากขนบประเพณีนิยมเดิม สู่การปฏิวัติทางโครงสร้างแบบ "พระราชนิยม" ในรัชกาลที่ ๓ ผสานสุนทรียศาสตร์ช่างหลวงและศิลปะจีนอย่างสง่างาม
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Provenance & Chronology Ribbon (SINGLE LINE, ZERO WRAPPING) -->
+    <div class="chronology-ribbon">
+      <div class="chronology-time">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+        <span>สถาปนา : พ.ศ. ๒๓๖๓ (สมัยรัชกาลที่ ๒)</span>
+      </div>
+      <div class="chronology-divider"></div>
+      <div class="chronology-desc">สถาปนาโดยพระเจ้าลูกยาเธอ กรมหมื่นเจษฎาบดินทร์ (รัชกาลที่ ๓)</div>
+      <div class="chronology-pill">ROYAL HERITAGE</div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 4. MASTERPIECE ARCHITECTURAL STAGE (BOUNDARY-BREAKING)    -->
+    <!-- ========================================================= -->
+    <div class="architectural-stage">
+
+      <!-- Layer 1 (Background Plane): Atmospheric Sky Panel -->
+      <div class="stage-sky-backdrop">
+        <div class="sky-monograph-badge">SINO-THAI MONOGRAPH</div>
+        <div class="sky-coord-tag">13°42'31"N 100°28'12"E • SINO-THAI ORDER 1820</div>
+      </div>
+
+      <!-- Layer 2 (Middle Plane): Giant Landmark Typography (Paris Landmark Style) -->
+      <div class="stage-landmark-typo">
+        <div class="landmark-word">RATCHAORAS</div>
+      </div>
+
+      <!-- Layer 3 (Foreground Hero Plane): AI Cutout Ubosot (Breaks UPWARDS in front of letters) -->
+      <div class="stage-cutout-wrap">
+        <img src="task02_assets/wat_ratchaorasaram_cutout.png" alt="พระอุโบสถวัดราชโอรสารามราชวรวิหาร ไดคัตพื้นหลัง">
+      </div>
+
+      <!-- Layer 4: Overlapping Cascading Micro Insets (Right Side, Layered Depth) -->
+      <div class="stage-insets-column">
+        
+        <!-- Detail Inset 1: Gable -->
+        <div class="architectural-inset-card cascade-1">
+          <div class="inset-thumb-box">
+            <img src="task02_assets/detail_gable.jpg" alt="หน้าบันกระเบื้องเคลือบกวางตุ้ง ลายดอกโบตั๋น ไร้ช่อฟ้า">
+          </div>
+          <div class="inset-content">
+            <h5>หน้าบันกระเบื้องเคลือบกวางตุ้ง</h5>
+            <p>ลายดอกโบตั๋นและเครื่องมงคล ไร้ช่อฟ้าใบระกา</p>
+          </div>
+        </div>
+
+        <!-- Detail Inset 2: Bai Sema -->
+        <div class="architectural-inset-card cascade-2">
+          <div class="inset-thumb-box">
+            <img src="task02_assets/detail_sema.jpg" alt="ซุ้มสีมาศิลาจำหลักหินจีน ทรงเก๋งจีน">
+          </div>
+          <div class="inset-content">
+            <h5>ซุ้มสีมาศิลาจำหลักหินจีน</h5>
+            <p>สลักหินแกรนิตทรงเก๋งจีน ยอดโดมศิลาประณีต</p>
+          </div>
+        </div>
+
+        <!-- Detail Inset 3: Chinese Lion & Dragon Basin -->
+        <div class="architectural-inset-card cascade-3">
+          <div class="inset-thumb-box">
+            <img src="task02_assets/detail_guardian.jpg" alt="อ่างมังกรทองและตุ๊กตาศิลาจีน">
+          </div>
+          <div class="inset-content">
+            <h5>อ่างมังกรทอง &amp; ตุ๊กตาศิลาจีน</h5>
+            <p>อ่างกระเบื้องมังกรและอับเฉาศิลาจีน พิทักษ์พระอาราม</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 5. The 3 Architectural Pillars Section -->
+    <div class="pillars-section">
+      
+      <!-- Pillar 1 -->
+      <div class="pillar-card">
+        <div class="pillar-card-header">
+          <div class="pillar-badge-num">01</div>
+          <h4>หน้าบันถือปูนไร้เครื่องไม้ (Porcelain Gable)</h4>
+        </div>
+        <p>
+          ยกเลิกเครื่องบนไม้แกะสลักเดิม เปลี่ยนเป็น <strong>หน้าบันก่ออิฐถือปูนทึบ</strong> ประดับกระเบื้องเคลือบจีนลายดอกโบตั๋น ทนแดดฝนและคงทนถาวร
+        </p>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="pillar-card">
+        <div class="pillar-card-header">
+          <div class="pillar-badge-num">02</div>
+          <h4>เสาสี่เหลี่ยมทึบไร้คันทวย (Monolithic Colonnade)</h4>
+        </div>
+        <p>
+          ใช้ <strong>เสาสี่เหลี่ยมขนาดใหญ่ไม่มีบัวหัวเสา</strong> และไม่ใช้คันทวยรับชายคา มอบความรู้สึกสงบนิ่ง แข็งแกร่ง โอ่อ่า และมั่นคงดั่งขุนเขา
+        </p>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="pillar-card">
+        <div class="pillar-card-header">
+          <div class="pillar-badge-num">03</div>
+          <h4>ซุ้มสีมาและประติมากรรมจีน (Sino Elements)</h4>
+        </div>
+        <p>
+          ตั้ง <strong>ซุ้มสีมาหินสลักแบบเก๋งจีน</strong> สี่เสารอบพระอุโบสถ รายล้อมด้วยสิงโตหินอับเฉา สะท้อนดุลยภาพความสัมพันธ์ทางการค้าสยาม-จีน
+        </p>
+      </div>
+
+    </div>
+
+    <!-- 6. Synthesis Quote Bar -->
+    <div class="quote-banner">
+      <div class="quote-text">
+        "การปฏิวัติทางสุนทรียศาสตร์ของ <strong>ศิลปะพระราชนิยม</strong> คือการผสานประโยชน์ใช้สอย ความคงทน และจิตวิญญาณแห่งยุคสมัยเข้าด้วยกัน"
+      </div>
+      <div class="quote-cite">ARCHITECTURAL INSIGHT</div>
+    </div>
+
+    <!-- 7. Institutional Footer Bar -->
+    <div class="footer-bar">
+      <div class="footer-author">
+        รายงานวิชาการ: <span>นายรามิล ปัญญพัทธ์</span> • กลุ่มบริหารงานวิชาการ โรงเรียนพูลเจริญวิทยาคม
+      </div>
+      <div class="footer-spec">LEVEL 2 BALANCED INK • 4K RETINA</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

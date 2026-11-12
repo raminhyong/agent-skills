@@ -62,43 +62,58 @@
     }
 
     /* ==========================================================
-       HERO VISUAL LAYER (UNOBSTRUCTED, SEAMLESS FADING)
+       HERO VISUAL LAYER: FULL-BODY SUBJECT PRESERVATION
+       (Rooster + Gemstone 100% Unclipped, No Amputation)
        ========================================================== */
     .hero-visual-layer {
       position: absolute;
-      top: 500px;
-      left: 0;
-      width: 100%;
-      height: 860px;
+      inset: 0;
+      width: 1400px;
+      height: 1980px;
       z-index: 2;
       overflow: hidden;
-      mask-image: linear-gradient(to bottom, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.15) 10%,
-        rgba(0, 0, 0, 0.9) 25%,
-        rgba(0, 0, 0, 1) 50%,
-        rgba(0, 0, 0, 0.9) 75%,
-        rgba(0, 0, 0, 0.15) 92%,
-        transparent 100%
-      );
-      -webkit-mask-image: linear-gradient(to bottom, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.15) 10%,
-        rgba(0, 0, 0, 0.9) 25%,
-        rgba(0, 0, 0, 1) 50%,
-        rgba(0, 0, 0, 0.9) 75%,
-        rgba(0, 0, 0, 0.15) 92%,
-        transparent 100%
-      );
     }
 
     .hero-visual-layer img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center 42%;
-      transform: scale(1.04);
-      filter: contrast(1.12) saturate(1.2) brightness(0.96);
+      object-fit: contain;
+      object-position: center 52%;
+      transform: scale(1.18) translateY(10px);
+      filter: contrast(1.1) saturate(1.18) brightness(0.96);
+    }
+
+    /* Environmental Vignettes: Protects Text Legibility while leaving Rooster & Gem 100% Unobscured */
+    .vignette-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 520px;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(to bottom, 
+        rgba(3, 6, 17, 0.96) 0%, 
+        rgba(3, 6, 17, 0.82) 50%, 
+        rgba(3, 6, 17, 0.3) 80%, 
+        transparent 100%
+      );
+    }
+
+    .vignette-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 600px;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(to top, 
+        rgba(3, 6, 17, 0.98) 0%, 
+        rgba(3, 6, 17, 0.88) 45%, 
+        rgba(3, 6, 17, 0.25) 78%, 
+        transparent 100%
+      );
     }
 
     .vignette-lateral {
@@ -107,12 +122,10 @@
       z-index: 3;
       pointer-events: none;
       background: linear-gradient(to right, 
-        #030611 0%, 
-        rgba(3, 6, 17, 0.45) 8%, 
-        transparent 25%, 
-        transparent 75%, 
-        rgba(3, 6, 17, 0.45) 92%, 
-        #030611 100%
+        rgba(3, 6, 17, 0.55) 0%, 
+        transparent 12%, 
+        transparent 88%, 
+        rgba(3, 6, 17, 0.55) 100%
       );
     }
 
@@ -252,27 +265,28 @@
        (CRITICAL PRINCIPLE moved to linear narrative flow below image!)
        ========================================================== */
     .middle-separator {
-      height: 380px; /* Leaves image completely clear of floating cards */
+      flex: 1;
+      min-height: 480px; /* Expands to leave the entire rooster and gem 100% untouched */
       pointer-events: none;
     }
 
-    /* Integrated Focal Capsule: Sits cleanly in natural sequence */
+    /* Integrated Focal Capsule: Positioned cleanly in Top Zone (No Artwork Intrusion) */
     .integrated-capsule {
       position: relative;
       z-index: 5;
-      align-self: center;
+      align-self: flex-start;
+      margin-top: 20px;
       background: rgba(3, 6, 17, 0.88);
-      border: 2px solid rgba(56, 189, 248, 0.5);
+      border: 1.5px solid rgba(56, 189, 248, 0.55);
       backdrop-filter: blur(25px);
       border-radius: 9999px;
-      padding: 16px 42px;
-      display: flex;
+      padding: 12px 32px;
+      display: inline-flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       box-shadow: 
-        0 0 35px rgba(14, 165, 233, 0.35),
-        0 20px 45px rgba(0, 0, 0, 0.95);
-      margin-bottom: 25px;
+        0 0 30px rgba(14, 165, 233, 0.3),
+        0 15px 35px rgba(0, 0, 0, 0.95);
     }
 
     .focal-stamp {
@@ -420,7 +434,9 @@
       <img id="proverb-img" src="assets/chicken_gem_proverb.png" alt="ไก่ได้พลอย — ไก่ชนขนมรกตกับอัญมณีล้ำค่าที่ส่องประกาย">
     </div>
 
-    <!-- Vignette Overlays -->
+    <!-- Vignette Overlays: Cinematic Contrast Protection -->
+    <div class="vignette-top"></div>
+    <div class="vignette-bottom"></div>
     <div class="vignette-lateral"></div>
 
     <!-- 1. TOP ZONE: Editorial Title & Meaning (Luminance >= 90% Pure White) -->
@@ -448,17 +464,17 @@
         <p class="assertion-sub">
           อุปมาถึงผู้ที่ได้รับโอกาส วัตถุสิ่งของ หรือความรู้อันประเสริฐ แต่ขาดวิสัยทัศน์และความเข้าใจ ย่อมปล่อยให้สิ่งล้ำค่าสูญเปล่าราวกับก้อนกรวดไร้ราคา
         </p>
+
+        <!-- Integrated Key Principle Capsule: Anchored in Top Zone, 100% Freeing the Artwork -->
+        <div class="integrated-capsule">
+          <span class="focal-stamp">CRITICAL PRINCIPLE</span>
+          <span class="focal-motto">"มีของล้ำค่า... แต่ตาไม่ถึง ย่อมไร้ความหมาย"</span>
+        </div>
       </div>
     </header>
 
-    <!-- 2. MIDDLE ZONE: Space reservation for full illustration view -->
+    <!-- 2. MIDDLE ZONE: 100% UNTOUCHED CINEMATIC ARTWORK (Full Rooster + Glowing Gem) -->
     <div class="middle-separator"></div>
-
-    <!-- Integrated Takeaway Capsule: Positioned below image, NO MORE OVERLAYING FEATHERS! -->
-    <div class="integrated-capsule">
-      <span class="focal-stamp">CRITICAL PRINCIPLE</span>
-      <span class="focal-motto">"มีของล้ำค่า... แต่ตาไม่ถึง ย่อมไร้ความหมาย"</span>
-    </div>
 
     <!-- 3. BOTTOM ZONE: Balanced Energy Comparison & Large Projector-Ready Footer -->
     <footer class="bottom-zone">
@@ -484,9 +500,9 @@
         <div class="author-signature">
           <span class="author-name">นายรามิล ปัญญพัทธ์</span>
           <span class="divider-dot"></span>
-          <span>กลุ่มสาระการเรียนรู้ภาษาไทย โรงเรียนพูลเจริญวิทยาคม</span>
+          <span>โรงเรียนพูลเจริญวิทยาคม</span>
         </div>
-        <div class="spec-mark">PORTRAIT MASTERCLASS • 21:29.7 (A4)</div>
+        <div class="spec-mark">MASTERCLASS • 21:29.7 (A4)</div>
       </div>
     </footer>
   </div>

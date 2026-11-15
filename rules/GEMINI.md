@@ -47,6 +47,21 @@
   - ใช้ `ui-ux-pro-max` ในการสืบค้นคู่สี สไตล์ และแนวทาง UX ทางจิตวิทยาการเรียนรู้โดยอัตโนมัติ
   - ใช้หลักการของ `emil-skills` คุมแอนิเมชัน: แอนิเมชัน UI ต้องสั้นกว่า 300ms, ใช้ `ease-out` หรือ Spring Physics, ปุ่มกดต้องมี `:active` scale (0.97), ห้ามใช้ `ease-in` หรือ `transition: all` ลอยๆ
 
+- **ข้อห้ามเด็ดขาดและมาตรฐานการเปิดเบราว์เซอร์หน้าจอจริง (Strict Browser Launching Rules & Anti-Stupid Mandate)**:
+  - **ข้อห้าม 1 (ห้ามแอบทำงานเบื้องหลัง)**: ห้ามใช้ `pw.mjs`, Playwright CDP, headless mode, หรือ daemon แอบรันเว็บใน background เมื่อผู้ใช้สั่งให้เปิดหน้าจอเด็ดขาด
+  - **ข้อห้าม 2 (ห้ามอ้างว่าเปิดแล้วโดยไม่มีหลักฐานภาพจริง)**: ห้ามรายงานว่า "เปิดหน้าต่างให้แล้ว" โดยเด็ดขาดหากไม่มีภาพถ่ายหน้าจอจริง (`WinSta0\Default`) ยืนยันว่าหน้าต่าง GUI ปรากฏอยู่บนหน้าจอคอมพิวเตอร์จริงต่อหน้าผู้ใช้
+  - **ข้อห้าม 3 (ห้ามรันผ่าน Start-Process/subprocess ตรงๆ ใน Virtual Sandbox)**: ห้ามสั่งเปิดโปรแกรม GUI ผ่าน `Start-Process` หรือ `subprocess.Popen` โดยตรงจาก shell เพราะจะติดอยู่ใน Virtual Desktop (`exebox-...`) ทำให้ผู้ใช้มองไม่เห็นหน้าต่างบนจอจริง
+  - **ข้อห้าม 4 (ห้ามโยนงานให้ผู้ใช้ทำเอง)**: ห้ามสั่งให้ผู้ใช้ไปดับเบิลคลิกไฟล์หรือเปิดเว็บเอง หน้าที่การเปิดและควบคุมหน้าจอเป็นของเอเจนต์ 100%
+  - **วิธีเปิดหน้าต่างขึ้นจอจริงที่ถูกต้องเท่านั้น**:
+    1. ตรวจสอบและเคลียร์โปรเซสเบื้องหลังที่ค้าง: `Stop-Process -Name chrome -Force -ErrorAction SilentlyContinue`
+    2. สั่งเปิดผ่าน Windows Task Scheduler Subsystem ด้วย Flag Interactive (`/it` บน `WinSta0\Default`) หรือสั่งรัน `.bat` ทางลัดผ่าน `schtasks`:
+       ```powershell
+       schtasks /create /tn "OpenChromeInteractive" /tr "cmd.exe /c <PathToBat>" /sc once /st 23:59 /it /f
+       schtasks /run /tn "OpenChromeInteractive"
+       schtasks /delete /tn "OpenChromeInteractive" /f
+       ```
+    3. ถ่ายภาพหน้าจอจริง (`BitBlt` บน `WinSta0\Default`) ยืนยันก่อนรายงานผู้ใช้เสมอ
+
 
 
 

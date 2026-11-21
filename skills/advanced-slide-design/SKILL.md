@@ -1,6 +1,6 @@
 ---
 name: advanced-slide-design
-description: มาตรฐานและแนวทางปฏิบัติการออกแบบสไลด์นำเสนอระดับพรีเมียม (Cinematic & Masterclass Presentation) สำหรับครูและนักวิชาการ ด้วยหลักจิตวิทยาการรู้คิด (Cognitive Load Theory), กฎการดึงสายตา (Leading Lines & Optical Vector), การเฟดภาพไร้รอยต่อ (Seamless Gradient Masking), การตรวจจับและคุ้มครองวัตถุสำคัญ (Subject Saliency & Bounding Box Integrity), การเลือกคู่ฟอนต์ขั้นสูง (ห้ามใช้ Sarabun ทำปก), กฎขนาดฟอนต์สัมพัทธ์ 1.2% Canvas Height (Golden Ratio Floor), การตัดขอบฟอนต์ด้วย Distinct Stroke & Radiance, และการเรนเดอร์ระดับ 4K ด้วย Playwright (ไม่พึ่งพา Canva/Figma)
+description: มาตรฐานและแนวทางปฏิบัติการออกแบบสไลด์นำเสนอระดับพรีเมียม (Cinematic & Masterclass Presentation) สำหรับครูและนักวิชาการ ด้วยหลักจิตวิทยาการรู้คิด (Cognitive Load Theory), กฎการดึงสายตา (Leading Lines & Optical Vector), การเฟดภาพไร้รอยต่อ (Seamless Gradient Masking), การตรวจจับและคุ้มครองวัตถุสำคัญ (Subject Saliency & Bounding Box Integrity), การเลือกคู่ฟอนต์ขั้นสูง (ห้ามใช้ Sarabun ทำปก), กฎพื้นฟอนต์ขั้นต่ำ 19px บนแคนวาส 1280×720 (2.64% Canvas Height Floor — ล็อกโดยผู้ใช้), การตัดขอบฟอนต์ด้วย Distinct Stroke & Radiance 5px (≈0.5× stem width), และการเรนเดอร์ระดับ 4K ด้วย Playwright (ไม่พึ่งพา Canva/Figma)
 ---
 
 # มาตรฐานการออกแบบสไลด์ระดับมาสเตอร์คลาส (Advanced Slide Design Masterclass)
@@ -43,11 +43,24 @@ description: มาตรฐานและแนวทางปฏิบัต�
     * หัวข้อเสาหลักและแสตมป์แก่นคิด (Pillar Titles, Focal Motto): **$30\text{px} - 34\text{px}$**
     * คำแถลงแก่นหลัก (Assertion Lead): **$38\text{px} - 44\text{px}$**
     * พาดหัวหลักแนวตั้ง (Hero Display Title): **$110\text{px} - 125\text{px}$**
+  * **แคนวาส 16:9 แนวนอน ($1280 \times 720\text{ px}$) — สเปกที่ล็อกใช้งานจริง 👇:** $\text{Floor} = 19\text{px}$ ($720 \times 2.64\%$)
+    * ฟอนต์เล็กสุด (Eyebrow, เครดิตภาพ, เลขหน้า, Footer): **$19\text{px}$ — ห้ามต่ำกว่านี้เด็ดขาด**
+    * ที่มาอ้างอิง / หน่วยนับ (Source, Unit): **$24\text{px}$**
+    * เนื้อความ (Body): **$32\text{px}$** (เป้าหมาย $32-36$)
+    * คำโปรย (Lead): **$36\text{px}$**
+    * หัวข้อ (Headline): **$56-58\text{px}$**
+    * ตัวเลขนำ (Stat): **$96\text{px}$**
+    * ประโยคหลัก (Assertion): **$84\text{px}$**
+    * พาดหัวปก (Display): **$132-150\text{px}$**
   * **แคนวาส 16:9 แนวนอน ($1920 \times 1080\text{ px}$):**
-    * ฟอนต์เล็กสุด (Footer, Spec Tag, Eyebrow): **$\ge 14\text{px} - 16\text{px}$** (ปรับสมดุลสายตาให้อ่านสบาย)
-    * เนื้อหาบรรยาย (Body Text): **$20\text{px} - 24\text{px}$**
-    * พาดหัวย่อย / เสาหลัก (Pillars): **$24\text{px} - 28\text{px}$**
-    * พาดหัวหลัก (Hero Title): **$95\text{px} - 115\text{px}$**
+    * ฟอนต์เล็กสุด (Footer, Spec Tag, Eyebrow): **$\ge 28-29\text{px}$** (สเกลตาม 2.64% ของความสูง — ไม่ใช่ 14px)
+
+### 2.1 สเปกฟอนต์ที่ผู้ใช้ล็อกไว้ (Locked Floor Spec — ใช้แทนตัวเลขเดิมเมื่อขัดกัน)
+* เหตุผลที่ยกพื้นขึ้นจาก 13px เป็น 19px: งานที่ดูดีบนจอคอมยัง **อ่านไม่ชัดบนโปรเจกเตอร์ห้องเรียน** (นักเรียนแถวหลัง)
+* เทียบหน่วย PowerPoint: $1\text{px} = 0.75\text{pt}$ บนแคนวาส $1280\times720$ → $19\text{px} = 14.25\text{pt}$, $32\text{px} = 24\text{pt}$, $58\text{px} = 43.5\text{pt}$
+* ผลที่ต้องยอมรับ: พื้นที่ใส่เนื้อหาลดลง ~35% → ต้องตัดคำและใช้กฎ "1 สไลด์ 1 ความคิด" อย่างจริงจัง
+* เมื่อขยายฟอนต์ ให้ไล่สเกลทั้งระบบด้วยตัวแปร CSS ชุดเดียว (`--t-micro` … `--t-display`) ห้ามแก้ทีละจุด
+
 
 ---
 
@@ -82,19 +95,39 @@ description: มาตรฐานและแนวทางปฏิบัต�
 * ⚡ **กฎสมดุลพลังงานการรับรู้ของสีคู่ตรงข้าม (Perceptual Energy Balancing - Helmholtz-Kohlrausch Effect):**
   * เมื่อออกแบบคอลัมน์เปรียบเทียบสองขั้ว (เช่น *ILLITERACY TRAP* vs *VALUE MASTERY*) ดวงตามนุษย์รับรู้สีโทนเย็น (Cyan `#38BDF8`) ว่าสว่างและเด่นกว่าสีโทนร้อนเสมอ
   * ดังนั้น ขั้วตรงข้ามต้องไม่ใช้สีชมพูหม่นหรือแดงทึบ แต่ต้องใช้ **Electric Neon Coral / Vivid Crimson (`#FF3366` หรือ `#FF2E63`)** เพื่อสร้างสมดุลทางสายตาและน้ำหนักทางจิตวิทยาที่เท่าเทียมกัน
-* 🛡️ **เทคนิค Stroke ชัดเจน & Radiance Halo คัดขอบฟอนต์ (The Distinct Stroke Armor):**
+* 🛡️ **เทคนิค Stroke ชัดเจน & Radiance Halo คัดขอบฟอนต์ (The Distinct Stroke Armor) — สเปกที่ล็อก 👇:**
   * ใช้ **`paint-order: stroke fill;`** เสมอ เพื่อให้เส้น Stroke อยู่ *ด้านหลัง* เนื้อฟอนต์ ไม่บีบตัวอักษรให้ลีบแบน
-  * ขนาด Stroke แนะนำ: `-webkit-text-stroke: 1.5px – 2.5px rgba(0, 0, 0, 0.95);`
-  * เสริมด้วย **Radiance Halo ซ้อน 3 ชั้น** (`text-shadow`):
+  * **ขนาด = 5px หรือ ≈ 0.5 เท่าของความหนาเส้นฟอนต์ (stem width)** แล้วแต่ขนาดตัวอักษร
+    * ฟอนต์ $19-32\text{px}$ → `--halo: 5px`, stroke $0.045\text{em}$ (≈ 0.8-1.4px)
+    * ฟอนต์ $84-150\text{px}$ → ขยายตาม `em` (`0.3em` blur, `0.045em` stroke) เพื่อคงสัดส่วน 0.5 เท่าไว้ — ห้ามใช้ 5px คงที่บนฟอนต์ใหญ่ เพราะจะกลายเป็นเส้นขนแมว
+  * **สี halo ต้อง "ตัดกับสีฟอนต์" เสมอ ไม่ใช่ตัดกับภาพ:** ฟอนต์สว่าง → halo เข้ม (`rgba(12,20,16,.92)`); ฟอนต์เข้ม → halo สว่าง (`rgba(251,246,236,.95)`) — ห้ามใช้ halo สีเดียวกับฟอนต์ (จะกลายเป็นตัวหนาเบลอ)
+  * **ซ้อน 2 ชั้นพอ** (ชั้นที่ 2 เพื่ออิ่มตัว) + เงาลึกล่าง 1 ชั้น:
     ```css
-    /* เทคนิค Distinct Stroke & Radiance Halo */
-    paint-order: stroke fill;
-    -webkit-text-stroke: 2px rgba(3, 6, 17, 0.95);
-    text-shadow: 
-      0 0 2px #000, 0 0 4px #000,          /* Black crisp edge */
-      0 0 25px rgba(56, 189, 248, 0.65),    /* Vivid Radiance Glow */
-      0 10px 30px rgba(0, 0, 0, 0.95);      /* Deep backing shadow */
+    /* ล็อกสเปก: 19px floor + Stroke/Radiance */
+    :root{
+      --halo:5px;
+      --halo-dark:rgba(12,20,16,.92);
+      --halo-light:rgba(251,246,236,.95);
+      --stroke-w:.045em;            /* ≈ 0.5 × stem width */
+    }
+    .halo,.halo-lite{
+      paint-order:stroke fill;
+      -webkit-text-stroke:var(--stroke-w) var(--halo-dark);
+      text-shadow:
+        0 0 var(--halo) var(--halo-dark),
+        0 0 var(--halo) var(--halo-dark),
+        0 2px 6px rgba(0,0,0,.45);   /* เงาลึกกันภาพลายเซ็นรบกวน */
+    }
+    .halo-lite{                        /* ฟอนต์เข้มบนภาพสว่าง */
+      -webkit-text-stroke:var(--stroke-w) var(--halo-light);
+      text-shadow:0 0 var(--halo) var(--halo-light),
+                  0 0 var(--halo) var(--halo-light),
+                  0 1px 4px rgba(0,0,0,.18);
+    }
     ```
+  * ใช้ halo **เฉพาะเมื่อฟอนต์ทับภาพหรือพื้นหลังที่ความสว่างไม่คงที่** — ฟอนต์บนพื้นเรียบไม่ต้องใส่ (halo เกินจำเป็น = ตัวอักษรดูสกปรก)
+  * งานธีมมืดจัดที่ต้องการไฟเรืองแสง (เช่น สไลด์ AI) ค่อยเสริม glow สีสด `0 0 25px rgba(56,189,248,.65)` เป็นชั้นบนสุดได้
+
 
 ---
 

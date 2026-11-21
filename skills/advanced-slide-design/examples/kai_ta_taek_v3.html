@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>ไก่ตาแตก v3 — สเปกฟอนต์ล็อก 19px + Stroke/Radiance</title>
+<style>
+@font-face{font-family:"THS";src:url("file:///C:/Windows/Fonts/THSarabunNew.ttf");font-weight:400}
+@font-face{font-family:"THS";src:url("file:///C:/Windows/Fonts/THSarabunNew%20Bold.ttf");font-weight:700}
+@font-face{font-family:"Mitr";src:url("file:///C:/Windows/Fonts/Mitr-Regular.ttf");font-weight:400}
+@font-face{font-family:"Mitr";src:url("file:///C:/Windows/Fonts/Mitr-SemiBold.ttf");font-weight:600}
+@font-face{font-family:"Mitr";src:url("file:///C:/Windows/Fonts/Mitr-Bold.ttf");font-weight:700}
+
+/* ============================================================
+   SPEC ล็อก: canvas 1280×720 · ฟอนต์ขั้นต่ำ 19px
+   Stroke/Radiance = 5px ≈ 0.5 × ความหนาเส้นฟอนต์ (สเกลด้วย em บนงานใหญ่)
+   ============================================================ */
+:root{
+  --canvas-h:720px;
+  --t-micro:19px;    /* พื้นล่างสุด — eyebrow, เครดิต, เลขหน้า */
+  --t-small:24px;    /* ที่มา / หน่วยนับ */
+  --t-body:32px;     /* เนื้อความ */
+  --t-lead:36px;     /* คำโปรย */
+  --t-h2:58px;       /* หัวข้อ */
+  --t-num:96px;      /* ตัวเลขนำ */
+  --t-quote:84px;    /* ประโยคหลัก */
+  --t-display:132px; /* ปก */
+
+  --ink:#16211A; --ink2:#0C1410;
+  --cream:#F3EADA; --cream-lt:#FBF6EC;
+  --gold:#C9A227; --gold-dp:#B08A3E;
+
+  --halo:5px;                 /* ระยะเรืองแสง */
+  --halo-dark:rgba(12,20,16,.92);   /* halo สำหรับฟอนต์สว่างบนภาพ */
+  --halo-light:rgba(251,246,236,.95);/* halo สำหรับฟอนต์เข้มบนภาพ */
+  --stroke-w:.045em;          /* ≈ 0.5 × stem width ของฟอนต์ */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#111;font-family:"THS",sans-serif;color:var(--ink)}
+.slide{position:relative;width:1280px;height:720px;overflow:hidden;page-break-after:always;break-after:page}
+.slide.dark{background:var(--ink2)}
+.slide.light{background:var(--cream-lt)}
+
+/* --- ระบบตัวอักษร: 4 ชั้น + พื้นล่าง 19px --- */
+.eyebrow{font-family:"Mitr";font-weight:600;font-size:var(--t-micro);letter-spacing:.34em;text-transform:uppercase}
+.micro{font-family:"Mitr";font-weight:400;font-size:var(--t-micro);letter-spacing:.1em}
+.body{font-family:"THS";font-weight:400;font-size:var(--t-body);line-height:1.52}
+.h2{font-family:"Mitr";font-weight:600;font-size:var(--t-h2);line-height:1.2;letter-spacing:-.01em}
+
+/* --- Stroke + Radiance: ใช้เมื่อฟอนต์ทับภาพ/พื้นหลังที่แปรผัน --- */
+.halo, .halo-lite{
+  paint-order:stroke fill;          /* stroke อยู่หลังเนื้อฟอนต์ ไม่บีบตัวอักษร */
+  -webkit-text-stroke:var(--stroke-w) var(--halo-dark);
+  text-shadow:
+    0 0 var(--halo) var(--halo-dark),
+    0 0 var(--halo) var(--halo-dark),
+    0 2px 6px rgba(0,0,0,.45);
+}
+.halo-lite{
+  -webkit-text-stroke:var(--stroke-w) var(--halo-light);
+  text-shadow:
+    0 0 var(--halo) var(--halo-light),
+    0 0 var(--halo) var(--halo-light),
+    0 1px 4px rgba(0,0,0,.18);
+}
+
+/* ---------- S1 ปก: ภาพเต็มขอบ + ฟอนต์มี halo ---------- */
+.cover .bg{position:absolute;inset:0}
+.cover .bg img{width:100%;height:100%;object-fit:cover;object-position:38% 40%;filter:contrast(1.04) saturate(.9)}
+.cover .bg:after{content:"";position:absolute;inset:0;background:
+  linear-gradient(92deg, rgba(8,14,11,.96) 0%, rgba(8,14,11,.90) 30%, rgba(8,14,11,.55) 52%, rgba(8,14,11,.06) 78%),
+  linear-gradient(0deg, rgba(8,14,11,.72) 0%, rgba(8,14,11,0) 46%)}
+.cover .txt{position:absolute;left:88px;top:0;height:100%;width:62%;display:flex;flex-direction:column;justify-content:center;z-index:2}
+.cover .eyebrow{color:var(--gold);margin-bottom:28px}
+.cover .rule{width:84px;height:2px;background:var(--gold);margin-bottom:34px}
+.cover h1{font-family:"Mitr";font-weight:700;font-size:var(--t-display);line-height:1.04;letter-spacing:-.02em;color:var(--cream)}
+.cover h1 em{font-style:normal;color:var(--gold)}
+.cover .lead{font-family:"THS";font-size:var(--t-lead);line-height:1.62;color:rgba(243,234,218,.88);margin-top:34px;max-width:470px}
+.cover .meta{position:absolute;left:88px;right:88px;bottom:44px;display:flex;justify-content:space-between;align-items:center;z-index:2;color:rgba(243,234,218,.78)}
+.cover .meta .dot{color:var(--gold)}
+
+/* ---------- S2 หลักฐาน: split ---------- */
+.split .photo{position:absolute;top:0;right:0;width:46%;height:100%;overflow:hidden}
+.split .photo img{width:100%;height:100%;object-fit:cover}
+.split .txt{position:absolute;left:88px;top:0;height:100%;width:52%;display:flex;flex-direction:column;justify-content:center;padding:52px 0 64px}
+.split .eyebrow{color:#8C7A3A;margin-bottom:18px}
+.split .num{font-family:"Mitr";font-weight:600;font-size:var(--t-num);line-height:.92;color:var(--gold-dp);letter-spacing:-.03em}
+.split .unit{font-family:"Mitr";font-weight:600;font-size:var(--t-small);color:#8A8570;letter-spacing:.14em;margin-top:12px}
+.split .h2{color:var(--ink);margin:26px 0 22px;max-width:540px}
+.split .quote{font-family:"THS";font-size:var(--t-body);line-height:1.55;color:#3A4237;max-width:500px;border-left:3px solid var(--gold);padding-left:24px}
+.split .quote small{display:block;font-size:var(--t-small);color:#8A8570;margin-top:10px}
+.split .credit{position:absolute;left:88px;bottom:44px;color:#7C7A6A}
+
+/* ---------- S3 ความหมาย: ภาพเต็มขอบ + stroke บนฟอนต์ใหญ่ ---------- */
+.idea .bg{position:absolute;inset:0}
+.idea .bg img{width:100%;height:100%;object-fit:cover;object-position:66% 46%}
+.idea .bg:after{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg, rgba(8,14,11,.96) 0%, rgba(8,14,11,.92) 26%, rgba(8,14,11,.55) 52%, rgba(8,14,11,.10) 76%)}
+.idea .txt{position:absolute;left:88px;top:0;height:100%;width:64%;display:flex;flex-direction:column;justify-content:center;z-index:2}
+.idea .eyebrow{color:var(--gold);margin-bottom:30px}
+.idea .q{font-family:"Mitr";font-weight:700;font-size:var(--t-quote);line-height:1.3;color:var(--cream)}
+.idea .q span{color:var(--gold)}
+.idea .src{margin-top:38px;padding-top:22px;border-top:1px solid rgba(201,162,39,.4);color:rgba(243,234,218,.8);font-size:var(--t-small);line-height:1.5;max-width:520px}
+.idea .pg{position:absolute;right:88px;bottom:44px;color:rgba(243,234,218,.7);z-index:2}
+
+@page{size:1280px 720px;margin:0}
+@media print{html,body{background:#fff}.slide{break-inside:avoid}}
+body.one .slide{display:none}
+body.one .slide.on{display:block}
+</style>
+</head>
+<body>
+
+<!-- 1 / ปก -->
+<section class="slide dark cover">
+  <div class="bg"><img src="assets/rooster_v3.jpg" alt="ไก่ชน"></div>
+  <div class="txt">
+    <div class="eyebrow halo">สำนวนไทย · กลุ่มสาระภาษาไทย</div>
+    <div class="rule"></div>
+    <h1 class="halo">ไก่ตา<em>แตก</em></h1>
+    <p class="lead halo">ประวัติของสำนวน<br>ที่เกิดในสนามชนไก่<br>และยังใช้อยู่ทุกวันนี้</p>
+  </div>
+  <div class="meta micro">
+    <span class="halo">โรงเรียนพูลเจริญวิทยาคม</span>
+    <span class="halo">พจนานุกรมฯ 2542 <i class="dot">·</i> กฎหมายตราสามดวง <i class="dot">·</i> อิเหนา ร.2</span>
+    <span class="halo">01 / 10</span>
+  </div>
+</section>
+
+<!-- 2 / กฎหมายตราสามดวง -->
+<section class="slide light split">
+  <div class="photo"><img src="assets/arena_v3.jpg" alt="ไก่ชนเผชิญหน้า"></div>
+  <div class="txt">
+    <div class="eyebrow">หลักฐานชั้นต้น · สมัยอยุธยา</div>
+    <div class="num">119</div>
+    <div class="unit">มาตรา · พระไอยการเบดเสรจ</div>
+    <h2 class="h2">ชนไก่มี “กฎหมาย” รองรับ<br>ก่อนจะมีคำนี้เสียอีก</h2>
+    <div class="quote">“เหล้นเบี้ยชนไก่…พะนันขันต่อกันในบ่อน”<small>— กฎหมายตราสามดวง</small></div>
+  </div>
+  <div class="credit micro">ภาพ: Cock fight, Niran24 / Wikimedia Commons</div>
+</section>
+
+<!-- 3 / ความหมาย -->
+<section class="slide dark idea">
+  <div class="bg"><img src="assets/closeup_v3.jpg" alt="ดวงตาไก่"></div>
+  <div class="txt">
+    <div class="eyebrow halo">ความหมาย</div>
+    <div class="q halo">งงมาก<br>จน<span>ทำอะไรไม่ถูก</span></div>
+    <div class="src halo">“งงเป็นไก่ตาแตก” (สำ) ก. — พจนานุกรมฉบับราชบัณฑิตยสถาน พ.ศ. 2542</div>
+  </div>
+  <div class="pg micro halo">03 / 10</div>
+</section>
+
+<script>
+(function(){var m=location.search.match(/[?&]s=(\d+)/);if(!m)return;
+document.body.classList.add('one');var sl=document.querySelectorAll('.slide');
+var i=parseInt(m[1],10)-1;if(sl[i])sl[i].classList.add('on');})();
+</script>
+</body>
+</html>
